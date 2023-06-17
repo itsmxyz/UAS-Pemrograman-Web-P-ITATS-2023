@@ -13,20 +13,14 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function loginPage() {
-        if (Auth::guard('sensei')->check()) {
-            return redirect()->route('dashboard.sensei');
-        } elseif (Auth::guard('sekretaris')->check()) {
-            return redirect()->route('dashboard.sekretaris');
-        } elseif (Auth::guard('schale')->check()) {
-            return redirect()->route('dashboard.schale');
-        }
+    public final function loginPage() {
+        if (Auth::guard('sensei')->check())  return redirect()->route('dashboard.sensei');
+        elseif (Auth::guard('sekretaris')->check()) return redirect()->route('dashboard.sekretaris');
+        elseif (Auth::guard('schale')->check()) return redirect()->route('dashboard.schale');
+
         return view('page5-admin.login-admin');
     }
-    public function index(SenseiModel $senseiModel, SekretarisModel $sekretarisModel)
+    public final function index(SenseiModel $senseiModel, SekretarisModel $sekretarisModel)
     {
         return view('page5-admin.dashboard-admin', [
             'jumlahsensei' => $senseiModel->getAll()->count(),
