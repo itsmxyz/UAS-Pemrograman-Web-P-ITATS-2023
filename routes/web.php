@@ -26,8 +26,10 @@ Route::get('/', function (){
     return view('page1-home.home');
 });
 
-Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
-Route::get('/login', [LoginController::class,'index'])->name('login');
+Route::middleware('guest')->group(function () {
+    Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
+    Route::get('/login', [LoginController::class,'index'])->name('login');
+});
 
 Route::post('/schale-auth', [LoginController::class, 'authSchale'])->name('auth.schale');
 Route::post('/sensei-auth', [LoginController::class, 'authSensei'])->name('auth.sensei');
