@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function (){
     return view('page1-home.home');
-});
+})->name('home');
 
 Route::middleware('guest')->group(function () {
     Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
@@ -35,7 +35,7 @@ Route::post('/schale-auth', [LoginController::class, 'authSchale'])->name('auth.
 Route::post('/sensei-auth', [LoginController::class, 'authSensei'])->name('auth.sensei');
 Route::post('/sekretaris-auth', [LoginController::class, 'authSekretaris'])->name('auth.sekretaris');
 
-Route::middleware('auth:schale')->group(function (){
+Route::middleware('srt')->group(function (){
     Route::get('/schale/dashboard', [AdminController::class, 'index'])->name('dashboard.schale');
     Route::post('/logout-schale', [LoginController::class, 'logout'])->name('logout.schale');
     Route::get('/data-sensei', [AdminController::class, 'getDataSensei']);
