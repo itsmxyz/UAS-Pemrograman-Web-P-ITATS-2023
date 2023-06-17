@@ -21,7 +21,7 @@ class SenseiModel extends Model implements Authenticatable
     {
         return $this->belongsTo(SekretarisModel::class, 'sekretaris_id', 'id_sekretaris');
     }
-    public final function getAll()
+    public final function getAll(): \Illuminate\Database\Eloquent\Collection|array
     {
         return $this->with('sekretaris')->get();
     }
