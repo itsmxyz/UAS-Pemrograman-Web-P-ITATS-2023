@@ -4,7 +4,7 @@ Project ini dibuat untuk memenuhi tugas UAS Mata kuliah Pemrograman WEB kelas P 
 <br>
 Project ini disusun oleh :
 - Bapak Satria Erianto - DevOps / Pengarah project
-- Latiful Sirri        - Backend Dev.
+- Latiful Sirri        - BackEnd Dev.
 - Havidz Ubaidillah    - FrontEnd Dev.
 <br>
 Project ini dikerjakan dengan Framework Laravel v.10.13.5 ( 17-06-2023 )
