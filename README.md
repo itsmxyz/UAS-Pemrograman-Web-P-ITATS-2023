@@ -1,3 +1,14 @@
+Nama Project : Millennium-School Study center.
+<br>
+Project ini dibuat untuk memenuhi tugas UAS Mata kuliah Pemrograman WEB kelas P di Institut Teknologi Adhi Tama.
+<br>
+Project ini disusun oleh :
+- Bapak Satria Erianto - DevOps / Pengarah project
+- Latiful Sirri        - Backend Dev.
+- Havidz Ubaidillah    - FrontEnd Dev.
+<br>
+Project ini dikerjakan dengan Framework Laravel v.10.13.5 ( 17-06-2023 )
+<br>
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
