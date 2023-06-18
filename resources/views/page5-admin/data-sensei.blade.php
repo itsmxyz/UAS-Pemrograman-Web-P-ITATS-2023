@@ -139,6 +139,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{--Tambah DATA MODAL--}}
                         <div class="modal fade" id="add-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -148,7 +149,7 @@
                                             <span aria-hidden="true">x</span>
                                         </button>
                                     </div>
-                                    <form method="post" action="{{route('schale.create-sensei')}}">
+                                    <form method="post" action="{{route('schale.sensei-create')}}">
                                         @csrf
                                         <div class="cnter-wrap p-4">
                                             <div class="section text-left md-2">
@@ -219,7 +220,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        {{--TABLE--}}
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -244,8 +245,10 @@
                                         <td style="width: 10%">
                                             <div class="d-flex justify-content-center">
                                                 <div class="dropdown" data-bs-toggle="modal" data-bs-target="#update-data">
-                                                    <button class="bi bi-pencil-square btn btn-transparent"
-                                                            id="edit-button" data-id="{{$data->id_sensei}}"></button>
+                                                    <button class="bi bi-pencil-square btn btn-transparent" id="edit-button"
+                                                            data-nama="{{$data->nama}}" data-username="{{$data->username}}"
+                                                            data-kantor="{{$data->kantor}}"
+                                                            data-sekretaris="{{$data->sekretaris->nama}}"></button>
                                                 </div>
                                                 <div class="dropdown" data-bs-toggle="modal" data-bs-target="#del-data">
                                                     <button class="bi bi-trash3 btn btn-transparent"
@@ -262,7 +265,7 @@
                     </div>
                 </div>
             </div>
-
+            //UPDATE MODAL
             <div class="modal fade" id="update-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -272,8 +275,9 @@
                                 <span aria-hidden="true">x</span>
                             </button>
                         </div>
-                        <form method="post" action="/schale/dashbaord/create-sensei">
+                        <form method="post" action="{{route('schale.sensei-update')}}">
                             @csrf
+                            @method('put')
                             <div class="cnter-wrap p-4">
                                 <div class="section text-left md-2">
                                     <div class="row">
@@ -343,7 +347,7 @@
                     </div>
                 </div>
             </div>
-
+            //DELETE MODAL
             <div class="modal fade" id="del-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -355,7 +359,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" action="/delete-sensei">
+                            <form>
                                 @csrf
                                 <div class="center-wrap p-4">
                                     <div class="section text-center md-2">
@@ -376,31 +380,12 @@
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                            <a class="btn btn-primary" href="/belutlogin">Hapus</a>
+                            <button type="submit" class="btn btn-primary">Hapus</button>
                         </div>
                     </div>
-
                 </div>
             </div>
 
-            <div class="modal fade" id="del-button" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus data ini?</h5>
-                            <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">x</span>
-                            </button>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                            <a class="btn btn-primary bx-color-red" href="/belutlogin">Hapus</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
 
             <!-- End of Main Content -->
 
@@ -494,6 +479,5 @@
         }
     }
 </script>
-
 </html>
 
