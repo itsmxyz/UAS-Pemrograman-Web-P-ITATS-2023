@@ -66,5 +66,5 @@ class Kernel extends HttpKernel
     ];
     protected $routeMiddleware = [
         'srt' => \App\Http\Middleware\SRTMiddleware::class,
-    ];
+        ];
 }
