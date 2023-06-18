@@ -148,7 +148,7 @@
                                             <span aria-hidden="true">x</span>
                                         </button>
                                     </div>
-                                    <form method="post" action="/register-sensei">
+                                    <form method="post" action="{{route('schale.create-sensei')}}">
                                         @csrf
                                         <div class="cnter-wrap p-4">
                                             <div class="section text-left md-2">
@@ -211,7 +211,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                                    <button type="submit" class="btn btn-primary" href="/register-sensei">Tambahkan</button>
+                                                    <button type="submit" class="btn btn-primary">Tambahkan</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -272,7 +272,7 @@
                                 <span aria-hidden="true">x</span>
                             </button>
                         </div>
-                        <form method="post" action="/register-sensei">
+                        <form method="post" action="/schale/dashbaord/create-sensei">
                             @csrf
                             <div class="cnter-wrap p-4">
                                 <div class="section text-left md-2">
@@ -335,7 +335,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-primary" href="/register-sensei">Edit</button>
+                                        <button type="submit" class="btn btn-primary">Edit</button>
                                     </div>
                                 </div>
                             </div>

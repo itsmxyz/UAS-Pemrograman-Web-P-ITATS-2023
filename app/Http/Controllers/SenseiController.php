@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SenseiModel;
 use App\Http\Requests\StoreSenseiRequest;
 use App\Http\Requests\UpdateSenseiRequest;
+use Illuminate\Http\RedirectResponse;
 
 class SenseiController extends Controller
 {
@@ -28,9 +29,18 @@ class SenseiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSenseiRequest $request)
+    public function store(StoreSenseiRequest $request): RedirectResponse
     {
         //
+        SenseiModel::create([
+            'nama' => $request->input('nama'),
+            'username' => $request->input('username'),
+            'password' => $request->input('password'),
+            'kantor' => $request->input('kantor'),
+            'sekretaris_id' => $request->input('sekretaris'),
+        ]);
+
+        return redirect()->route('dashboard.schale')->with('sukses', 'Data Sensei telah ditambahkan!');
     }
 
     /**

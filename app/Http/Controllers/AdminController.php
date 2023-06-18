@@ -27,18 +27,6 @@ class AdminController extends Controller
             'jumlahsekretaris' => $sekretarisModel->getAll()->count()
         ]);
     }
-    public final function registerSensei (Request $request, SenseiModel $senseiModel): void {
-        $validatedData = $request->validate([
-            'nama_sensei' => 'required || unique:sensei, nama_sensei',
-            'password_sensei' => 'required',
-            'kantor_sensei' => 'required',
-            'sekretaris_id' => 'required'
-        ]);
-        $validatedData['password_sensei'] = Hash::make($validatedData['password_sensei'], [
-            'rounds' => 12,
-        ]);
-        $senseiModel->register($validatedData);
-    }
     public final function registerSekretaris(Request $request, SekretarisModel $sekretarisModel): void {
         $validatedData = $request->validate([
             'nama_sekretaris' => 'required||unique:sekretaris, nama_sekretaris',

@@ -17,7 +17,7 @@ class SRTMiddleware
     public final function handle(Request $request, Closure $next): Response
     {
         if ($request->is('schale/dashboard', 'logout-schale',
-                'data-siswa', 'data-sensei', 'data-sekretaris')
+                'data-siswa', 'schale/sensei', 'data-sekretaris')
             && !Auth::guard('schale')->check()) {
             return redirect()->route('home');
         }

@@ -58,7 +58,7 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/data-sensei">
+            <a class="nav-link collapsed" href="/schale/sensei">
                 <i class="bi bi-person"></i>
                 <span>Sensei</span>
             </a>
