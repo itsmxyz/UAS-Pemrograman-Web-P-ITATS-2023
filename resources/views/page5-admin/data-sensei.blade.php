@@ -162,14 +162,12 @@
                                         <td style="width: 10%">
                                             <div class="d-flex justify-content-center">
                                                 <div class="dropdown" data-bs-toggle="modal" data-bs-target="#update-data">
-                                                    <button type="submit" class="bi bi-pencil-square btn btn-transparent" id="edit-button"
-                                                            data-nama="{{$data->nama}}" data-username="{{$data->username}}"
-                                                            data-kantor="{{$data->kantor}}"
-                                                            data-sekretaris="{{$data->sekretaris->nama}}"></button>
+                                                    <button type="submit" class="bi bi-pencil-square btn btn-transparent"
+                                                            id="edit-button" onclick="ikut(this)"></button>
                                                 </div>
                                                 <div class="dropdown" data-bs-toggle="modal" data-bs-target="#del-data">
                                                     <button type="submit" class="bi bi-trash3 btn btn-transparent"
-                                                            id="del-button" data-id="{{$data->id_sensei}}"></button>
+                                                            id="del-button" ></button>
                                                 </div>
                                             </div>
                                         </td>
@@ -201,6 +199,7 @@
                                             <label for="nama" class="mb-4">Nama</label>
                                         </div>
                                         <div class="col-md-9">
+                                            <input type="hidden" value="">
                                             <input type="text" name="nama" class="form-control" required id="nama" autocomplete="off">
                                         </div>
                                     </div>
@@ -321,16 +320,34 @@
 </div>
 </body>
 <script>
-    function edit(){
-        // Mendapatkan elemen tombol edit
-        var editButton = document.getElementById("edit-button");
+    function ikut(button) {
+        // Mendapatkan elemen baris induk tombol yang diklik
+        var row = button.closest("tr");
 
-        // Mendapatkan nilai ID dari atribut data-id
-        var idSensei = editButton.getAttribute("data-id");
+        // Mendapatkan nilai-nilai dari kolom lain dalam baris yang sama
+        var idSensei = row.cells[0].innerText;
+        var nama = row.cells[1].innerText;
+        var username = row.cells[2].innerText;
+        var kantor = row.cells[3].innerText;
+        var namaSekretaris = row.cells[4].innerText;
 
-        // Menggunakan nilai ID yang telah diambil
-        console.log(idSensei); // Output: nilai ID dari tombol edit yang diklik
+        // Lakukan apa pun yang Anda perlukan dengan nilai-nilai tersebut
+        console.log("ID Sensei:", idSensei);
+        console.log("Nama:", nama);
+        console.log("Username:", username);
+        console.log("Kantor:", kantor);
+        console.log("Nama Sekretaris:", namaSekretaris);
     }
+    // function edit(){
+    //     // Mendapatkan elemen tombol edit
+    //     var editButton = document.getElementById("edit-button");
+    //
+    //     // Mendapatkan nilai ID dari atribut data-id
+    //     var idSensei = editButton.getAttribute("data-id");
+    //
+    //     // Menggunakan nilai ID yang telah diambil
+    //     console.log(idSensei); // Output: nilai ID dari tombol edit yang diklik
+    // }
 
     function hapus(){
 
