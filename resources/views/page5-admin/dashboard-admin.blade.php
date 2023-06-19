@@ -37,7 +37,11 @@
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
-    @include('templates.navbar-schale')
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+            @include('templates.navbar-schale')
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->

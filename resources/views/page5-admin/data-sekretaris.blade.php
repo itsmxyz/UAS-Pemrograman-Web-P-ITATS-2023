@@ -102,7 +102,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                                    <button type="submit" class="btn btn-primary" href="/register-sekretaris">Tambahkan</button>
+                                                    <button type="submit" class="btn btn-primary">Tambahkan</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -113,7 +113,7 @@
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="dataTable">
                                     <thead>
                                     <tr class="text-center">
                                         <th>ID Sekretaris</th>
@@ -194,7 +194,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-primary" href="/register-sekretaris">Edit</button>
+                                        <button type="submit" class="btn btn-primary" id="edit-btn" onclick="edit()">Edit</button>
                                     </div>
                                 </div>
                             </div>
@@ -237,7 +237,7 @@
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary bx-color-red" href="/belutlogin">Hapus</button>
+                            <button type="submit" class="btn btn-primary bx-color-red" onclick="hapus()">Hapus</button>
                         </div>
                     </div>
                     </form>
@@ -284,6 +284,15 @@
 </div>
 </body>
 <script>
+
+    function edit(){
+
+    }
+
+    function hapus(){
+
+    }
+
     function togglePasswordVisibility2() {
         var passwordInput = document.getElementById("passwordupdate");
         var eyeIcon = document.getElementById("eye-icon2");

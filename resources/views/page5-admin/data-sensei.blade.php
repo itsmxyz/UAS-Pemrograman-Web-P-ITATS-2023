@@ -129,7 +129,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                                    <button type="submit" class="btn btn-primary">Tambahkan</button>
+                                                    <button type="submit" class="btn btn-primary" onclick="tambah()">Tambahkan</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -140,7 +140,7 @@
                         {{--TABLE--}}
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="dataTable">
                                     <thead>
                                     <tr class="text-center">
                                         <th>ID Sensei</th>
@@ -255,7 +255,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-primary">Edit</button>
+                                        <button type="submit" class="btn btn-primary" onclick="edit()">Edit</button>
                                     </div>
                                 </div>
                             </div>
@@ -275,7 +275,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form>
+                            <form method="post" action="schale.sensei-delete">
                                 @csrf
                                 <div class="center-wrap p-4">
                                     <div class="section text-center md-2">
@@ -296,7 +296,7 @@
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Hapus</button>
+                            <button type="submit" class="btn btn-primary" onclick="hapus()">Hapus</button>
                         </div>
                     </div>
                 </div>
@@ -341,14 +341,20 @@
 </div>
 </body>
 <script>
-    // Mendapatkan elemen tombol edit
-    var editButton = document.getElementById("edit-button");
+    function edit(){
+        // Mendapatkan elemen tombol edit
+        var editButton = document.getElementById("edit-button");
 
-    // Mendapatkan nilai ID dari atribut data-id
-    var idSensei = editButton.getAttribute("data-id");
+        // Mendapatkan nilai ID dari atribut data-id
+        var idSensei = editButton.getAttribute("data-id");
 
-    // Menggunakan nilai ID yang telah diambil
-    console.log(idSensei); // Output: nilai ID dari tombol edit yang diklik
+        // Menggunakan nilai ID yang telah diambil
+        console.log(idSensei); // Output: nilai ID dari tombol edit yang diklik
+    }
+
+    function hapus(){
+
+    }
 
     function togglePasswordVisibility2() {
         var passwordInput = document.getElementById("passwordupdate");

@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{route('schale.dashboard')}}">
             <i class="bi bi-house-door"></i>
             <span>Dashboard Admin</span></a>
     </li>
