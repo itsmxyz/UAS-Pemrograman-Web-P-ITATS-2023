@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SenseiModel;
 use App\Http\Requests\StoreSenseiRequest;
 use App\Http\Requests\UpdateSenseiRequest;
+use http\Exception\BadConversionException;
 use Illuminate\Http\RedirectResponse;
 
 class SenseiController extends Controller
@@ -62,9 +63,15 @@ class SenseiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSenseiRequest $request, SenseiModel $sensei)
+    public function update(UpdateSenseiRequest $request, SenseiModel $sensei, $id)
     {
-        //
+        $validateData = $request->validated();
+        if ($validateData) {
+            $sensei->update($validateData);
+            return back()->with('sukses', 'Data Sensei berhasil diperbarui!');
+        }
+        else
+            return back()->with('error', 'Data gagal diperbarui! Mohon periksa kembali input Anda.');
     }
 
     /**
@@ -72,6 +79,11 @@ class SenseiController extends Controller
      */
     public function destroy(SenseiModel $sensei)
     {
-        //
+        if ($sensei) {
+            $sensei->delete();
+            return back()->with('sukses', 'Data Sensei berhasil dihapus!');
+        }
+        else
+            return back()->with('error', 'Data Sensei gagal dihapus!');
     }
 }
