@@ -262,35 +262,33 @@
     <!-- End of Page Wrapper -->
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin keluar?</h5>
-                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                </div>
-                <div class="modal-body">Tekan keluar jika anda ingin keluar.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                    <button class="btn btn-primary" href="/belutadmin">Keluar</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    @include('templates.logout-schale')
 </div>
 </body>
 <script>
 
-    function edit(){
+    function edit() {
+        // Mendapatkan nilai input dari elemen-elemen form
+        var nama = document.getElementById("nama").value;
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("passwordupdate").value;
 
+        // Menampilkan nilai input ke konsol
+        console.log("Nama: " + nama);
+        console.log("Username: " + username);
+        console.log("Password: " + password);
+
+        // Melakukan pengiriman data ke server atau manipulasi data lainnya
+        // ...
+
+        // Mengosongkan nilai input setelah proses pengiriman atau manipulasi selesai
+        document.getElementById("nama").value = "";
+        document.getElementById("username").value = "";
+        document.getElementById("passwordupdate").value = "";
     }
 
     function hapus(){
-
+        var hapus = document.getElementById()
     }
 
     function togglePasswordVisibility2() {
