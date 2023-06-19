@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\SenseiModel;
 use App\Http\Requests\StoreSenseiRequest;
 use App\Http\Requests\UpdateSenseiRequest;
-use http\Exception\BadConversionException;
 use Illuminate\Http\RedirectResponse;
 
 class SenseiController extends Controller
@@ -30,18 +29,15 @@ class SenseiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSenseiRequest $request): RedirectResponse
+    public function store(StoreSenseiRequest $request, SenseiModel $senseiModel): RedirectResponse
     {
-        //
-        SenseiModel::create([
-            'nama' => $request->input('nama'),
-            'username' => $request->input('username'),
-            'password' => $request->input('password'),
-            'kantor' => $request->input('kantor'),
-            'sekretaris_id' => $request->input('sekretaris'),
-        ]);
-
-        return redirect()->route('schale.dashboard')->with('sukses', 'Data Sensei telah ditambahkan!');
+        $validateData = $request->validate();
+        if ($validateData){
+            $senseiModel->create($validateData);
+            return back()->with('sukses', 'Data Sensei berhasil ditambahkan!');
+        }
+        else
+            return back()->with('gagal', 'Data Sensei gagal ditambahkan!');
     }
 
     /**
@@ -77,10 +73,10 @@ class SenseiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SenseiModel $sensei)
+    public function destroy(SenseiModel $senseiModel)
     {
-        if ($sensei) {
-            $sensei->delete();
+        if ($senseiModel) {
+            $senseiModel->delete();
             return back()->with('sukses', 'Data Sensei berhasil dihapus!');
         }
         else
