@@ -69,7 +69,13 @@ class SenseiController extends Controller
     {
         $validateData = $request->validated();
         if ($validateData) {
-            $sensei->update($validateData);
+            $sensei->update([
+                'nama' => $validateData['nama'],
+                'username' => $validateData['username'],
+                'password' => $validateData['password'],
+                'kantor' => $validateData['kantor'],
+                'sekretaris_id' => $validateData['sekretaris'],
+            ]);
             return back()->with('sukses', 'Data Sensei berhasil diperbarui!');
         }
         else
