@@ -50,6 +50,6 @@ Route::middleware('auth:sensei')->group(function (){
 });
 
 Route::middleware('auth:sekretaris')->group(function (){
-    Route::get('/sekretaris/dashboard', [SekretarisController::class, 'index'])->name('dashboard.sekretaris');
+    Route::get('/sekretaris/dashboard', [SekretarisController::class, 'index'])->name('sekretaris.dashboard');
     Route::post('/logout-sekretaris', [LoginController::class, 'logout'])->name('logout.sekretaris');
 });

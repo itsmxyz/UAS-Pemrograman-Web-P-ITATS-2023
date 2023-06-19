@@ -19,7 +19,7 @@ class SRTMiddleware
         if ($request->is('schale/dashboard', 'logout-schale',
                 'data-siswa', 'schale/sensei', 'data-sekretaris')
             && !Auth::guard('schale')->check()) {
-            return redirect()->route('home');
+            return redirect('/DADA');
         }
         return $next($request);
     }

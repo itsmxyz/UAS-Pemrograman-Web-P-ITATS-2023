@@ -17,7 +17,6 @@ class SenseiController extends Controller
         //
         return view('page3-dashboard.dashboard');
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -25,7 +24,6 @@ class SenseiController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -45,7 +43,6 @@ class SenseiController extends Controller
         } else
             return back()->with('error', 'Data tidak valid! Priksa kembali input Anda.');
     }
-
     /**
      * Display the specified resource.
      */
@@ -53,7 +50,6 @@ class SenseiController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -61,7 +57,6 @@ class SenseiController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -81,7 +76,6 @@ class SenseiController extends Controller
         else
             return back()->with('error', 'Data gagal diperbarui! Mohon periksa kembali input Anda.');
     }
-
     /**
      * Remove the specified resource from storage.
      */
