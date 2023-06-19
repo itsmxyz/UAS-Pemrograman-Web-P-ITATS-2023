@@ -31,13 +31,19 @@ class SenseiController extends Controller
      */
     public function store(StoreSenseiRequest $request, SenseiModel $senseiModel): RedirectResponse
     {
-        $validateData = $request->validate();
-        if ($validateData){
-            $senseiModel->create($validateData);
+        $validatedData = $request->validated();
+
+        if ($validatedData) {
+            $senseiModel->create([
+                'nama' => $validatedData['nama'],
+                'username' => $validatedData['username'],
+                'password' => $validatedData['password'],
+                'kantor' => $validatedData['kantor'],
+                'sekretaris_id' => $validatedData['sekretaris'],
+            ]);
             return back()->with('sukses', 'Data Sensei berhasil ditambahkan!');
-        }
-        else
-            return back()->with('gagal', 'Data Sensei gagal ditambahkan!');
+        } else
+            return back()->with('error', 'Data tidak valid! Priksa kembali input Anda.');
     }
 
     /**
