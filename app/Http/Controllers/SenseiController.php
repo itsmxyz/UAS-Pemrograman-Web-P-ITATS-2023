@@ -59,7 +59,7 @@ class SenseiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSenseiRequest $request, SenseiModel $sensei, $id)
+    public function update(UpdateSenseiRequest $request, SenseiModel $sensei)
     {
         $validateData = $request->validated();
         if ($validateData) {
