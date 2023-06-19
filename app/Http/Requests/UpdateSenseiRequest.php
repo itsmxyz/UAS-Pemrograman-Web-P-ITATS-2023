@@ -11,7 +11,7 @@ class UpdateSenseiRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->guard('schale')->check();
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateSenseiRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama' => 'required',
+            'username' => 'required||unique:sensei,username',
+            'password' => 'required',
+            'kantor' => 'required',
+            'sekretaris' => 'required'
         ];
     }
 }

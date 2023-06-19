@@ -38,7 +38,7 @@ Route::middleware('srt')->group(function () {
     Route::get('/schale/sensei', [AdminController::class, 'getDataSensei'])->name('schale.sensei');
     Route::get('/schale/sekretaris', [AdminController::class, 'getDataSekretaris'])->name('schale.sekretaris');
     Route::post('/schale/sensei/create-sensei', [SenseiController::class, 'store'])->name('schale.sensei-create');
-    Route::post('/schale/sensei/update-sensei', [SenseiController::class, 'update'])->name('schale.sensei-update');
+    Route::put('/schale/sensei/update-sensei', [SenseiController::class, 'update'])->name('schale.sensei-update');
     Route::post('/schale/sensei/delete-sensei', [SenseiController::class, 'destroy'])->name('schale.sensei-delete');
     Route::post('/logout-schale', [LoginController::class, 'logout'])->name('schale.logout');
     Route::get('/data-siswa', [SiswaController::class, 'show']);
