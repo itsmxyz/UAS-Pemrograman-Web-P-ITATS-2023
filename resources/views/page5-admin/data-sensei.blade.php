@@ -194,6 +194,7 @@
                         </div>
                         <form method="post" action="{{route('schale.sensei-update')}}">
                             @csrf
+                            @method('PUT')
                             <div class="cnter-wrap p-4">
                                 <div class="section text-left md-2">
                                     <div class="row">
