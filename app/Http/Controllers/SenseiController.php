@@ -40,7 +40,7 @@ class SenseiController extends Controller
             'sekretaris_id' => $request->input('sekretaris'),
         ]);
 
-        return redirect()->route('dashboard.schale')->with('sukses', 'Data Sensei telah ditambahkan!');
+        return redirect()->route('schale.dashboard')->with('sukses', 'Data Sensei telah ditambahkan!');
     }
 
     /**

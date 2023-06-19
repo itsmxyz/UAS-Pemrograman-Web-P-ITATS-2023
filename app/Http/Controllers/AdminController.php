@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     public final function loginPage() {
-        if (Auth::guard('sensei')->check())  return redirect()->route('dashboard.sensei');
-        elseif (Auth::guard('sekretaris')->check()) return redirect()->route('dashboard.sekretaris');
-        elseif (Auth::guard('schale')->check()) return redirect()->route('dashboard.schale');
+        if (Auth::guard('sensei')->check())  return redirect()->route('sensei.dashboard');
+        elseif (Auth::guard('sekretaris')->check()) return redirect()->route('sekretaris.dashboard');
+        elseif (Auth::guard('schale')->check()) return redirect()->route('schale.dashboard');
 
         return view('page5-admin.login-admin');
     }

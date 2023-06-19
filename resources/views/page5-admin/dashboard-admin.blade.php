@@ -58,7 +58,7 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/schale/sensei">
+            <a class="nav-link collapsed" href="{{route('schale.sensei')}}">
                 <i class="bi bi-person"></i>
                 <span>Sensei</span>
             </a>
@@ -68,7 +68,7 @@
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/data-sekretaris">
+            <a class="nav-link collapsed" href="{{route('schale.sekretaris')}}">
                 <i class="bi bi-person"></i>
                 <span>Sekretaris</span>
             </a>
@@ -203,7 +203,7 @@
                 </div>
                 <div class="modal-body">Tekan keluar jika anda ingin keluar.</div>
                 <div class="modal-footer">
-                    <form method="post" action="/logout-schale">
+                    <form method="post" action="{{route('schale.logout')}}">
                         @csrf
                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary">Keluar</button>

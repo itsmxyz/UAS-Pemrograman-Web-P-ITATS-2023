@@ -52,7 +52,7 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/data-sensei">
+            <a class="nav-link collapsed" href="{{route('schale.sensei')}}">
                 <i class="bi bi-person"></i>
                 <span>Sensei</span>
             </a>
@@ -60,7 +60,7 @@
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="/data-sekretaris">
+            <a class="nav-link collapsed" href="{{route('schale.sekretaris')}}">
                 <i class="bi bi-person"></i>
                 <span>Sekretaris</span>
             </a>
