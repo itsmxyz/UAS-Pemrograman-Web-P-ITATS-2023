@@ -131,7 +131,8 @@
                                             <td style="width: 10%">
                                                 <div class="d-flex justify-content-center">
                                                     <div class="dropdown" data-bs-toggle="modal" data-bs-target="#update-data">
-                                                        <button type="submit" class="bi bi-pencil-square btn btn-transparent" id="edit-button"></button>
+                                                        <button type="submit" class="bi bi-pencil-square btn btn-transparent"
+                                                                id="edit-button" onclick="edit(this)"></button>
                                                     </div>
                                                     <div class="dropdown" data-bs-toggle="modal" data-bs-target="#del-data">
                                                         <button type="submit" class="bi bi-trash3 btn btn-transparent" id="del-button"></button>
@@ -161,7 +162,7 @@
                             @csrf
                             <div class="center-wrap p-4">
                                 <div class="section text-left md-2">
-                                    <div class="row">
+                                    <div class="row" >
                                         <div class="col-md-3">
                                             <label for="nama" class="mb-4">Nama</label>
                                         </div>
@@ -174,6 +175,7 @@
                                             <label for="username" class="mb-4">Username</label>
                                         </div>
                                         <div class="col-md-9">
+                                            <input type="hidden" name="id_sekretaris" id="id_sekretaris">
                                             <input type="text" name="username" class="form-control" required id="username" autocomplete="off">
                                         </div>
                                     </div>
@@ -194,7 +196,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-primary" id="edit-btn" onclick="edit()">Edit</button>
+                                        <button type="submit" class="btn btn-primary" id="edit-btn" onclick="edit(button)">Edit</button>
                                     </div>
                                 </div>
                             </div>
@@ -265,24 +267,23 @@
 </body>
 <script>
 
-    function edit() {
-        // Mendapatkan nilai input dari elemen-elemen form
-        var nama = document.getElementById("nama").value;
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("passwordupdate").value;
+    function edit(button) {
+        // Mendapatkan elemen baris induk tombol yang diklik
+        var row = button.closest("tr");
+
+        // Mendapatkan nilai-nilai dari kolom lain dalam baris yang sama
+        var idSekretaris = row.cells[0].innerText;
+        var nama = row.cells[1].innerText;
+        var username = row.cells[2].innerText;
+        var password = row.cells[3].innerText;
 
         // Menampilkan nilai input ke konsol
         console.log("Nama: " + nama);
         console.log("Username: " + username);
-        console.log("Password: " + password);
 
-        // Melakukan pengiriman data ke server atau manipulasi data lainnya
-        // ...
-
-        // Mengosongkan nilai input setelah proses pengiriman atau manipulasi selesai
-        document.getElementById("nama").value = "";
-        document.getElementById("username").value = "";
-        document.getElementById("passwordupdate").value = "";
+        // Mengambil data form update
+        document.getElementById("nama").value = nama;
+        document.getElementById("username").value = username;
     }
 
     function hapus(){

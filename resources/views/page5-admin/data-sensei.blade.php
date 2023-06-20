@@ -152,27 +152,27 @@
                                     </tr>
                                     </thead>
                                     @foreach($sensei as $data)
-                                    <tbody>
-                                    <tr class="text-center">
-                                        <td>{{$data->id_sensei}}</td>
-                                        <td>{{$data->nama}}</td>
-                                        <td>{{$data->username}}</td>
-                                        <td>{{$data->kantor}}</td>
-                                        <td>{{$data->sekretaris->nama}}</td>
-                                        <td style="width: 10%">
-                                            <div class="d-flex justify-content-center">
-                                                <div class="dropdown" data-bs-toggle="modal" data-bs-target="#update-data">
-                                                    <button type="submit" class="bi bi-pencil-square btn btn-transparent"
-                                                            id="edit-button" onclick="ikut(this)"></button>
+                                        <tbody>
+                                        <tr class="text-center">
+                                            <td>{{$data->id_sensei}}</td>
+                                            <td>{{$data->nama}}</td>
+                                            <td>{{$data->username}}</td>
+                                            <td>{{$data->kantor}}</td>
+                                            <td>{{$data->sekretaris->nama}}</td>
+                                            <td style="width: 10%">
+                                                <div class="d-flex justify-content-center">
+                                                    <div class="dropdown" data-bs-toggle="modal" data-bs-target="#update-data">
+                                                        <button type="submit" class="bi bi-pencil-square btn btn-transparent"
+                                                                id="edit-button" onclick="edit(this)"></button>
+                                                    </div>
+                                                    <div class="dropdown" data-bs-toggle="modal" data-bs-target="#del-data">
+                                                        <button type="submit" class="bi bi-trash3 btn btn-transparent"
+                                                                id="del-button" ></button>
+                                                    </div>
                                                 </div>
-                                                <div class="dropdown" data-bs-toggle="modal" data-bs-target="#del-data">
-                                                    <button type="submit" class="bi bi-trash3 btn btn-transparent"
-                                                            id="del-button" ></button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
+                                            </td>
+                                        </tr>
+                                        </tbody>
                                     @endforeach
                                 </table>
                             </div>
@@ -199,7 +199,7 @@
                                             <label for="nama" class="mb-4">Nama</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="hidden" value="">
+                                            <input type="hidden" name="id_sensei" id="id_sensei">
                                             <input type="text" name="nama" class="form-control" required id="nama" autocomplete="off">
                                         </div>
                                     </div>
@@ -216,7 +216,7 @@
                                             <label for="kantor" class="mb-4">Kantor</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <select name="kantor" class="form-select" required>
+                                            <select name="kantor" class="form-select" required id="kantor">
                                                 <option value="" selected disabled>Pilih Kantor</option>
                                                 @foreach($kantor as $data)
                                                     <option value="{{$data}}">{{$data}}</option>
@@ -229,7 +229,7 @@
                                             <label for="sekretaris" class="mb-4">Sekretaris</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <select name="sekretaris" class="form-select" required>
+                                            <select name="sekretaris" class="form-select" required id="sekretaris">
                                                 <option value="" selected disabled>Pilih Sekretaris</option>
                                                 @foreach($nama as $data)
                                                     <option value="{{$data->id_sekretaris}}">{{$data->nama}}</option>
@@ -254,7 +254,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-primary" onclick="edit()">Edit</button>
+                                        <button type="submit" class="btn btn-primary" onclick="edit(button)">Edit</button>
                                     </div>
                                 </div>
                             </div>
@@ -300,8 +300,6 @@
                     </div>
                 </div>
             </div>
-
-
             <!-- End of Main Content -->
 
             <!-- Footer -->
@@ -320,7 +318,7 @@
 </div>
 </body>
 <script>
-    function ikut(button) {
+    function edit(button) {
         // Mendapatkan elemen baris induk tombol yang diklik
         var row = button.closest("tr");
 
@@ -337,17 +335,13 @@
         console.log("Username:", username);
         console.log("Kantor:", kantor);
         console.log("Nama Sekretaris:", namaSekretaris);
+
+        {{--//Mengambil data untuk form update--}}
+        document.getElementById('nama').value = nama;
+        document.getElementById('username').value = username;
+        document.getElementById('kantor').value = kantor;
+        document.getElementById('sekretaris').value = namaSekretaris;
     }
-    // function edit(){
-    //     // Mendapatkan elemen tombol edit
-    //     var editButton = document.getElementById("edit-button");
-    //
-    //     // Mendapatkan nilai ID dari atribut data-id
-    //     var idSensei = editButton.getAttribute("data-id");
-    //
-    //     // Menggunakan nilai ID yang telah diambil
-    //     console.log(idSensei); // Output: nilai ID dari tombol edit yang diklik
-    // }
 
     function hapus(){
 
