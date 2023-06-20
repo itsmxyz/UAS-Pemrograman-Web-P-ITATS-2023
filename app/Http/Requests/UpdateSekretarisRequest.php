@@ -11,9 +11,8 @@ class UpdateSekretarisRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return auth()->guard('schale')->check();
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,7 +21,9 @@ class UpdateSekretarisRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama' => 'required',
+            'username' => 'required||unique:sekretaris,username',
+            'password' => 'required',
         ];
     }
 }

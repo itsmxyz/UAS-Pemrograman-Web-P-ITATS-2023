@@ -40,6 +40,9 @@ Route::middleware('srt')->group(function () {
     Route::post('/schale/sensei/create-sensei', [SenseiController::class, 'store'])->name('schale.sensei-create');
     Route::post('/schale/sensei/update-sensei', [SenseiController::class, 'update'])->name('schale.sensei-update');
     Route::post('/schale/sensei/delete-sensei', [SenseiController::class, 'destroy'])->name('schale.sensei-delete');
+    Route::post('/schale/sekretaris/create-sekretaris', [SekretarisController::class, 'store'])->name('schale.sekretaris-create');
+    Route::post('/schale/sekretaris/update-sensei', [SekretarisController::class, 'update'])->name('schale.sekretaris-update');
+    Route::post('/schale/sekretaris/update-sensei', [SekretarisController::class, 'destroy'])->name('schale.sekretaris-delete');
     Route::post('/logout-schale', [LoginController::class, 'logout'])->name('schale.logout');
     Route::get('/data-siswa', [SiswaController::class, 'show']);
 });

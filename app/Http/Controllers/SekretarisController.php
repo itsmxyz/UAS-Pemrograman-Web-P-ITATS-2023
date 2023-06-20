@@ -27,9 +27,20 @@ class SekretarisController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSekretarisRequest $request)
+    public function store(StoreSekretarisRequest $request, SekretarisModel $sekretarisModel)
     {
         //
+        $validatedData = $request->validated();
+
+        if ($validatedData) {
+            $sekretarisModel->create([
+                'nama' => $validatedData['nama'],
+                'username' => $validatedData['username'],
+                'password' => $validatedData['password'],
+            ]);
+            return back()->with('sukses', 'Data Sekretaris berhasil ditambahkan!');
+        } else
+            return back()->with('error', 'Data tidak valid! Priksa kembali input Anda.');
     }
 
     /**
@@ -51,11 +62,22 @@ class SekretarisController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSekretarisRequest $request, SekretarisModel $sekretaris)
+    public function update(UpdateSekretarisRequest $request, SekretarisModel $sekretarisModel)
     {
         //
+        $validateData = $request->validated();
+        if ($validateData) {
+            if ($sekretarisModel->findOrFail($validateData['id']))
+            $sekretarisModel->update([
+                'nama' => $validateData['nama'],
+                'username' => $validateData['username'],
+                'password' => $validateData['password'],
+            ]);
+            return back()->with('sukses', 'Data Sekretaris berhasil diperbarui!');
+        }
+        else
+            return back()->with('error', 'Data gagal diperbarui! Mohon periksa kembali input Anda.');
     }
-
     /**
      * Remove the specified resource from storage.
      */
