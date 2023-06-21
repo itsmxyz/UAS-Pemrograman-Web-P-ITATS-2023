@@ -23,7 +23,6 @@ class UpdateSenseiRequest extends FormRequest
     {
         return [
             'nama' => 'required',
-            'password' => 'required',
             'kantor' => 'required',
             'sekretaris' => 'required'
         ];

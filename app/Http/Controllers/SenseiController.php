@@ -65,24 +65,26 @@ class SenseiController extends Controller
         $find = $sensei->find($request->input('id_sensei'));
 
         if ($request->input('username') != $find->username){
-            $request['username'] = 'required||unique:username';
+            $newRules = [
+                'username' => 'required||unique:sensei,username',
+            ];
+            $validateData = $request->validate($newRules);
+            if ($validateData) {
+                $find->update([
+                    'nama' => $request->input('nama'),
+                    'username' => $request->input('username'),
+                    'kantor' => $request->input('kantor'),
+                    'sekretaris_id' => $request->input('sekretaris'),
+                ]);
+                return back()->with('sukses', 'Data Sensei berhasil diperbarui!');
+            }
+            else
+                return back()->with('error', 'Data gagal diperbarui! Mohon periksa kembali input Anda.');
         }
         else{
-            return back()
+            dd($request);
+            return back()->with('error', 'Username telah diambil.');
         }
-        $validateData = $request->validated();
-        if ($validateData) {
-            $find->update([
-                'nama' => $validateData['nama'],
-                'username' => $validateData['username'],
-                'password' => $validateData['password'],
-                'kantor' => $validateData['kantor'],
-                'sekretaris_id' => $validateData['sekretaris'],
-            ]);
-            return back()->with('sukses', 'Data Sensei berhasil diperbarui!');
-        }
-        else
-            return back()->with('error', 'Data gagal diperbarui! Mohon periksa kembali input Anda.');
     }
     /**
      * Remove the specified resource from storage.

@@ -236,7 +236,7 @@
                                             <select name="sekretaris" class="form-select" required id="sekretaris-update">
                                                 <option value="{{old('sekretaris')}}" selected disabled>Pilih Sekretaris</option>
                                                 @foreach($sekretaris as $data)
-                                                    <option value="{{$data->nama}}">{{$data->nama}}</option>
+                                                    <option value="{{$data->id_sekretaris}}">{{$data->nama}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
