@@ -38,9 +38,7 @@ Route::middleware('srt')->group(function () {
     Route::get('/schale/sensei', [AdminController::class, 'getDataSensei'])->name('schale.sensei');
     Route::get('/schale/sekretaris', [AdminController::class, 'getDataSekretaris'])->name('schale.sekretaris');
     Route::post('/schale/sensei/create-sensei', [SenseiController::class, 'store'])->name('schale.sensei-create');
-    Route::post('/schale/sensei/update-sensei', function (){
-        dd(request()->input());
-    })->name('schale.sensei-update');
+    Route::post('/schale/sensei/update-sensei', [SenseiController::class, 'update'])->name('schale.sensei-update');
     Route::post('/schale/sensei/delete-sensei', [SenseiController::class, 'destroy'])->name('schale.sensei-delete');
     Route::post('/schale/sekretaris/create-sekretaris', [SekretarisController::class, 'store'])->name('schale.sekretaris-create');
     Route::post('/schale/sekretaris/update-sensei', [SekretarisController::class, 'update'])->name('schale.sekretaris-update');

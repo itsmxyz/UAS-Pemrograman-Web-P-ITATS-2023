@@ -62,12 +62,15 @@ class SenseiController extends Controller
      */
     public function update(UpdateSenseiRequest $request, SenseiModel $sensei)
     {
-        if ($request->input('username') != $sensei->username){
-            $request['username'] = 'required||unique:username';
-        }
-        $validateData = $request->validated();
         $find = $sensei->find($request->input('id_sensei'));
 
+        if ($request->input('username') != $find->username){
+            $request['username'] = 'required||unique:username';
+        }
+        else{
+            return back()
+        }
+        $validateData = $request->validated();
         if ($validateData) {
             $find->update([
                 'nama' => $validateData['nama'],
