@@ -193,7 +193,7 @@
                                 <span aria-hidden="true">x</span>
                             </button>
                         </div>
-                        <form method="post" action="{{route('schale.sensei-update', ['id' => $data->$sensei->id_sensei])}}" id="update-form">
+                        <form method="post" action="{{route('schale.sensei-update')}}" id="update-form">
                             @csrf
                             <div class="cnter-wrap p-4">
                                 <div class="section text-left md-2">
@@ -202,7 +202,7 @@
                                             <label for="nama" class="mb-4">Nama</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="hidden" name="id_sensei" id="id_sensei-update" value="">
+                                            <input type="hidden" name="id_sensei" id="id-update" value="">
                                             <input type="text" name="nama" class="form-control" required id="nama-update" autocomplete="off">
                                         </div>
                                     </div>
@@ -258,7 +258,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-primary" id="submit-update" onclick="edit(button)">Edit</button>
+                                        <button type="submit" class="btn btn-primary" onclick="edit(button)">Edit</button>
                                     </div>
                                 </div>
                             </div>
@@ -333,35 +333,26 @@
     });
 
     function edit(button) {
-        // Mendapatkan elemen baris induk tombol yang diklik
         var row = button.closest("tr");
 
-        // Mendapatkan nilai-nilai dari kolom lain dalam baris yang sama
         var idSensei = row.cells[0].innerText;
         var nama = row.cells[1].innerText;
         var username = row.cells[2].innerText;
         var kantor = row.cells[3].innerText;
         var namaSekretaris = row.cells[4].innerText;
 
-        // Lakukan apa pun yang Anda perlukan dengan nilai-nilai tersebut
         console.log("ID Sensei:", idSensei);
         console.log("Nama:", nama);
         console.log("Username:", username);
         console.log("Kantor:", kantor);
         console.log("Nama Sekretaris:", namaSekretaris);
 
-        {{--//Mengambil data untuk form update--}}
+        document.getElementById('id-update').value = idSensei;
         document.getElementById('nama-update').value = nama;
         document.getElementById('username-update').value = username;
         document.getElementById('kantor-update').value = kantor;
         document.getElementById('sekretaris-update').value = namaSekretaris;
     }
-
-    $(document).on('click','edit-button',function (){
-       var idSensei = $(this).data('id_sensei-update');
-       $('#id_sensei-update').val(idSensei);
-       $('#update-form').submit();
-    });
 
     function hapus(){
 
