@@ -200,7 +200,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <input type="hidden" name="id_sensei" id="id_sensei">
-                                            <input type="text" name="nama" class="form-control" required id="nama" autocomplete="off">
+                                            <input type="text" name="nama" class="form-control" required id="nama-update" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -208,7 +208,8 @@
                                             <label for="username" class="mb-4">Username</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="text" name="username" class="form-control" required id="username" autocomplete="off">
+                                            <input type="text" name="username" class="form-control" required id="username-update" autocomplete="off"
+                                            value="">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -216,7 +217,7 @@
                                             <label for="kantor" class="mb-4">Kantor</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <select name="kantor" class="form-select" required id="kantor">
+                                            <select name="kantor" class="form-select" required id="kantor-update">
                                                 <option value="" selected disabled>Pilih Kantor</option>
                                                 @foreach($kantor as $data)
                                                     <option value="{{$data}}">{{$data}}</option>
@@ -229,7 +230,7 @@
                                             <label for="sekretaris" class="mb-4">Sekretaris</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <select name="sekretaris" class="form-select" required id="sekretaris">
+                                            <select name="sekretaris" class="form-select" required id="sekretaris-update">
                                                 <option value="" selected disabled>Pilih Sekretaris</option>
                                                 @foreach($nama as $data)
                                                     <option value="{{$data->id_sekretaris}}">{{$data->nama}}</option>
@@ -239,14 +240,14 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <label for="password" class="mb-4">Password</label>
+                                            <label for="password" class="mb-4"> Reset Password</label>
                                         </div>
                                         <div class="col-md-9">
                                             <div class="form-group mt-2">
                                                 <div class="input-group">
-                                                    <input type="password" name="password" class="form-control" required id="passwordupdate" autocomplete="off">
+                                                    <input type="password" disabled name="password" class="form-control" required id="passwor-dupdate" autocomplete="off">
                                                     <button class="btn btn-outline-secondary" type="button" id="password-toggle-sensei" onclick="togglePasswordVisibility2()">
-                                                        <i id="eye-icon2" class="bi bi-eye"></i>
+                                                        <i class="bi bi-wrench-adjustable-circle-fill"></i>
                                                     </button>
                                                 </div>
                                             </div>
@@ -282,7 +283,7 @@
                                             <div class="form-group mt-2">
                                                 <h6>Masukkan Password untuk konfirmasi</h6>
                                                 <div class="input-group">
-                                                    <input type="password" name="password" class="form-control" id="passworddelete" autocomplete="off">
+                                                    <input type="password" name="password" class="form-control" id="password-delete" autocomplete="off">
                                                     <button class="btn btn-outline-secondary" type="button" id="password-toggle" onclick="togglePasswordVisibility1()">
                                                         <i id="eye-icon1" class="bi bi-eye"></i>
                                                     </button>
@@ -337,10 +338,10 @@
         console.log("Nama Sekretaris:", namaSekretaris);
 
         {{--//Mengambil data untuk form update--}}
-        document.getElementById('nama').value = nama;
-        document.getElementById('username').value = username;
-        document.getElementById('kantor').value = kantor;
-        document.getElementById('sekretaris').value = namaSekretaris;
+        document.getElementById('nama-update').value = nama;
+        document.getElementById('username-update').value = username;
+        document.getElementById('kantor-update').value = kantor;
+        document.getElementById('sekretaris-update').value = namaSekretaris;
     }
 
     function hapus(){
@@ -348,22 +349,11 @@
     }
 
     function togglePasswordVisibility2() {
-        var passwordInput = document.getElementById("passwordupdate");
-        var eyeIcon = document.getElementById("eye-icon2");
 
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            eyeIcon.classList.remove("bi-eye");
-            eyeIcon.classList.add("bi-eye-slash");
-        } else {
-            passwordInput.type = "password";
-            eyeIcon.classList.remove("bi-eye-slash");
-            eyeIcon.classList.add("bi-eye");
-        }
     }
 
     function togglePasswordVisibility1() {
-        var passwordInput = document.getElementById("passworddelete");
+        var passwordInput = document.getElementById("password-delete");
         var eyeIcon = document.getElementById("eye-icon1");
 
         if (passwordInput.type === "password") {

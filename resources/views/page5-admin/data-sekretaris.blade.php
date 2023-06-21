@@ -167,7 +167,7 @@
                                             <label for="nama" class="mb-4">Nama</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="text" name="nama" class="form-control" required id="nama" autocomplete="off">
+                                            <input type="text" name="nama" class="form-control" required id="nama-update" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -176,7 +176,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <input type="hidden" name="id_sekretaris" id="id_sekretaris">
-                                            <input type="text" name="username" class="form-control" required id="username" autocomplete="off">
+                                            <input type="text" name="username" class="form-control" required id="username-update" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -282,8 +282,8 @@
         console.log("Username: " + username);
 
         // Mengambil data form update
-        document.getElementById("nama").value = nama;
-        document.getElementById("username").value = username;
+        document.getElementById("nama-update").value = nama;
+        document.getElementById("username-update").value = username;
     }
 
     function hapus(){
