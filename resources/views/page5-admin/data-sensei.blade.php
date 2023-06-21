@@ -163,7 +163,9 @@
                                                 <div class="d-flex justify-content-center">
                                                     <div class="dropdown" data-bs-toggle="modal" data-bs-target="#update-data">
                                                         <button type="submit" class="bi bi-pencil-square btn btn-transparent"
-                                                                id="edit-button" onclick="edit(this)"></button>
+                                                                id="edit-button" onclick="edit(this)"
+                                                                data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                data-bs-title="Edit Data"></button>
                                                     </div>
                                                     <div class="dropdown" data-bs-toggle="modal" data-bs-target="#del-data">
                                                         <button type="submit" class="bi bi-trash3 btn btn-transparent"
@@ -231,9 +233,9 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select name="sekretaris" class="form-select" required id="sekretaris-update">
-                                                <option value="" selected disabled>Pilih Sekretaris</option>
+                                                <option value="{{old('sekretaris')}}" selected disabled>Pilih Sekretaris</option>
                                                 @foreach($nama as $data)
-                                                    <option value="{{$data->id_sekretaris}}">{{$data->nama}}</option>
+                                                    <option value="{{$data->nama}}">{{$data->nama}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -319,6 +321,9 @@
 </div>
 </body>
 <script>
+    const exampleEl = document.getElementById('edit-button');
+    const tooltip = new bootstrap.Tooltip(exampleEl);
+
     function edit(button) {
         // Mendapatkan elemen baris induk tombol yang diklik
         var row = button.closest("tr");
