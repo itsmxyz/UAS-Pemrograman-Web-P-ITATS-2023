@@ -40,7 +40,7 @@ class AdminController extends Controller
     public final function getDataSensei(SenseiModel $senseiModel, SekretarisModel $sekretarisModel){
         return view('page5-admin.data-sensei', [
             'sensei' =>$senseiModel->getAll(),
-            'nama' => $sekretarisModel->getNamaSekretaris(),
+            'sekretaris' => $sekretarisModel->getNamaSekretaris(),
             'kantor' => $senseiModel->getKantor()
         ]);
     }
