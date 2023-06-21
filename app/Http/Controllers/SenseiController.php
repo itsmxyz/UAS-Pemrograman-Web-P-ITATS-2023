@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SenseiModel;
 use App\Http\Requests\StoreSenseiRequest;
 use App\Http\Requests\UpdateSenseiRequest;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 class SenseiController extends Controller
@@ -87,10 +88,12 @@ class SenseiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SenseiModel $senseiModel)
+    public function destroy(Request $request, SenseiModel $senseiModel)
     {
-        if ($senseiModel) {
-            $senseiModel->delete();
+        $sensei = $senseiModel->find($request->input('id_sensei'));
+
+        if ($sensei) {
+            $sensei->delete();
             return back()->with('sukses', 'Data Sensei berhasil dihapus!');
         }
         else
