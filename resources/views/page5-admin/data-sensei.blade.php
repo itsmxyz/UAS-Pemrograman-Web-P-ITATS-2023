@@ -169,7 +169,8 @@
                                                     </div>
                                                     <div class="dropdown" data-bs-toggle="modal" data-bs-target="#del-data">
                                                         <button class="bi bi-trash3 btn btn-transparent"
-                                                                id="del-button" ></button>
+                                                                id="del-button" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                data-bs-title="Edit Data" data-id-sensei="{{$data->id_sensei}}" ></button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -192,7 +193,7 @@
                                 <span aria-hidden="true">x</span>
                             </button>
                         </div>
-                        <form method="post" action="{{route('schale.sensei-update')}}">
+                        <form method="post" action="{{route('schale.sensei-update')}}" id="update-form">
                             @csrf
                             <div class="cnter-wrap p-4">
                                 <div class="section text-left md-2">
@@ -354,7 +355,7 @@
     $(document).on('click','edit-button',function (){
        var idSensei = $(this).data('id-sensei');
        $('#id_sensei-update').valueOf(idSensei);
-       $('#update-data').submit();
+       $('#update-form').submit();
     });
 
     function hapus(){
