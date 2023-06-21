@@ -170,7 +170,7 @@
                                                     <div class="dropdown" data-bs-toggle="modal" data-bs-target="#del-data">
                                                         <button class="bi bi-trash3 btn btn-transparent"
                                                                 id="del-button" data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                data-bs-title="Edit Data" data-id-sensei="{{$data->id_sensei}}" ></button>
+                                                                data-bs-title="Hapus Data" data-id-sensei="{{$data->id_sensei}}" ></button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -323,6 +323,11 @@
 </body>
 <script>
     const editButton = document.querySelectorAll('#edit-button');
+    editButton.forEach(function (button){
+        const tooltip = new bootstrap.Tooltip(button);
+    });
+
+    const hapusButton = document.querySelectorAll('#del-button');
     editButton.forEach(function (button){
         const tooltip = new bootstrap.Tooltip(button);
     });
