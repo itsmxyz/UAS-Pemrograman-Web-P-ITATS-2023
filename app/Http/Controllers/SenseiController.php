@@ -81,10 +81,8 @@ class SenseiController extends Controller
             else
                 return back()->with('error', 'Data gagal diperbarui! Mohon periksa kembali input Anda.');
         }
-        else{
-            dd($request);
+        else
             return back()->with('error', 'Username telah diambil.');
-        }
     }
     /**
      * Remove the specified resource from storage.
