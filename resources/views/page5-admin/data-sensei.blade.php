@@ -193,7 +193,7 @@
                                 <span aria-hidden="true">x</span>
                             </button>
                         </div>
-                        <form method="post" action="{{route('schale.sensei-update')}}" id="update-form">
+                        <form method="post" action="{{route('schale.sensei-update', ['id' => $data->$sensei->id_sensei])}}" id="update-form">
                             @csrf
                             <div class="cnter-wrap p-4">
                                 <div class="section text-left md-2">
@@ -258,7 +258,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-primary" onclick="edit(button)">Edit</button>
+                                        <button type="submit" class="btn btn-primary" id="submit-update" onclick="edit(button)">Edit</button>
                                     </div>
                                 </div>
                             </div>
@@ -353,8 +353,8 @@
     }
 
     $(document).on('click','edit-button',function (){
-       var idSensei = $(this).data('id-sensei');
-       $('#id_sensei-update').valueOf(idSensei);
+       var idSensei = $(this).data('id_sensei-update');
+       $('#id_sensei-update').val(idSensei);
        $('#update-form').submit();
     });
 
