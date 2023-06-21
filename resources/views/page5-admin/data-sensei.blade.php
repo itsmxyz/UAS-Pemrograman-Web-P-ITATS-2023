@@ -106,7 +106,7 @@
                                                     <div class="col-md-9">
                                                         <select name="sekretaris" class="form-select" required>
                                                             <option value="" selected disabled>Pilih Sekretaris</option>
-                                                            @foreach($nama as $data)
+                                                            @foreach($sekretaris as $data)
                                                                 <option value="{{$data->id_sekretaris}}">{{$data->nama}}</option>
                                                             @endforeach
                                                         </select>
@@ -162,13 +162,13 @@
                                             <td style="width: 10%">
                                                 <div class="d-flex justify-content-center">
                                                     <div class="dropdown" data-bs-toggle="modal" data-bs-target="#update-data">
-                                                        <button type="submit" class="bi bi-pencil-square btn btn-transparent"
+                                                        <button class="bi bi-pencil-square btn btn-transparent"
                                                                 id="edit-button" onclick="edit(this)"
                                                                 data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                data-bs-title="Edit Data"></button>
+                                                                data-bs-title="Edit Data" data-id-sensei="{{$data->id_sensei}}"></button>
                                                     </div>
                                                     <div class="dropdown" data-bs-toggle="modal" data-bs-target="#del-data">
-                                                        <button type="submit" class="bi bi-trash3 btn btn-transparent"
+                                                        <button class="bi bi-trash3 btn btn-transparent"
                                                                 id="del-button" ></button>
                                                     </div>
                                                 </div>
@@ -201,7 +201,7 @@
                                             <label for="nama" class="mb-4">Nama</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="hidden" name="id_sensei" id="id_sensei">
+                                            <input type="hidden" name="id_sensei" id="id_sensei-update" value="">
                                             <input type="text" name="nama" class="form-control" required id="nama-update" autocomplete="off">
                                         </div>
                                     </div>
@@ -234,7 +234,7 @@
                                         <div class="col-md-9">
                                             <select name="sekretaris" class="form-select" required id="sekretaris-update">
                                                 <option value="{{old('sekretaris')}}" selected disabled>Pilih Sekretaris</option>
-                                                @foreach($nama as $data)
+                                                @foreach($sekretaris as $data)
                                                     <option value="{{$data->nama}}">{{$data->nama}}</option>
                                                 @endforeach
                                             </select>
@@ -321,8 +321,10 @@
 </div>
 </body>
 <script>
-    const exampleEl = document.getElementById('edit-button');
-    const tooltip = new bootstrap.Tooltip(exampleEl);
+    const editButton = document.querySelectorAll('#edit-button');
+    editButton.forEach(function (button){
+        const tooltip = new bootstrap.Tooltip(button);
+    });
 
     function edit(button) {
         // Mendapatkan elemen baris induk tombol yang diklik
@@ -348,6 +350,12 @@
         document.getElementById('kantor-update').value = kantor;
         document.getElementById('sekretaris-update').value = namaSekretaris;
     }
+
+    $(document).on('click','edit-button',function (){
+       var idSensei = $(this).data('id-sensei');
+       $('#id_sensei-update').valueOf(idSensei);
+       $('#update-data').submit();
+    });
 
     function hapus(){
 
