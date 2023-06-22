@@ -47,7 +47,7 @@ Route::middleware('srt')->group(function () {
     Route::get('/data-siswa', [SiswaController::class, 'show']);
 });
 
-Route::post('/logout?={username}', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout?={username}', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::middleware('auth:sensei')->group(function (){
