@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public final function index(){
+        $data = ['username' => 'Guest'];
         if (Auth('schale')->check() || Auth('sensei')->check() || Auth('sekretaris')->check()) {
             if (Auth('schale')->check())
                 $data = ['username' => Auth('schale')->user()->username];
@@ -18,6 +19,6 @@ class HomeController extends Controller
             return view('page1-home.home', $data);
         }
         else
-            return view('page1-home.home');
+            return view('page1-home.home', $data);
     }
 }
