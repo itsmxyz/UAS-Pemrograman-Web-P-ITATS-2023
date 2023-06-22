@@ -49,7 +49,7 @@
                 <li><a class="nav-link scrollto" href="#galeri">Galeri</a></li>
                 <li><a class="nav-link scrollto" href="#kontak">Hubungi Kami</a></li>
                 @if(auth()->guard('schale')->check()||auth()->guard('sensei')->check()||auth()->guard('sekretaris')->check() )
-                    <li><a class="nav-link scrollto" href="{{route('home.logout')}}">Logout</a></li>
+                    <li><a class="nav-link scrollto" href="{{route('home.logout', ['username' => session('username')])}}">Logout</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" id="login">Login<i class="bi bi-chevron-down"></i></a>
