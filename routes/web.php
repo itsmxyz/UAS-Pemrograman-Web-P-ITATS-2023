@@ -48,7 +48,7 @@ Route::middleware('srt')->group(function () {
 });
 
 Route::middleware('auth:sensei')->group(function (){
-    Route::get('/sensei/dashboard', [SenseiController::class, 'index'])->name('dashboard.sensei');
+    Route::get('/sensei/dashboard', [SenseiController::class, 'index'])->name('sensei.dashboard');
     Route::post('/logout-sensei', [LoginController::class, 'logout'])->name('logout.sensei');
 });
 

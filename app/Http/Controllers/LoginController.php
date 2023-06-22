@@ -10,14 +10,13 @@ class LoginController extends Controller
 {
     //
     public function index() {
-        if (Auth::guard('sensei')->check()) {
+        if (Auth::guard('sensei')->check())
             return redirect()->route('sensei.dashboard');
-        } elseif (Auth::guard('sekretaris')->check()) {
+        elseif (Auth::guard('sekretaris')->check())
             return redirect()->route('sekretaris.dashboard');
-        } elseif (Auth::guard('schale')->check()) {
+        elseif (Auth::guard('schale')->check()){
             return redirect()->route('schale.dashboard');
         }
-
         return view('page2-login.login');
     }
     public function authSensei(Request $request): RedirectResponse
