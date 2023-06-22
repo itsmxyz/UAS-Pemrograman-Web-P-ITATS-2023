@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::get('/', function (){ return view('page1-home.home'); })->name('home');
-Route::get('/logout', [LoginController::class, 'logout'])->name('home.logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('isAuth');
 
 Route::middleware('guest')->group(function () {
     Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
@@ -34,7 +34,7 @@ Route::post('/schale-auth', [LoginController::class, 'authSchale'])->name('auth.
 Route::post('/sensei-auth', [LoginController::class, 'authSensei'])->name('auth.sensei');
 Route::post('/sekretaris-auth', [LoginController::class, 'authSekretaris'])->name('auth.sekretaris');
 
-Route::middleware('srt')->group(function () {
+Route::middleware('schale')->group(function () {
     Route::get('/schale/dashboard', [AdminController::class, 'index'])->name('schale.dashboard');
     Route::get('/schale/sensei', [AdminController::class, 'getDataSensei'])->name('schale.sensei');
     Route::get('/schale/sekretaris', [AdminController::class, 'getDataSekretaris'])->name('schale.sekretaris');
@@ -44,17 +44,14 @@ Route::middleware('srt')->group(function () {
     Route::post('/schale/sekretaris/create-sekretaris', [SekretarisController::class, 'store'])->name('schale.sekretaris-create');
     Route::post('/schale/sekretaris/update-sensei', [SekretarisController::class, 'update'])->name('schale.sekretaris-update');
     Route::post('/schale/sekretaris/update-sensei', [SekretarisController::class, 'destroy'])->name('schale.sekretaris-delete');
-    Route::post('/logout-schale', [LoginController::class, 'logout'])->name('schale.logout');
     Route::get('/data-siswa', [SiswaController::class, 'show']);
 });
 
 
 Route::middleware('auth:sensei')->group(function (){
     Route::get('/sensei/dashboard', [SenseiController::class, 'index'])->name('sensei.dashboard');
-    Route::post('/logout-sensei', [LoginController::class, 'logout'])->name('logout.sensei');
 });
 
 Route::middleware('auth:sekretaris')->group(function (){
     Route::get('/sekretaris/dashboard', [SekretarisController::class, 'index'])->name('sekretaris.dashboard');
-    Route::post('/logout-sekretaris', [LoginController::class, 'logout'])->name('logout.sekretaris');
 });

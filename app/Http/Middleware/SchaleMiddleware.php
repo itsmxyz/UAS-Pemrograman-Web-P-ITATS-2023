@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class SRTMiddleware
+class SchaleMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,9 @@ class SRTMiddleware
      */
     public final function handle(Request $request, Closure $next): Response
     {
-        if ($request->is('schale/dashboard', 'logout-schale',
-                'data-siswa', 'schale/sensei', 'data-sekretaris')
-            && !Auth::guard('schale')->check()) {
-            return redirect('/DADA');
-        }
+        if ($request->is('schale/*')  && !Auth::guard('schale')->check())
+            abort(405);
+
         return $next($request);
     }
 }

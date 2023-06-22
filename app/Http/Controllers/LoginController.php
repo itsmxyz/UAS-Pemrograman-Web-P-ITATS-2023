@@ -25,11 +25,19 @@ class LoginController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
-        if (Auth::guard('sensei')->attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended(route('sensei.dashboard'));
+        if (!$credentials){
+            return back()->withErrors([
+                'username' => 'Username tidak boleh kosong!',
+                'password' => 'Passowrd tidak boleh kosong!',
+            ])->onlyInput('username');
         }
-        return back()->with('loginError', 'Login Gagal!')->onlyInput('username');
+        else{
+            if (Auth::guard('sensei')->attempt($credentials)) {
+                $request->session()->regenerate();
+                return redirect()->intended(route('sensei.dashboard'));
+            }
+            return back()->with('loginError', 'Login Gagal!')->onlyInput('username');
+        }
     }
     public function authSekretaris(Request $request): RedirectResponse
     {
@@ -37,11 +45,19 @@ class LoginController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
-        if (Auth::guard('sekretaris')->attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended(route('sekretaris.dashboard'));
+        if (!$credentials){
+            return back()->withErrors([
+                'username' => 'Username tidak boleh kosong!',
+                'password' => 'Passowrd tidak boleh kosong!',
+            ])->onlyInput('username');
         }
-        return back()->with('loginError', 'Login Gagal!')->onlyInput('username');
+        else{
+            if (Auth::guard('sekretaris')->attempt($credentials)) {
+                $request->session()->regenerate();
+                return redirect()->intended(route('sekretaris.dashboard'));
+            }
+            return back()->with('loginError', 'Login Gagal!')->onlyInput('username');
+        }
     }
     public function authSchale(Request $request): RedirectResponse
     {
