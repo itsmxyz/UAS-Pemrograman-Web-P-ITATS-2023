@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public final function index(){
-        $data = ['username' => 'Guest'];
+        $data = [];
         if (Auth('schale')->check() || Auth('sensei')->check() || Auth('sekretaris')->check()) {
             if (Auth('schale')->check())
                 $data = ['username' => Auth('schale')->user()->username];
