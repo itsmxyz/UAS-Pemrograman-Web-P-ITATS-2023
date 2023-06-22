@@ -49,11 +49,19 @@ class LoginController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
-        if (Auth::guard('schale')->attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended(route('schale.dashboard'));
+        if (!$credentials){
+            return back()->withErrors([
+                'username' => 'Username tidak boleh kosong!',
+                'password' => 'Passowrd tidak boleh kosong!',
+                ])->onlyInput('username');
         }
-        return back()->with('loginError', 'Login Gagal!')->onlyInput('username');
+        else{
+            if (Auth::guard('schale')->attempt($credentials)) {
+                $request->session()->regenerate();
+                return redirect()->intended(route('schale.dashboard'));
+            }
+            return back()->with('loginError', 'Login Gagal!')->onlyInput('username');
+        }
     }
     public function logout(Request $request): RedirectResponse
     {
