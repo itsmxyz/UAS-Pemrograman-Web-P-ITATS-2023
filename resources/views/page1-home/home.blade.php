@@ -50,7 +50,7 @@
                 <li><a class="nav-link scrollto" href="#kontak">Hubungi Kami</a></li>
                 @if(auth()->guard('schale')->check()||auth()->guard('sensei')->check()||auth()->guard('sekretaris')->check())
                     <li class="dropdown">
-                        <a href="#" id="nav-menu">Halo<i class="bi bi-chevron-down"></i></a>
+                        <a href="#" id="nav-menu">{{$data['username']}}<i class="bi bi-chevron-down"></i></a>
                         <ul>
                             <li><a href="{{route('login')}}">Dashboard</a></li>
                             <li><a href="{{route('logout')}}">Logout</a></li>
