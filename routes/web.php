@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::get('/', function (){ return view('page1-home.home'); })->name('home');
+Route::get('/logout?={username}', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('guest')->group(function () {
     Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
@@ -46,8 +47,6 @@ Route::middleware('srt')->group(function () {
     Route::post('/logout-schale', [LoginController::class, 'logout'])->name('schale.logout');
     Route::get('/data-siswa', [SiswaController::class, 'show']);
 });
-
-Route::get('/logout?={username}', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::middleware('auth:sensei')->group(function (){
