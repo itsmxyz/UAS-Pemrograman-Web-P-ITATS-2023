@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SekretarisController;
 use App\Http\Controllers\SenseiController;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
-Route::get('/', function (){ return view('page1-home.home'); })->name('home');
+Route::get('/', [Controller::class, 'index'])->name('home');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('isAuth');
 
 Route::middleware('guest')->group(function () {
