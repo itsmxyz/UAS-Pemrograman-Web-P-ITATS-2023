@@ -269,19 +269,6 @@
                             <li><a href="/login">Sekretaris</a></li>
                         </ul>
                     </li>
-
-                    <script>
-                        $(document).ready(function () {
-                            $('#login').click(function (event) {
-                                event.preventDefault();
-                            });
-                        });
-                        $(document).ready(function () {
-                            $('#logo').click(function (event) {
-                                event.preventDefault();
-                            });
-                        });
-                    </script>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -373,6 +360,19 @@
             passwordToggle.innerHTML = '<i class="bi bi-eye"></i>';
         }
     }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#login').click(function (event) {
+            event.preventDefault();
+        });
+    });
+    $(document).ready(function () {
+        $('#logo').click(function (event) {
+            event.preventDefault();
+        });
+    });
 </script>
 
 <script>
