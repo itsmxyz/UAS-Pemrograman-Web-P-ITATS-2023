@@ -250,27 +250,30 @@
             color: #000000;
             box-shadow: 0 8px 24px 0 rgba(51, 89, 211, 0.2);
         }
+        #login-error{
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
     </style>
 </head>
 <body>
 
 <div class="section">
-    <header id="header" class="d-flex align-items-center">
-        <div class="container d-flex align-items-center justify-content-between">
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#tentang">Tentang Kami</a></li>
-                    <li><a class="nav-link scrollto" href="#stats">Statistik</a></li>
-                </ul>
-            </nav><!-- .navbar -->
-
-        </div>
-    </header>
-
     <div class="container">
         <div class="row full-height justify-content-center">
             <div class="col-12 text-center align-self-center py-5">
+                @if(session()->has('loginError'))
+                    <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="login-error">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                Username atau Password yang anda masukkan salah!
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                @endif
                 <div class="section pb-5 pt-5 pt-sm-2 text-center">
                     <div class="card-3d-wrap mx-auto">
                         <div class="card-3d-wrapper">
@@ -305,6 +308,14 @@
 </body>
 </html>
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var loginErrorToast = document.getElementById('login-error');
+        if (loginErrorToast) {
+            var bsToast = new bootstrap.Toast(loginErrorToast);
+            bsToast.show();
+        }
+    });
+
     function togglePasswordVisibility() {
         let passwordInput = document.getElementById('pass-sensei');
         let passwordToggle = document.getElementById('password-toggle-sensei');
