@@ -28,7 +28,11 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout')->middl
 
 Route::middleware('guest')->group(function () {
     Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
-    Route::get('/login', [LoginController::class,'index'])->name('login');
+    Route::get('/login-sensei', function (){
+        return view('page2-login.login-sensei');
+    })->name('login');
+    Route::get('/login-sekretaris', [LoginController::class,'index'])->name('login');
+
 });
 
 Route::post('/schale-auth', [LoginController::class, 'authSchale'])->name('auth.schale');
