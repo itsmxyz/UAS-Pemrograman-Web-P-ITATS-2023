@@ -32,7 +32,7 @@ class SenseiModel extends Model implements Authenticatable
     public final function insertSensei($validatedData):bool {
         try {
            $this->create($validatedData);
-        } catch (QueryException $e){
+        }catch (QueryException $e){
             return false;
         }
         return true;
