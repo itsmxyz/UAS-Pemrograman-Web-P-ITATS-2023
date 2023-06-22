@@ -53,15 +53,15 @@
                         <a href="#" id="nav-menu">{{$data['username']}}<i class="bi bi-chevron-down"></i></a>
                         <ul>
                             <li><a href="{{route('login')}}">Dashboard</a></li>
-                            <li><a href="{{route('logout')}}">Logout</a></li>
+                            <li><a href="/logout">Logout</a></li>
                         </ul>
                     </li>
                 @else
                     <li class="dropdown">
                         <a href="#" id="login">Login<i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><a href="/login">Sensei</a></li>
-                            <li><a href="/login">Sekretaris</a></li>
+                            <li><a href="/login-sensei">Sensei</a></li>
+                            <li><a href="/login-sekretaris">Sekretaris</a></li>
                         </ul>
                     </li>
                 @endif

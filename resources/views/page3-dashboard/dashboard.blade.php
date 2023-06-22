@@ -233,10 +233,7 @@
                     </button>
                 </div>
                 <div class="modal-body">Tekan keluar jika anda ingin keluar.</div>
-                <form method="post" action="
-                @if(auth()->guard('sensei')->check()) /logout-sensei
-                @elseif(auth()->guard('sekretaris')->check()) /logout-sekretaris
-                @endif">
+                <form method="post" action="/logout">
                     @csrf
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
