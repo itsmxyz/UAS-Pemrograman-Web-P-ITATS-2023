@@ -53,47 +53,6 @@
         .full-height {
             min-height: 100vh;
         }
-        [type="checkbox"]:checked,
-        [type="checkbox"]:not(:checked) {
-            position: absolute;
-            left: -9999px;
-        }
-        .checkbox:checked + label,
-        .checkbox:not(:checked) + label {
-            position: relative;
-            display: block;
-            text-align: center;
-            width: 60px;
-            height: 16px;
-            border-radius: 8px;
-            padding: 0;
-            margin: 10px auto;
-            cursor: pointer;
-            background-color: #9BA4B5;
-        }
-        .checkbox:checked + label:before,
-        .checkbox:not(:checked) + label:before {
-            position: absolute;
-            display: block;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            color: #fff;
-            background-color: #102770;
-            font-family: 'bootstrap-icons', serif;
-            content: '\F116';
-            z-index: 20;
-            top: -10px;
-            left: -10px;
-            line-height: 36px;
-            text-align: center;
-            font-size: 24px;
-            transition: all 0.5s ease;
-        }
-        .checkbox:checked + label:before {
-            transform: translateX(44px) rotate(360deg);
-            content: '\F117';
-        }
         .card-3d-wrap {
             position: relative;
             width: 440px;
@@ -105,7 +64,7 @@
             margin-top: 60px;
         }
         .card-3d-wrapper {
-            border: 2px solid #1D267D;
+            border: none;
             border-radius:8px;
             width: 100%;
             height: 100%;
@@ -116,26 +75,7 @@
             transform-style: preserve-3d;
             transition: all 600ms ease-out;
         }
-        .card-front, .card-back {
-            width: 100%;
-            height: 100%;
-            background-color: #B0DAFF;
-            background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
-            background-position: bottom center;
-            background-repeat: no-repeat;
-            background-size: 300%;
-            position: absolute;
-            border-radius: 6px;
-            left: 0;
-            top: 0;
-            -webkit-transform-style: preserve-3d;
-            transform-style: preserve-3d;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
-        .card-back {
-            transform: rotateY(180deg);
-        }
+
         .checkbox:checked ~ .card-3d-wrap .card-3d-wrapper {
             transform: rotateY(180deg);
         }
@@ -250,17 +190,65 @@
             color: #000000;
             box-shadow: 0 8px 24px 0 rgba(51, 89, 211, 0.2);
         }
+        #login-error{
+            align-content: center;
+            position: absolute;
+            top: 50px;
+            left: 46%;
+            z-index: 9999;
+        }
     </style>
 </head>
 <body>
+@if(session()->has('loginError'))
+    <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="login-error">
+        <div class="d-flex">
+            <div class="toast-body">
+                Username atau Password yang anda masukkan salah!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+@endif
+@error('username')
+<div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="login-error">
+    <div class="d-flex">
+        <div class="toast-body">
+            Minimal masukin username lah bodoh!
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+@enderror
+@error('password')
+<div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="login-error">
+    <div class="d-flex">
+        <div class="toast-body">
+            Password kau bodoh!
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+@enderror
 
 <div class="section">
     <div class="container">
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="..." class="rounded me-2" alt="...">
+                <strong class="me-auto">Bootstrap</strong>
+                <small>11 mins ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Hello, world! This is a toast message.
+            </div>
+        </div>
         <div class="row full-height justify-content-center">
             <div class="col-12 text-center align-self-center py-5">
-                @yield('warning')
                 <div class="section pb-5 pt-5 pt-sm-2 text-center">
                     <label for="reg-log"></label>
+                    @yield('warning')
                     <div class="card-3d-wrap mx-auto">
                         <div class="card-3d-wrapper">
                             @yield('form')
@@ -274,6 +262,15 @@
 </div>
 </body>
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var loginErrorToast = document.getElementById('login-error');
+        if (loginErrorToast) {
+            var bsToast = new bootstrap.Toast(loginErrorToast);
+            bsToast.show();
+        }
+    });
+</script>
 <script>
     function togglePasswordVisibility() {
         let passwordInput = document.getElementById('pass-sensei');

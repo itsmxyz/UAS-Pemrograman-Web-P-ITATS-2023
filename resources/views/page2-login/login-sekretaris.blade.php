@@ -3,7 +3,6 @@
 @section('tittle')
     <title>Millennium School : Login Sekretaris</title>
 @endsection
-
 @section('form')
     <form method="post" action="/sekretaris-auth" id="sekretaris">
         @csrf
@@ -16,8 +15,8 @@
                 </div>
                 <div class="form-group mt-2">
                     <div class="input-group">
-                        <input type="password" name="password" class="form-control" placeholder="Masukkan password" id="pass-sensei" autocomplete="off">
-                        <button class="btn btn-outline-secondary" type="button" id="password-toggle-sensei" onclick="togglePasswordVisibility()"><i class="bi bi-eye"></i></button>
+                        <input type="password" name="password" class="form-control" placeholder="Masukkan password" id="pass-sekretaris" autocomplete="off">
+                        <button class="btn btn-outline-secondary" type="button" id="password-toggle-sekretaris" onclick="togglePasswordVisibility()"><i class="bi bi-eye"></i></button>
                     </div>
                 </div>
                 <button type="submit" class="btn mt-4" name="submit" value="sensei">LOGIN</button>
@@ -25,4 +24,3 @@
         </div>
     </form>
 @endsection
-
