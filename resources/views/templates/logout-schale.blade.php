@@ -11,7 +11,7 @@
             </div>
             <div class="modal-body">Tekan keluar jika anda ingin keluar.</div>
             <div class="modal-footer">
-                <form method="post" action="{{route('schale.logout')}}">
+                <form method="post" action="{{route('logout')}}">
                     @csrf
                     <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary">Keluar</button>

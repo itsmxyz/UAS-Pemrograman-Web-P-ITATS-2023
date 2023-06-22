@@ -224,7 +224,7 @@
 
         .btn {
             border-radius: 4px;
-            height: 44px;
+            height: 30px;
             font-size: 13px;
             font-weight: 600;
             -webkit-transition: all 200ms linear;
@@ -255,36 +255,48 @@
 <body>
 
 <div class="section">
-    <header id="header" class="d-flex align-items-center">
-        <div class="container d-flex align-items-center justify-content-between">
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#tentang">Tentang Kami</a></li>
-                    <li><a class="nav-link scrollto" href="#stats">Statistik</a></li>
-                    <li class="dropdown">
-                        <a href="#" id="login">Login<i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li><a href="/login">Sensei</a></li>
-                            <li><a href="/login">Sekretaris</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
-
-        </div>
-    </header>
-
     <div class="container">
         <div class="row full-height justify-content-center">
             <div class="col-12 text-center align-self-center py-5">
+                @if(session()->has('loginError'))
+                    <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="login-error">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                Username atau Password yang anda masukkan salah!
+                            </div>
+                            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                    </div>
+                @endif
+                @error('username')
+                <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="login-error">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            Minimal masukin username lah bodoh!
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+                @enderror
+                @error('password')
+                <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="login-error">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            Password kau bodoh!
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+                @enderror
                 <div class="section pb-5 pt-5 pt-sm-2 text-center">
-                    <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
                     <label for="reg-log"></label>
                     <div class="card-3d-wrap mx-auto">
                         <div class="card-3d-wrapper">
                             <div class="card-front">
+                                <div class="d-flex pt-1">
+                                    <button type="button" class="btn btn-primary btn-sm">Sensei</button>
+                                    <button type="button" class="btn btn-secondary btn-sm">Sekretaris</button>
+                                </div>
                                 <form method="post" action="/sensei-auth" id="sensei">
                                     @csrf
                                     <div class="center-wrap">
