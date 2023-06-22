@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::get('/', function (){ return view('page1-home.home'); })->name('home');
-Route::get('/logout?={username}', [LoginController::class, 'logout'])->name('home.logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('home.logout');
 
 Route::middleware('guest')->group(function () {
     Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
