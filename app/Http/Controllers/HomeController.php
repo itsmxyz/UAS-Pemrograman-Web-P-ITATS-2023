@@ -16,9 +16,9 @@ class HomeController extends Controller
             elseif (Auth('sekretaris')->check())
                 $data = ['username' => Auth('sekretaris')->user()->username];
 
-            return view('page1-home.home', $data);
+            return view('page1-home.home', compact('data'));
         }
         else
-            return view('page1-home.home', $data);
+            return view('page1-home.home', compact('data'));
     }
 }
