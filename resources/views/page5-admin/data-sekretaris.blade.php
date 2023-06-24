@@ -135,7 +135,8 @@
                                                                 id="edit-button" onclick="edit(this)"></button>
                                                     </div>
                                                     <div class="dropdown" data-bs-toggle="modal" data-bs-target="#del-data">
-                                                        <button type="submit" class="bi bi-trash3 btn btn-transparent" id="del-button"></button>
+                                                        <button type="submit" class="bi bi-trash3 btn btn-transparent"
+                                                                id="del-button" onclick="hapus(this)"></button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -167,6 +168,7 @@
                                             <label for="nama" class="mb-4">Nama</label>
                                         </div>
                                         <div class="col-md-9">
+                                            <input type="hidden" name="id_sekretaris" id="id_sekretaris">
                                             <input type="text" name="nama" class="form-control" required id="nama-update" autocomplete="off">
                                         </div>
                                     </div>
@@ -175,7 +177,6 @@
                                             <label for="username" class="mb-4">Username</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="hidden" name="id_sekretaris" id="id_sekretaris">
                                             <input type="text" name="username" class="form-control" required id="username-update" autocomplete="off">
                                         </div>
                                     </div>
@@ -222,6 +223,7 @@
                                     <div class="section text-center md-2">
                                         <div class="col-md-15">
                                             <div class="form-group mt-2">
+                                                <input type="hidden" name="id_sekretaris" id="id_sekretaris">
                                                 <h6>Masukkan Password untuk konfirmasi</h6>
                                                 <div class="input-group">
                                                     <input type="password" name="password" class="form-control" id="passworddelete" autocomplete="off">
@@ -237,7 +239,7 @@
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary bx-color-red" onclick="hapus()">Hapus</button>
+                            <button type="submit" class="btn btn-primary bx-color-red" onclick="hapus(button)">Hapus</button>
                         </div>
                     </div>
                     </form>
@@ -286,8 +288,10 @@
         document.getElementById("username-update").value = username;
     }
 
-    function hapus(){
-        var hapus = document.getElementById()
+    function hapus(button){
+        var row = button.closest("tr")
+        var idSekretaris = row.cells[0].innerText;
+        console.log("idSekretaris: " + idSekretaris);
     }
 
     function togglePasswordVisibility2() {

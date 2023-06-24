@@ -16,7 +16,7 @@
                 <div class="form-group mt-2">
                     <div class="input-group">
                         <input type="password" name="password" class="form-control" placeholder="Masukkan password" id="pass-sekretaris" autocomplete="off">
-                        <button class="btn btn-outline-secondary" type="button" id="password-toggle-sekretaris" onclick="togglePasswordVisibility()"><i class="bi bi-eye"></i></button>
+                        <button class="btn btn-outline-secondary" type="button" id="password-toggle-sekretaris" onclick="togglePasswordVisibility2()"><i class="bi bi-eye"></i></button>
                     </div>
                 </div>
                 <button type="submit" class="btn mt-4" name="submit" value="sensei">LOGIN</button>

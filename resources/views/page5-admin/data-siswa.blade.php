@@ -172,26 +172,9 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td><label for="nama">Kantor Sensei :</label></td>
+                                                        <td><label for="kelas">Kelas :</label></td>
                                                         <td>
-                                                            <input type="text" name="kantor_sensei" class="form-control" id="nama" autocomplete="off"><br>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><label for="kota">Sekretaris Sensei :</label></td>
-                                                        <td>
-                                                            <select name="sekretaris" required class="form-select">
-                                                                <option value="" selected disabled>Pilih Sekretaris</option>
-                                                                <option value="Noa">Noa</option>
-                                                                <option value="Yuuka">Yuuka</option>
-                                                                <option value="Rio">Rio</option>
-                                                            </select><br>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><label>Password Sensei :</label></td>
-                                                        <td>
-                                                            <input type="password" name="password_sensei" class="form-control" id="nama" autocomplete="off"><br>
+                                                            <input type="text" name="kelas" class="form-control" id="kelas" autocomplete="off"><br>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -252,25 +235,7 @@
     <!-- End of Page Wrapper -->
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin keluar?</h5>
-                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                </div>
-                <div class="modal-body">Tekan keluar jika anda ingin keluar.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                    <a class="btn btn-primary" href="/belutlogin">Keluar</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    @include('templates.logout-schale')
 </div>
 </body>
 

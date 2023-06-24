@@ -32,7 +32,7 @@ Route::middleware('guest')->group(function () {
     });
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::get('/login-sensei', function (){ return view('page2-login.login-sensei'); })->name('sensei.login');
-    Route::get('/login-sekretaris', function (){ return view('page2-login.login-sensei'); })->name('sekretaris.login');
+    Route::get('/login-sekretaris', function (){ return view('page2-login.login-sekretaris'); })->name('sekretaris.login');
     Route::post('/schale-auth', [LoginController::class, 'authSchale'])->name('auth.schale');
     Route::post('/sensei-auth', [LoginController::class, 'authSensei'])->name('auth.sensei');
     Route::post('/sekretaris-auth', [LoginController::class, 'authSekretaris'])->name('auth.sekretaris');

@@ -169,7 +169,7 @@
                                                     </div>
                                                     <div class="dropdown" data-bs-toggle="modal" data-bs-target="#del-data">
                                                         <button class="bi bi-trash3 btn btn-transparent"
-                                                                id="del-button" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                id="del-button" onclick="hapus(this)" data-bs-toggle="tooltip" data-bs-placement="top"
                                                                 data-bs-title="Hapus Data" data-id-sensei="{{$data->id_sensei}}" ></button>
                                                     </div>
                                                 </div>
@@ -284,6 +284,7 @@
                                     <div class="section text-center md-2">
                                         <div class="col-md-15">
                                             <div class="form-group mt-2">
+                                                <input type="hidden" name="id_sensei" id="id-update" value="">
                                                 <h6>Masukkan Password untuk konfirmasi</h6>
                                                 <div class="input-group">
                                                     <input type="password" name="password" class="form-control" id="password-delete" autocomplete="off">
@@ -299,7 +300,7 @@
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary" onclick="hapus()">Hapus</button>
+                            <button type="submit" class="btn btn-primary" onclick="hapus(button)">Hapus</button>
                         </div>
                     </div>
                 </div>
@@ -328,7 +329,7 @@
     });
 
     const hapusButton = document.querySelectorAll('#del-button');
-    editButton.forEach(function (button){
+    hapusButton.forEach(function (button){
         const tooltip = new bootstrap.Tooltip(button);
     });
 
@@ -354,13 +355,27 @@
         document.getElementById('sekretaris-update').value = namaSekretaris;
     }
 
-    function hapus(){
+    function hapus(button){
+        var row = button.closest("tr");
 
+        var idSensei = row.cells[0].innerText;
+        console.log("ID Sensei:", idSensei);
     }
 
-    function togglePasswordVisibility2() {
-
-    }
+    // function togglePasswordVisibility2() {
+    //     var passwordInput = document.getElementById("password-update");
+    //     var eyeIcon = document.getElementById("eye-icon2");
+    //
+    //     if (passwordInput.type === "password") {
+    //         passwordInput.type = "text";
+    //         eyeIcon.classList.remove("bi-eye");
+    //         eyeIcon.classList.add("bi-eye-slash");
+    //     } else {
+    //         passwordInput.type = "password";
+    //         eyeIcon.classList.remove("bi-eye-slash");
+    //         eyeIcon.classList.add("bi-eye");
+    //     }
+    // }
 
     function togglePasswordVisibility1() {
         var passwordInput = document.getElementById("password-delete");
