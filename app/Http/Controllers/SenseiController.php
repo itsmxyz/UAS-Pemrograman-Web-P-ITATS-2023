@@ -30,15 +30,24 @@ class SenseiController extends Controller
      */
     public function store(StoreSenseiRequest $request, SenseiModel $senseiModel): RedirectResponse
     {
-        $validatedData = $request->validated();
-        if ($validatedData) {
-            if ($senseiModel->insertSensei($validatedData))
-                return back()->with('sukses', 'Data Sensei berhasil ditambahkan!');
+        $basicValidate = $request->validated();
+        if ($basicValidate){
+            $uniqueRule = [
+                'username' => 'required||unique:sensei,username',
+            ];
+            $uniqueValidate = $request->validate($uniqueRule);
+            if ($uniqueValidate){
+                $query = $senseiModel->insertSensei($request->all());
+                if ($query)
+                    return back()->with('sukses', 'Data Sensei telah ditambahkan!');
+                else
+                    return back()->with('error', 'Sistem error! Data Sensei gagal ditambahkan.');
+            }
             else
-                return back()->with('gagal', 'Data Sensei gagal ditambahkan!');
+                return back()->with('error', 'Username telah digunakan!');
         }
         else
-            return back()->with('gagal', 'Data tidak valid! Periksa kembali input Anda.');
+            return back()->with('error', 'Data tidak valid. Mohon cek kembali input anda!');
     }
     /**
      * Display the specified resource.
@@ -57,29 +66,29 @@ class SenseiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSenseiRequest $request, SenseiModel $sensei)
+    public function update(UpdateSenseiRequest $request, SenseiModel $senseiModel)
     {
-        $find = $sensei->find($request->input('id_sensei'));
-
-        if ($request->input('username') != $find->username){
-            $newRules = [
-                'username' => 'required||unique:sensei,username',
-            ];
-            $validateData = $request->validate($newRules);
-            if ($validateData) {
-                $find->update([
-                    'nama' => $request->input('nama'),
-                    'username' => $request->input('username'),
-                    'kantor' => $request->input('kantor'),
-                    'sekretaris_id' => $request->input('sekretaris'),
+        $basicValidate = $request->validated();
+        if ($basicValidate){
+            $isSameUsername = $senseiModel->sameUsernameCheck([
+                'id_sensei' => $request->input('id_sensei'),
+                'username' => $request->input('username'),
                 ]);
-                return back()->with('sukses', 'Data Sensei berhasil diperbarui!');
+            if (!$isSameUsername)
+            {
+                $uniqueRule = [ 'username' => 'required||unique:sensei,username',];
+                $uniqueValidate = $request->validate($uniqueRule);
+                if (!$uniqueValidate)
+                    return back()->with('error', 'Username telah digunakan!');
             }
+            $query = $senseiModel->updateSensei($request->all());
+            if ($query)
+                return back()->with('sukses', 'Data Sensei telah ditambahkan!');
             else
-                return back()->with('error', 'Data gagal diperbarui! Mohon periksa kembali input Anda.');
+                return back()->with('error', 'Sistem error! Data Sensei gagal ditambahkan.');
         }
         else
-            return back()->with('error', 'Username telah diambil.');
+            return back()->with('error', 'Data tidak valid. Mohon cek kembali input anda!');
     }
     /**
      * Remove the specified resource from storage.

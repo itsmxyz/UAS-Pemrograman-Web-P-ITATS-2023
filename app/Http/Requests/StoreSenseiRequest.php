@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\SenseiModel;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSenseiRequest extends FormRequest
@@ -23,10 +24,9 @@ class StoreSenseiRequest extends FormRequest
     {
         return [
             'nama' => 'required',
-            'username' => 'required||unique:sensei,username',
             'password' => 'required',
             'kantor' => 'required',
-            'sekretaris' => 'required'
+            'sekretaris' => 'required',
         ];
     }
 }

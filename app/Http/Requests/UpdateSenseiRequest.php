@@ -24,7 +24,7 @@ class UpdateSenseiRequest extends FormRequest
         return [
             'nama' => 'required',
             'kantor' => 'required',
-            'sekretaris' => 'required'
+            'sekretaris' => 'required',
         ];
     }
 }

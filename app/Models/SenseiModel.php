@@ -18,24 +18,50 @@ class SenseiModel extends Model implements Authenticatable
     protected $fillable = [ 'nama','username','password','kantor','sekretaris_id' ];
     protected $guarded = ['id_sensei'];
 
-    public final function sekretaris(): BelongsTo
-    {
+    public final function sekretaris(): BelongsTo {
         return $this->belongsTo(SekretarisModel::class, 'sekretaris_id', 'id_sekretaris');
     }
     public final function getAll(): \Illuminate\Database\Eloquent\Collection|array {
         return $this->with('sekretaris')->get();
     }
-    public final function getKantor(): Collection
-    {
+    public final function getKantor(): Collection {
         return DB::table('sensei')->distinct()->pluck('kantor');
     }
-    public final function insertSensei($validatedData):bool {
+    public final function insertSensei(array $validatedData):bool {
         try {
-           $this->create($validatedData);
+           $this->create([
+               'nama' => $validatedData['nama'],
+               'username' => $validatedData['username'],
+               'password' => $validatedData['password'],
+               'kantor' => $validatedData['kantor'],
+               'sekretaris_id' => $validatedData['sekretaris'],
+           ]);
         }catch (QueryException $e){
             return false;
         }
         return true;
+    }
+    public final function updateSensei(array $validatedData):bool {
+        try {
+            $find = $this->find($validatedData['id_sensei']);
+            $find->update([
+                'nama' => $validatedData['nama'],
+                'username' => $validatedData['username'],
+                'kantor' => $validatedData['kantor'],
+                'sekretaris_id' => $validatedData['sekretaris'],
+            ]);
+        }catch (QueryException $e){
+            return false;
+        }
+        return true;
+    }
+    public final function sameUsernameCheck(array $input):bool {
+        $hasil = $this->find($input['id_sensei']);
+        if ($hasil) {
+            return $hasil->username === $input['username'];
+        }
+        else
+            return false;
     }
     public function getAuthIdentifierName()
     {
