@@ -23,25 +23,15 @@ class AdminController extends Controller
     public final function index(SenseiModel $senseiModel, SekretarisModel $sekretarisModel)
     {
         return view('page5-admin.dashboard-admin', [
-            'jumlahsensei' => $senseiModel->getAll()->count(),
-            'jumlahsekretaris' => $sekretarisModel->getAll()->count()
+            'jumlahsensei' => $senseiModel->jumlahSensei(),
+            'jumlahsekretaris' => $sekretarisModel->jumlahSekretaris(),
         ]);
-    }
-    public final function registerSekretaris(Request $request, SekretarisModel $sekretarisModel): void {
-        $validatedData = $request->validate([
-            'nama_sekretaris' => 'required||unique:sekretaris, nama_sekretaris',
-            'password_sekretaris' => 'required',
-        ]);
-        $validatedData['password_sekretaris'] = Hash::make($validatedData['password_sekretaris'], [
-            'rounds' => 12,
-        ]);
-        $sekretarisModel->register($validatedData);
     }
     public final function getDataSensei(SenseiModel $senseiModel, SekretarisModel $sekretarisModel){
         return view('page5-admin.data-sensei', [
             'sensei' =>$senseiModel->getAll(),
-            'sekretaris' => $sekretarisModel->getNamaSekretaris(),
-            'kantor' => $senseiModel->getKantor()
+            'sekretaris' => $sekretarisModel->namaSekretaris(),
+            'kantor' => $senseiModel->listKantor()
         ]);
     }
     public final function getDataSekretaris(SekretarisModel $sekretarisModel){

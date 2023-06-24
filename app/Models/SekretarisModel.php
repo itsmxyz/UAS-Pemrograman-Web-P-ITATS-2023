@@ -6,6 +6,9 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class SekretarisModel extends Model implements Authenticatable
 {
@@ -23,13 +26,72 @@ class SekretarisModel extends Model implements Authenticatable
     {
         return $this->load('sensei')->get();
     }
-    public final function getNamaSekretaris()
-    {
-        return $this->select('id_sekretaris','nama')->get();
+    public final function insertSekretaris(array $validatedData):bool {
+        try {
+            $this->create([
+                'nama' => $validatedData['nama'],
+                'username' => $validatedData['username'],
+                'password' => $validatedData['password'],
+            ]);
+        }catch (QueryException $e){
+            return false;
+        }
+        return true;
     }
-    public final function register($validatedData)
+    public final function updateSekretaris(array $input):bool {
+        try {
+            $find = $this->find($input['id_sekretaris']);
+            $find->update([
+                'nama' => $input['nama'],
+                'username' => $input['username'],
+            ]);
+        }catch (QueryException $e){
+            return false;
+        }
+        return true;
+    }
+    public final function deleteSekretaris($input):bool {
+        try {
+            $find = $this->find($input);
+            if (!$find){
+                return false;
+            }
+            $find->delete();
+        }catch (QueryException $e){
+            return false;
+        }
+        return true;
+    }
+    public final function sameUsernameCheck(array $input):bool {
+        $hasil = $this->find($input['id_sekretaris']);
+        if ($hasil) {
+            return $hasil->username === $input['username'];
+        }
+        else
+            return false;
+    }
+    public final function jumlahSekretaris()
     {
-        $this->create($validatedData);
+        try {
+            $jumlahSekretaris = DB::table('sekretaris')
+                ->selectRaw('count(*) as jumlahSekretaris')
+                ->first()
+                ->jumlahSekretaris;
+            return $jumlahSekretaris;
+        }catch (QueryException $e){
+            return 0;
+        }
+    }
+    public final function namaSekretaris(): Collection
+    {
+        try {
+            $hasil = DB::table('sekretaris')
+                ->select('id_sekretaris', 'nama')
+                ->get();
+        }catch (QueryException $e){
+            $hasil = [];
+        }
+        return collect($hasil);
     }
     public function getAuthIdentifierName()
     {

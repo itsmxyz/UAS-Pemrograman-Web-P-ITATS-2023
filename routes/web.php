@@ -24,19 +24,24 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/logout', [LoginController::class, 'logout'])->middleware('isAuth');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('isAuth');
 
 Route::middleware('guest')->group(function () {
     Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
+    Route::get('/login-choice', function (){
+        return view('page2-login.login-choice');
+    });
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::get('/login-sensei', function (){ return view('page2-login.login-sensei'); })->name('sensei.login');
     Route::get('/login-sekretaris', function (){ return view('page2-login.login-sensei'); })->name('sekretaris.login');
+    Route::post('/schale-auth', [LoginController::class, 'authSchale'])->name('auth.schale');
+    Route::post('/sensei-auth', [LoginController::class, 'authSensei'])->name('auth.sensei');
+    Route::post('/sekretaris-auth', [LoginController::class, 'authSekretaris'])->name('auth.sekretaris');
 });
 
-Route::post('/schale-auth', [LoginController::class, 'authSchale'])->name('auth.schale');
-Route::post('/sensei-auth', [LoginController::class, 'authSensei'])->name('auth.sensei');
-Route::post('/sekretaris-auth', [LoginController::class, 'authSekretaris'])->name('auth.sekretaris');
+Route::middleware('isAuth')->group(function (){
+    Route::get('/logout', [LoginController::class, 'logout']);
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+});
 
 Route::middleware('schale')->group(function () {
     Route::get('/schale/dashboard', [AdminController::class, 'index'])->name('schale.dashboard');

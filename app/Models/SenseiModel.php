@@ -24,9 +24,6 @@ class SenseiModel extends Model implements Authenticatable
     public final function getAll(): \Illuminate\Database\Eloquent\Collection|array {
         return $this->with('sekretaris')->get();
     }
-    public final function getKantor(): Collection {
-        return DB::table('sensei')->distinct()->pluck('kantor');
-    }
     public final function insertSensei(array $validatedData):bool {
         try {
            $this->create([
@@ -74,6 +71,29 @@ class SenseiModel extends Model implements Authenticatable
         }
         else
             return false;
+    }
+    public final function listKantor(): Collection
+    {
+        try {
+            $hasil = DB::table('sensei')
+                ->distinct()
+                ->pluck('kantor');
+        } catch (QueryException $e) {
+            $hasil = [];
+        }
+        return collect($hasil);
+    }
+    public final function jumlahSensei()
+    {
+        try {
+            $jumlahSensei = DB::table('sensei')
+                ->selectRaw('count(*) as jumlahSensei')
+                ->first()
+                ->jumlahSensei;
+            return $jumlahSensei;
+        }catch (QueryException $e){
+            return -1;
+        }
     }
     public function getAuthIdentifierName()
     {

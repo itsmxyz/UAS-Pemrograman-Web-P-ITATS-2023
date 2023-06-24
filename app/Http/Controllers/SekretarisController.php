@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\SekretarisModel;
 use App\Http\Requests\StoreSekretarisRequest;
 use App\Http\Requests\UpdateSekretarisRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SekretarisController extends Controller
 {
@@ -27,62 +31,88 @@ class SekretarisController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSekretarisRequest $request, SekretarisModel $sekretarisModel)
+    public final function store(StoreSekretarisRequest $request, SekretarisModel $sekretarisModel): RedirectResponse
     {
-        //
-        $validatedData = $request->validated();
-
-        if ($validatedData) {
-            $sekretarisModel->create([
-                'nama' => $validatedData['nama'],
-                'username' => $validatedData['username'],
-                'password' => $validatedData['password'],
-            ]);
-            return back()->with('sukses', 'Data Sekretaris berhasil ditambahkan!');
-        } else
-            return back()->with('error', 'Data tidak valid! Priksa kembali input Anda.');
+        $basicValidate = $request->validated();
+        if ($basicValidate){
+            $uniqueRule = [
+                'username' => 'required||unique:sekretaris,username',
+            ];
+            $uniqueValidate = $request->validate($uniqueRule);
+            if ($uniqueValidate){
+                $query = $sekretarisModel->insertSekretaris($request->all());
+                if ($query)
+                    return back()->with('sukses', 'Data Sensei telah ditambahkan!');
+                else
+                    return back()->with('error', 'Sistem error! Data Sensei gagal ditambahkan.');
+            }
+            else
+                return back()->with('error', 'Username telah digunakan!');
+        }
+        else
+            return back()->with('error', 'Data tidak valid. Mohon cek kembali input anda!');
     }
-
     /**
      * Display the specified resource.
      */
-    public function show(SekretarisModel $sekretaris)
+    public function show(SekretarisModel $sekretarisModel)
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SekretarisModel $sekretaris)
+    public function edit(SekretarisModel $sekretarisModel)
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSekretarisRequest $request, SekretarisModel $sekretarisModel)
+    public final function update(UpdateSekretarisRequest $request, SekretarisModel $sekretarisModel): RedirectResponse
     {
-        //
-        $validateData = $request->validated();
-        if ($validateData) {
-            if ($sekretarisModel->findOrFail($validateData['id']))
-            $sekretarisModel->update([
-                'nama' => $validateData['nama'],
-                'username' => $validateData['username'],
-                'password' => $validateData['password'],
+        $basicValidate = $request->validated();
+        if ($basicValidate){
+            $isSameUsername = $sekretarisModel->sameUsernameCheck([
+                'id_sekretaris' => $request->input('id_sekretaris'),
+                'username' => $request->input('username'),
             ]);
-            return back()->with('sukses', 'Data Sekretaris berhasil diperbarui!');
+            if (!$isSameUsername)
+            {
+                $uniqueRule = [ 'username' => 'required||unique:sekretaris,username',];
+                $uniqueValidate = $request->validate($uniqueRule);
+                if (!$uniqueValidate)
+                    return back()->with('error', 'Username telah digunakan!');
+            }
+            $query = $sekretarisModel->updateSekretaris($request->all());
+            if ($query)
+                return back()->with('sukses', 'Data Sensei telah ditambahkan!');
+            else
+                return back()->with('error', 'Sistem error! Data Sensei gagal ditambahkan.');
         }
         else
-            return back()->with('error', 'Data gagal diperbarui! Mohon periksa kembali input Anda.');
+            return back()->with('error', 'Data tidak valid. Mohon cek kembali input anda!');
     }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SekretarisModel $sekretaris)
+    public final function destroy(Request $request, SekretarisModel $sekretarisModel): RedirectResponse
     {
-        //
+        $validatedData = $request->validate([ 'password' => 'required', ]);
+        if ($validatedData){
+            $inputPw = $request->input('password');
+            $schaleUser = Auth::guard('schale')->user();
+            if (!Hash::check($inputPw, $schaleUser->getAuthPassword()))
+                return back()->with('error', 'Password yang anda masukkan Salah!');
+            else {
+                $query = $sekretarisModel->deleteSekretaris($request->input('id_sensei'));
+                if ($query)
+                    return back()->with('sukses', 'Data Sensei berhasil dihapus!');
+                else
+                    return back()->with('error', 'Sistem error! Data Sensei gagal dihapus.');
+            }
+        }
+        else
+            return back()->with('error', 'Masukkan password untuk konfirmasi!');
     }
 }

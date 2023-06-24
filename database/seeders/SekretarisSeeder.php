@@ -15,13 +15,13 @@ class SekretarisSeeder extends Seeder
     {
         //
         SekretarisModel::create([
-            'nama' => 'Noa', 'username' => 'Noa','password' => bcrypt('Orang')
+            'nama' => 'Ushio Noa', 'username' => 'noaimut','password' => bcrypt('Orang')
         ]);
         SekretarisModel::create([
-            'nama' => 'Rio', 'username' => 'Rio','password' => bcrypt('Belut')
+            'nama' => 'Tsukatsuki Rio', 'username' => 'riobadag','password' => bcrypt('Belut')
         ]);
         SekretarisModel::create([
-            'nama' => 'Yuuka', 'username' => 'Yuuka', 'password' => bcrypt('Gomen')
+            'nama' => 'Hayase Yuuka', 'username' => 'yuukaluvsensei', 'password' => bcrypt('Gomen')
         ]);
     }
 }

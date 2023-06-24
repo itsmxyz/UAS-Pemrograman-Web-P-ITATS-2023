@@ -22,8 +22,6 @@ class UpdateSekretarisRequest extends FormRequest
     {
         return [
             'nama' => 'required',
-            'username' => 'required||unique:sekretaris,username',
-            'password' => 'required',
         ];
     }
 }
