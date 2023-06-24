@@ -41,15 +41,27 @@ class SenseiModel extends Model implements Authenticatable
         }
         return true;
     }
-    public final function updateSensei(array $validatedData):bool {
+    public final function updateSensei(array $input):bool {
         try {
-            $find = $this->find($validatedData['id_sensei']);
+            $find = $this->find($input['id_sensei']);
             $find->update([
-                'nama' => $validatedData['nama'],
-                'username' => $validatedData['username'],
-                'kantor' => $validatedData['kantor'],
-                'sekretaris_id' => $validatedData['sekretaris'],
+                'nama' => $input['nama'],
+                'username' => $input['username'],
+                'kantor' => $input['kantor'],
+                'sekretaris_id' => $input['sekretaris'],
             ]);
+        }catch (QueryException $e){
+            return false;
+        }
+        return true;
+    }
+    public final function deleteSensei($input):bool {
+        try {
+            $find = $this->find($input);
+            if (!$find){
+                return false;
+            }
+            $find->delete();
         }catch (QueryException $e){
             return false;
         }

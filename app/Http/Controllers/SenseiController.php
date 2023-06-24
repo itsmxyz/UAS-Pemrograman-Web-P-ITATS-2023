@@ -7,6 +7,8 @@ use App\Http\Requests\StoreSenseiRequest;
 use App\Http\Requests\UpdateSenseiRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SenseiController extends Controller
 {
@@ -93,15 +95,23 @@ class SenseiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, SenseiModel $senseiModel)
+    public function destroy(Request $request, SenseiModel $senseiModel): RedirectResponse
     {
-        $sensei = $senseiModel->find($request->input('id_sensei'));
-
-        if ($sensei) {
-            $sensei->delete();
-            return back()->with('sukses', 'Data Sensei berhasil dihapus!');
+        $validatedData = $request->validate([ 'password' => 'required', ]);
+        if ($validatedData){
+            $inputPw = $request->input('password');
+            $schaleUser = Auth::guard('schale')->user();
+            if (!Hash::check($inputPw, $schaleUser->getAuthPassword()))
+                return back()->with('error', 'Password yang anda masukkan Salah!');
+            else {
+                $query = $senseiModel->deleteSensei($request->input('id_sensei'));
+                if ($query)
+                    return back()->with('sukses', 'Data Sensei berhasil dihapus!');
+                else
+                    return back()->with('error', 'Sistem error! Data Sensei gagal dihapus.');
+            }
         }
         else
-            return back()->with('error', 'Data Sensei gagal dihapus!');
+            return back()->with('error', 'Masukkan password untuk konfirmasi!');
     }
 }
