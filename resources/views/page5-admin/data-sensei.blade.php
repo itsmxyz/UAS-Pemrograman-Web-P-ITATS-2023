@@ -271,6 +271,8 @@
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
+                        <form method="post" action="{{route('schale.sensei-delete')}}">
+                            @csrf
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus data ini?</h5>
                             <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
@@ -278,30 +280,28 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="post" action="schale.sensei-delete">
-                                @csrf
-                                <div class="center-wrap p-4">
-                                    <div class="section text-center md-2">
-                                        <div class="col-md-15">
-                                            <div class="form-group mt-2">
-                                                <input type="hidden" name="id_sensei" id="id-update" value="">
-                                                <h6>Masukkan Password untuk konfirmasi</h6>
-                                                <div class="input-group">
-                                                    <input type="password" name="password" class="form-control" id="password-delete" autocomplete="off">
-                                                    <button class="btn btn-outline-secondary" type="button" id="password-toggle" onclick="togglePasswordVisibility1()">
-                                                        <i id="eye-icon1" class="bi bi-eye"></i>
-                                                    </button>
-                                                </div>
+                            <div class="center-wrap p-4">
+                                <div class="section text-center md-2">
+                                    <div class="col-md-15">
+                                        <div class="form-group mt-2">
+                                            <input type="hidden" name="id_sensei" id="id-update" value="">
+                                            <h6>Masukkan Password untuk konfirmasi</h6>
+                                            <div class="input-group">
+                                                <input type="password" name="password" class="form-control" id="password-delete" autocomplete="off">
+                                                <button class="btn btn-outline-secondary" type="button" id="password-toggle" onclick="togglePasswordVisibility1()">
+                                                    <i id="eye-icon1" class="bi bi-eye"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary" onclick="hapus(button)">Hapus</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
