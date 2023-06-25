@@ -27,9 +27,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('guest')->group(function () {
     Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
-    Route::get('/login-choice', function (){
-        return view('page2-login.login-choice');
-    });
+    Route::get('/login-choice', function (){ return view('page2-login.login-choice'); });
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::get('/login-sensei', function (){ return view('page2-login.login-sensei'); })->name('sensei.login');
     Route::get('/login-sekretaris', function (){ return view('page2-login.login-sekretaris'); })->name('sekretaris.login');

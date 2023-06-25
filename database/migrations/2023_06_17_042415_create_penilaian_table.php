@@ -13,16 +13,15 @@ return new class extends Migration
     {
         Schema::create('penilaian', function (Blueprint $table) {
             $table->id('id_penilaian');
-            $table->foreignId('siswa_id')->constrained('siswa', 'id_siswa');
-            $table->integer('penilaian_1')->default(0);
-            $table->integer('penilaian_2')->default(0);
-            $table->integer('penilaian_3')->default(0);
-            $table->integer('penilaian_4')->default(0);
-            $table->integer('penilaian_5')->default(0);
-            $table->integer('penilaian_6')->default(0);
-            $table->integer('penilaian_7')->default(0);
-            $table->integer('penilaian_8')->default(0);
+            $table->string('kelas_kode');
             $table->timestamps();
+
+            for ($i = 1; $i <= 8; $i++) {
+                $table->integer('penilaian'.$i)->default(0);
+            }
+
+            $table->foreignId('siswa_nis')->constrained('siswa', 'nis_siswa')->onDelete('cascade');
+            $table->foreign('kelas_kode')->references('kode_kelas')->on('kelas')->onDelete('cascade');
         });
     }
 

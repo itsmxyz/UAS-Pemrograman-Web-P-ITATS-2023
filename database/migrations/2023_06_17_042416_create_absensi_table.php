@@ -11,9 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_kelas', function (Blueprint $table) {
+        Schema::create('absensi', function (Blueprint $table) {
+            $table->id('id_absensi');
             $table->string('kelas_kode');
             $table->timestamps();
+
+            // Kolom absensi
+            for ($i = 1; $i <= 20; $i++) {
+                $table->enum('absensi'.$i, ['Hadir', 'Izin', 'Sakit', 'Alpha', 'Kosong'])->default('Kosong');
+            }
 
             $table->foreignId('siswa_nis')->constrained('siswa', 'nis_siswa')->onDelete('cascade');
             $table->foreign('kelas_kode')->references('kode_kelas')->on('kelas')->onDelete('cascade');
@@ -25,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_kelas');
+        Schema::dropIfExists('absensi');
     }
 };
