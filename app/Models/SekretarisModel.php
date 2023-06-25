@@ -33,34 +33,31 @@ class SekretarisModel extends Model implements Authenticatable
                 'username' => $validatedData['username'],
                 'password' => $validatedData['password'],
             ]);
+            return true;
         }catch (QueryException $e){
             return false;
         }
-        return true;
     }
     public final function updateSekretaris(array $input):bool {
         try {
-            $find = $this->find($input['id_sekretaris']);
+            $find = $this->findOrFail($input['id_sekretaris']);
             $find->update([
                 'nama' => $input['nama'],
                 'username' => $input['username'],
             ]);
+            return true;
         }catch (QueryException $e){
             return false;
         }
-        return true;
     }
     public final function deleteSekretaris($input):bool {
         try {
-            $find = $this->find($input);
-            if (!$find){
-                return false;
-            }
+            $find = $this->findOrFail($input);
             $find->delete();
+            return true;
         }catch (QueryException $e){
             return false;
         }
-        return true;
     }
     public final function sameUsernameCheck(array $input):bool {
         $hasil = $this->find($input['id_sekretaris']);
