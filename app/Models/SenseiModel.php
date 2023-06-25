@@ -44,7 +44,7 @@ class SenseiModel extends Model implements Authenticatable
     }
     public final function updateSensei(array $input):bool {
         try {
-            $find = $this->find($input['id_sensei']);
+            $find = $this->findOrFail($input['id_sensei']);
             $find->update([
                 'nama' => $input['nama'],
                 'username' => $input['username'],
@@ -58,15 +58,12 @@ class SenseiModel extends Model implements Authenticatable
     }
     public final function deleteSensei($input):bool {
         try {
-            $find = $this->find($input);
-            if (!$find){
-                return false;
-            }
+            $find = $this->findOrFail($input);
             $find->delete();
+            return true;
         }catch (QueryException $e){
             return false;
         }
-        return true;
     }
     public final function sameUsernameCheck(array $input):bool {
         $hasil = $this->find($input['id_sensei']);

@@ -15,19 +15,16 @@ class SiswaModel extends Model
     protected $primaryKey = 'nis_siswa';
     protected $fillable = ['nama','jenis_kelamin'];
     protected $guarded = ['nis_siswa'];
-    public function kelas(): BelongsToMany
+    public final function kelas(): BelongsToMany
     {
         return $this->belongsToMany(KelasModel::class, 'data_kelas', 'siswa_nis', 'kelas_kode');
     }
-    public function absensi(): HasMany
+    public final function absensi(): HasMany
     {
         return $this->hasMany(AbsensiModel::class, 'siswa_nis', 'nis_siswa');
     }
-    public function penilaian(): HasMany
+    public final function penilaian(): HasMany
     {
         return $this->hasMany(PenilaianModel::class, 'siswa_nis', 'nis_siswa');
-    }
-    public final function getDataSiswa(){
-        return $this->paginate(15);
     }
 }

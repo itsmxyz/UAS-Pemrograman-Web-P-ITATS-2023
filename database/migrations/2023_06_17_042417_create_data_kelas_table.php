@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('data_kelas', function (Blueprint $table) {
             $table->string('kelas_kode');
-            $table->timestamps();
-
             $table->foreignId('siswa_nis')->constrained('siswa', 'nis_siswa')->onDelete('cascade');
             $table->foreign('kelas_kode')->references('kode_kelas')->on('kelas')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

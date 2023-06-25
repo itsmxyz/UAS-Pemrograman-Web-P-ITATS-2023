@@ -15,8 +15,8 @@ return new class extends Migration
             $table->string('kode_kelas')->primary();
             $table->string('nama');
             $table->string('mata_pelajaran');
-            $table->timestamps();
             $table->foreignId('sensei_id')->constrained('sensei', 'id_sensei')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
