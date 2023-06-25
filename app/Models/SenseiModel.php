@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +21,9 @@ class SenseiModel extends Model implements Authenticatable
 
     public final function sekretaris(): BelongsTo {
         return $this->belongsTo(SekretarisModel::class, 'sekretaris_id', 'id_sekretaris');
+    }
+    public final function kelas(): HasOne {
+        return $this->hasOne(KelasModel::class, 'sensei_id', 'id_sensei');
     }
     public final function getAll(): \Illuminate\Database\Eloquent\Collection|array {
         return $this->with('sekretaris')->get();
