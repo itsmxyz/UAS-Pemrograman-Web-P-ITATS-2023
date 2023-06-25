@@ -97,7 +97,6 @@ class SenseiController extends Controller
      */
     public function destroy(Request $request, SenseiModel $senseiModel): RedirectResponse
     {
-        dd($request->all());
         $validatedData = $request->validate([ 'password' => 'required', ]);
         if ($validatedData){
             $inputPw = $request->input('password');

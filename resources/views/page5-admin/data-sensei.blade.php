@@ -284,7 +284,7 @@
                                 <div class="section text-center md-2">
                                     <div class="col-md-15">
                                         <div class="form-group mt-2">
-                                            <input type="hidden" name="id_sensei" id="id-update" value="">
+                                            <input type="hidden" name="id_sensei" id="id-delete" value="">
                                             <h6>Masukkan Password untuk konfirmasi</h6>
                                             <div class="input-group">
                                                 <input type="password" name="password" class="form-control" id="password-delete" autocomplete="off">
@@ -342,12 +342,6 @@
         var kantor = row.cells[3].innerText;
         var namaSekretaris = row.cells[4].innerText;
 
-        console.log("ID Sensei:", idSensei);
-        console.log("Nama:", nama);
-        console.log("Username:", username);
-        console.log("Kantor:", kantor);
-        console.log("Nama Sekretaris:", namaSekretaris);
-
         document.getElementById('id-update').value = idSensei;
         document.getElementById('nama-update').value = nama;
         document.getElementById('username-update').value = username;
@@ -359,7 +353,7 @@
         var row = button.closest("tr");
 
         var idSensei = row.cells[0].innerText;
-        console.log("ID Sensei:", idSensei);
+        document.getElementById('id-delete').value = idSensei;
     }
 
     // function togglePasswordVisibility2() {
