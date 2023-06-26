@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SekretarisModel;
 use App\Http\Requests\StoreSekretarisRequest;
 use App\Http\Requests\UpdateSekretarisRequest;
+use App\Models\SenseiModel;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -110,6 +111,24 @@ class SekretarisController extends Controller
                     return back()->with('sukses', 'Data Sensei berhasil dihapus!');
                 else
                     return back()->with('error', 'Sistem error! Data Sensei gagal dihapus.');
+            }
+        }
+        else
+            return back()->with('error', 'Masukkan password untuk konfirmasi!');
+    }
+    public final function resetPassword(Request $request, SekretarisModel $sekretarisModel){
+        $validatedData = $request->validate([ 'password' => 'required', ]);
+        if ($validatedData){
+            $inputPw = $request->input('password');
+            $schaleUser = Auth::guard('schale')->user();
+            if (!Hash::check($inputPw, $schaleUser->getAuthPassword()))
+                return back()->with('error', 'Password yang anda masukkan Salah!');
+            else {
+                $query = $sekretarisModel->resetPwSekretaris($request->input('id_sensei'));
+                if ($query)
+                    return back()->with('sukses', 'Password Sensei berhasil direset!');
+                else
+                    return back()->with('error', 'Sistem error! Password Sensei gagal direset.');
             }
         }
         else
