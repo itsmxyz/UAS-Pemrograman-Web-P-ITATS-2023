@@ -18,7 +18,7 @@ class SiswaModelFactory extends Factory
     {
         return [
             'nama' => $this->faker->name(gender: 'female'),
-            'jenis_kelamin' => $this->faker->titleFemale(),
+            'jenis_kelamin' => $this->faker->randomElement(['cewek']),
         ];
     }
 }

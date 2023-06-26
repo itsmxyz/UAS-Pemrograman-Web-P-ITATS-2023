@@ -26,7 +26,4 @@ class SenseiModelTest extends TestCase
         $this->assertGreaterThan(0, $jumlahSensei);
         print "    //Jumlah Sensei : " . $jumlahSensei;
     }
-    public function testDefaultReset(){
-        print Hash::make('schalesensei');
-    }
 }

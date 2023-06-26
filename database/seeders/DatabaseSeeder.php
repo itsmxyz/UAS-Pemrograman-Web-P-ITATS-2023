@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             SekretarisSeeder::class,
             SenseiSeeder::class,
-            SiswaSeeder::class
+            SiswaSeeder::class,
+            KelasSeeder::class,
         ]);
     }
 

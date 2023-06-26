@@ -41,15 +41,19 @@ class SenseiController extends Controller
             if ($uniqueValidate){
                 $query = $senseiModel->insertSensei($request->all());
                 if ($query)
-                    return back()->with('sukses', 'Data Sensei telah ditambahkan!');
+                    return back()->withErrors('sukses', 'Data Sensei telah ditambahkan!')
+                        ->withErrors('sukses', 'Data Sensei telah ditambahkan!');
                 else
-                    return back()->with('error', 'Sistem error! Data Sensei gagal ditambahkan.');
+                    return back()->withErrors('Sistem error! Data Sensei gagal ditambahkan.')
+                        ->withErrors('Sistem error! Data Sensei gagal ditambahkan.');
             }
             else
-                return back()->with('error', 'Username telah digunakan!');
+                return back()->withErrors('Username telah digunakan!')
+                    ->withErrors('Username telah digunakan!');
         }
         else
-            return back()->with('error', 'Data tidak valid. Mohon cek kembali input anda!');
+            return back()->withErrors('Data tidak valid. Mohon cek kembali input anda!')
+                ->withErrors('Data tidak valid. Mohon cek kembali input anda!');
     }
     /**
      * Display the specified resource.
