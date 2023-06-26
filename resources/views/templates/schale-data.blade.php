@@ -149,15 +149,13 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="del-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
+            <div class="modal fade" id="del-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <form method="post" action="{{route('schale.sensei-delete')}}">
                             @csrf
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus data
-                                    ini?</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus data ini?</h5>
                                 <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">x</span>
                                 </button>
@@ -170,11 +168,9 @@
                                                 <input type="hidden" name="id_sensei" id="id-delete" value="">
                                                 <h6>Masukkan Password untuk konfirmasi</h6>
                                                 <div class="input-group">
-                                                    <input type="password" name="password" class="form-control"
-                                                           id="password-delete" autocomplete="off">
-                                                    <button class="btn btn-outline-secondary" type="button"
-                                                            id="password-toggle" onclick="togglePasswordVisibility()">
-                                                        <i id="eye-icon" class="bi bi-eye"></i>
+                                                    <input type="password" name="password" class="form-control" id="password-delete" autocomplete="off">
+                                                    <button class="btn btn-outline-secondary" type="button" id="password-toggle-delete" onclick="togglePasswordVisibility()">
+                                                        <i id="eye-icon-delete" class="bi bi-eye"></i>
                                                     </button>
                                                 </div>
                                             </div>
@@ -184,22 +180,21 @@
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-primary" onclick="hapus(button)">Hapus</button>
+                                <button type="submit" class="btn btn-primary" onclick="hapus()">Hapus</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <div class="modal fade" id="reset-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
+            <!-- Reset Modal -->
+            <div class="modal fade" id="reset-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <form method="post" action="{{route('schale.sensei-reset')}}">
                             @csrf
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin untuk reset password akun
-                                    ini?</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin untuk reset password akun ini?</h5>
                                 <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">x</span>
                                 </button>
@@ -212,11 +207,9 @@
                                                 <input type="hidden" name="id_sensei" id="id-reset" value="">
                                                 <h6>Masukkan Password untuk konfirmasi</h6>
                                                 <div class="input-group">
-                                                    <input type="password" name="password" class="form-control"
-                                                           id="password-reset" autocomplete="off">
-                                                    <button class="btn btn-outline-secondary" type="button"
-                                                            id="password-toggle" onclick="togglePasswordVisibility1()">
-                                                        <i id="eye-icons" class="bi bi-eye"></i>
+                                                    <input type="password" name="password" class="form-control" id="password-reset" autocomplete="off">
+                                                    <button class="btn btn-outline-secondary" type="button" id="password-toggle-reset" onclick="togglePasswordVisibility1()">
+                                                        <i id="eye-icons-reset" class="bi bi-eye"></i>
                                                     </button>
                                                 </div>
                                             </div>
@@ -226,7 +219,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-primary" onclick="reset(button)">Hapus</button>
+                                <button type="submit" class="btn btn-primary" onclick="reset()">Reset</button>
                             </div>
                         </form>
                     </div>
@@ -295,7 +288,7 @@
     //Delete
     function togglePasswordVisibility() {
         var passwordInput = document.getElementById("password-delete");
-        var eyeIcon = document.getElementById("eye-icon");
+        var eyeIcon = document.getElementById("eye-icon-delete");
 
         if (passwordInput.type === "password") {
             passwordInput.type = "text";
@@ -308,10 +301,9 @@
         }
     }
 
-    //reset
     function togglePasswordVisibility1() {
         var passwordInput = document.getElementById("password-reset");
-        var eyeIcon = document.getElementById("eye-icons");
+        var eyeIcon = document.getElementById("eye-icons-reset");
 
         if (passwordInput.type === "password") {
             passwordInput.type = "text";
