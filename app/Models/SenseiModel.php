@@ -70,6 +70,7 @@ class SenseiModel extends Model implements Authenticatable
         try {
             $find = $this->findOrFail($input);
             $find->password = Hash::make('schalesensei');
+            $find->save();
             return true;
         }catch (QueryException $e){
             return false;

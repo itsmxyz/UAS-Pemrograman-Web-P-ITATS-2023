@@ -1,6 +1,7 @@
 <?php
 
 
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 use App\Models\SenseiModel;
 
@@ -24,5 +25,8 @@ class SenseiModelTest extends TestCase
         $jumlahSensei = $this->senseiModel->jumlahSensei();
         $this->assertGreaterThan(0, $jumlahSensei);
         print "    //Jumlah Sensei : " . $jumlahSensei;
+    }
+    public function testDefaultReset(){
+        print Hash::make('schalesensei');
     }
 }
