@@ -19,7 +19,7 @@
                         <button class="btn btn-outline-secondary" type="button" id="password-toggle-sekretaris" onclick="togglePasswordVisibility2()"><i class="bi bi-eye"></i></button>
                     </div>
                 </div>
-                <button type="submit" class="btn mt-4" name="submit" value="sensei">LOGIN</button>
+                <button type="submit" class="btn mt-4" name="submit" value="sekretaris">LOGIN</button>
             </div>
         </div>
     </form>

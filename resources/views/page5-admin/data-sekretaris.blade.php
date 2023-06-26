@@ -14,8 +14,8 @@
 
     <!-- Custom fonts for this template-->
     <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{{asset('assets/css/style-dashboard.css')}}" rel="stylesheet">
@@ -56,7 +56,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade" id="add-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="add-data" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -74,7 +75,8 @@
                                                         <label for="nama" class="mb-4">Nama</label>
                                                     </div>
                                                     <div class="col-md-9">
-                                                        <input type="text" name="nama" class="form-control" required id="nama" autocomplete="off">
+                                                        <input type="text" name="nama" class="form-control" required
+                                                               id="nama" autocomplete="off">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -82,7 +84,8 @@
                                                         <label for="username" class="mb-4">Username</label>
                                                     </div>
                                                     <div class="col-md-9">
-                                                        <input type="text" name="username" class="form-control" required id="username" autocomplete="off">
+                                                        <input type="text" name="username" class="form-control" required
+                                                               id="username" autocomplete="off">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -92,8 +95,12 @@
                                                     <div class="col-md-9">
                                                         <div class="form-group mt-2">
                                                             <div class="input-group">
-                                                                <input type="password" name="password" required class="form-control" id="password" autocomplete="off">
-                                                                <button class="btn btn-outline-secondary" type="button" id="password-toggle-sensei" onclick="togglePasswordVisibility()">
+                                                                <input type="password" name="password" required
+                                                                       class="form-control" id="password"
+                                                                       autocomplete="off">
+                                                                <button class="btn btn-outline-secondary" type="button"
+                                                                        id="password-toggle-sensei"
+                                                                        onclick="togglePasswordVisibility()">
                                                                     <i id="eye-icon" class="bi bi-eye"></i>
                                                                 </button>
                                                             </div>
@@ -101,7 +108,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
+                                                    <button class="btn btn-secondary" type="button"
+                                                            data-bs-dismiss="modal">Batal
+                                                    </button>
                                                     <button type="submit" class="btn btn-primary">Tambahkan</button>
                                                 </div>
                                             </div>
@@ -130,11 +139,14 @@
                                             <td>{{$data->username}}</td>
                                             <td style="width: 10%">
                                                 <div class="d-flex justify-content-center">
-                                                    <div class="dropdown" data-bs-toggle="modal" data-bs-target="#update-data">
-                                                        <button type="submit" class="bi bi-pencil-square btn btn-transparent"
+                                                    <div class="dropdown" data-bs-toggle="modal"
+                                                         data-bs-target="#update-data">
+                                                        <button type="submit"
+                                                                class="bi bi-pencil-square btn btn-transparent"
                                                                 id="edit-button" onclick="edit(this)"></button>
                                                     </div>
-                                                    <div class="dropdown" data-bs-toggle="modal" data-bs-target="#del-data">
+                                                    <div class="dropdown" data-bs-toggle="modal"
+                                                         data-bs-target="#del-data">
                                                         <button type="submit" class="bi bi-trash3 btn btn-transparent"
                                                                 id="del-button" onclick="hapus(this)"></button>
                                                     </div>
@@ -150,7 +162,8 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="update-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="update-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -163,13 +176,14 @@
                             @csrf
                             <div class="center-wrap p-4">
                                 <div class="section text-left md-2">
-                                    <div class="row" >
+                                    <div class="row">
                                         <div class="col-md-3">
                                             <label for="nama" class="mb-4">Nama</label>
                                         </div>
                                         <div class="col-md-9">
                                             <input type="hidden" name="id_sekretaris" id="id_sekretaris">
-                                            <input type="text" name="nama" class="form-control" required id="nama-update" autocomplete="off">
+                                            <input type="text" name="nama" class="form-control" required
+                                                   id="nama-update" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -177,7 +191,8 @@
                                             <label for="username" class="mb-4">Username</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="text" name="username" class="form-control" required id="username-update" autocomplete="off">
+                                            <input type="text" name="username" class="form-control" required
+                                                   id="username-update" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -187,8 +202,11 @@
                                         <div class="col-md-9">
                                             <div class="form-group mt-2">
                                                 <div class="input-group">
-                                                    <input type="password" name="password" required class="form-control" id="passwordupdate" autocomplete="off">
-                                                    <button class="btn btn-outline-secondary" type="button" id="password-toggle-sensei" onclick="togglePasswordVisibility2()">
+                                                    <input type="password" name="password" required class="form-control"
+                                                           id="passwordupdate" autocomplete="off">
+                                                    <button class="btn btn-outline-secondary" type="button"
+                                                            id="password-toggle-sensei"
+                                                            onclick="togglePasswordVisibility2()">
                                                         <i id="eye-icon2" class="bi bi-eye"></i>
                                                     </button>
                                                 </div>
@@ -196,8 +214,11 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-primary" id="edit-btn" onclick="edit(button)">Edit</button>
+                                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" id="edit-btn"
+                                                onclick="edit(button)">Edit
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +232,8 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus data ini?</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus data
+                                ini?</h5>
                             <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">x</span>
                             </button>
@@ -226,8 +248,10 @@
                                                 <input type="hidden" name="id_sekretaris" id="id_sekretaris">
                                                 <h6>Masukkan Password untuk konfirmasi</h6>
                                                 <div class="input-group">
-                                                    <input type="password" name="password" class="form-control" id="passworddelete" autocomplete="off">
-                                                    <button class="btn btn-outline-secondary" type="button" id="password-toggle" onclick="togglePasswordVisibility1()">
+                                                    <input type="password" name="password" class="form-control"
+                                                           id="passworddelete" autocomplete="off">
+                                                    <button class="btn btn-outline-secondary" type="button"
+                                                            id="password-toggle" onclick="togglePasswordVisibility1()">
                                                         <i id="eye-icon1" class="bi bi-eye"></i>
                                                     </button>
                                                 </div>
@@ -239,7 +263,8 @@
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary bx-color-red" onclick="hapus(button)">Hapus</button>
+                            <button type="submit" class="btn btn-primary bx-color-red" onclick="hapus(button)">Hapus
+                            </button>
                         </div>
                     </div>
                     </form>
@@ -264,7 +289,7 @@
     <!-- End of Page Wrapper -->
 
     <!-- Logout Modal-->
-    @include('templates.logout-schale')
+    @include('templates.logout-template')
 </div>
 </body>
 <script>
@@ -288,7 +313,7 @@
         document.getElementById("username-update").value = username;
     }
 
-    function hapus(button){
+    function hapus(button) {
         var row = button.closest("tr")
         var idSekretaris = row.cells[0].innerText;
         console.log("idSekretaris: " + idSekretaris);

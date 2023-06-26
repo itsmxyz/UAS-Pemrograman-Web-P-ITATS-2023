@@ -115,7 +115,8 @@
                     <div class="nav-link dropdown-toggle no-arrow" href="#" role="button"
                          data-bs-toggle="dropdown">
                         <span class="mr-2 d-none d-lg-inline text-gray-600 fw-bold">Admin</span>
-                        <img class="img-profile rounded-circle" src="{{asset('assets/img/klub/veritas/veritas_leader.png')}}">
+                        <img class="img-profile rounded-circle"
+                             src="{{asset('assets/img/klub/veritas/veritas_leader.png')}}">
                     </div>
                     <!-- Dropdown - User Information -->
                     <ul class="dropdown-menu dropdown-menu-end shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -151,7 +152,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal fade" id="add-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="add-data" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -168,18 +170,22 @@
                                                     <tr>
                                                         <td><label>Nama Siswa :</label></td>
                                                         <td>
-                                                            <input type="text" name="nama_sensei" class="form-control" id="nama" autocomplete="off"><br>
+                                                            <input type="text" name="nama_sensei" class="form-control"
+                                                                   id="nama" autocomplete="off"><br>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td><label for="kelas">Kelas :</label></td>
                                                         <td>
-                                                            <input type="text" name="kelas" class="form-control" id="kelas" autocomplete="off"><br>
+                                                            <input type="text" name="kelas" class="form-control"
+                                                                   id="kelas" autocomplete="off"><br>
                                                         </td>
                                                     </tr>
                                                 </table>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
+                                                    <button class="btn btn-secondary" type="button"
+                                                            data-bs-dismiss="modal">Batal
+                                                    </button>
                                                     <a class="btn btn-primary" href="/belutlogin">Tambahkan</a>
                                                 </div>
                                             </div>
@@ -207,8 +213,12 @@
                                             <td>{{$data->nama_sensei}}</td>
                                             <td>{{$data->kantor_sensei}}</td>
                                             <td>{{$data->sekretaris->nama_sekretaris}}</td>
-                                            <td><button class="bi bi-pencil-square btn btn-transparent" id="edit-button"></button>
-                                                <button class="bi bi-trash3 btn btn-transparent" id="del-button"></button></td>
+                                            <td>
+                                                <button class="bi bi-pencil-square btn btn-transparent"
+                                                        id="edit-button"></button>
+                                                <button class="bi bi-trash3 btn btn-transparent"
+                                                        id="del-button"></button>
+                                            </td>
                                         </tr>
                                         </tbody>
                                     @endforeach
@@ -235,7 +245,7 @@
     <!-- End of Page Wrapper -->
 
     <!-- Logout Modal-->
-    @include('templates.logout-schale')
+    @include('templates.logout-template')
 </div>
 </body>
 

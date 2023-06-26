@@ -12,18 +12,19 @@
     <title>Dashboard Admin</title>
     @include('templates.cdn-link')
 
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <!-- Custom fonts for this template-->
     <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{{asset('assets/css/style-dashboard.css')}}" rel="stylesheet">
 
     <style>
-        .btn{
-            color :white;
+        .btn {
+            color: white;
         }
 
     </style>
@@ -62,7 +63,8 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            Jumlah Sensei</div>
+                                            Jumlah Sensei
+                                        </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{$jumlahsensei}}</div>
                                     </div>
                                     <div class="col-auto">
@@ -80,7 +82,8 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                            Jumlah Sekretaris</div>
+                                            Jumlah Sekretaris
+                                        </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{$jumlahsekretaris}}</div>
                                     </div>
                                     <div class="col-auto">
@@ -99,7 +102,7 @@
 
 
     <!-- End of Page Wrapper -->
-    @include('templates.logout-schale')
+    @include('templates.logout-template')
 </div>
 
 <script>
