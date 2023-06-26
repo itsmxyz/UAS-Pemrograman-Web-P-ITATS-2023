@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class SenseiModel extends Model implements Authenticatable
 {
@@ -60,6 +61,15 @@ class SenseiModel extends Model implements Authenticatable
         try {
             $find = $this->findOrFail($input);
             $find->delete();
+            return true;
+        }catch (QueryException $e){
+            return false;
+        }
+    }
+    public final function resetPwSensei($input): bool {
+        try {
+            $find = $this->findOrFail($input);
+            $find->password = Hash::make('schalesensei');
             return true;
         }catch (QueryException $e){
             return false;

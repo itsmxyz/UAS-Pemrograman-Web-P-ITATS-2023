@@ -114,4 +114,22 @@ class SenseiController extends Controller
         else
             return back()->with('error', 'Masukkan password untuk konfirmasi!');
     }
+    public final function resetPassword(Request $request, SenseiModel $senseiModel){
+        $validatedData = $request->validate([ 'password' => 'required', ]);
+        if ($validatedData){
+            $inputPw = $request->input('password');
+            $schaleUser = Auth::guard('schale')->user();
+            if (!Hash::check($inputPw, $schaleUser->getAuthPassword()))
+                return back()->with('error', 'Password yang anda masukkan Salah!');
+            else {
+                $query = $senseiModel->resetPwSensei($request->input('id_sensei'));
+                if ($query)
+                    return back()->with('sukses', 'Data Sensei berhasil dihapus!');
+                else
+                    return back()->with('error', 'Sistem error! Data Sensei gagal dihapus.');
+            }
+        }
+        else
+            return back()->with('error', 'Masukkan password untuk konfirmasi!');
+    }
 }
