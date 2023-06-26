@@ -26,4 +26,7 @@
 .btn-transparent:focus {
     box-shadow: none;
 }
+#reset-button:active{
+    border: none;
+}
 

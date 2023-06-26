@@ -45,14 +45,14 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    @yield('header')
+                    @yield('header-tittle')
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Tabel Data Sensei</h6>
+                            @yield('header-table')
                             <div class="ml-auto">
                                 <div class="dropdown" data-bs-toggle="modal" data-bs-target="#add-data">
-                                    <button class="btn btn-primary btn-transparent" id="add-button">Tambah Data</button>
+                                    @yield('btn-tambah')
                                 </div>
                             </div>
                         </div>
@@ -60,140 +60,13 @@
                         <div class="modal fade" id="add-data" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Tambahkan Data Sensei</h5>
-                                        <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">x</span>
-                                        </button>
-                                    </div>
-                                    <form method="post" action="{{route('schale.sensei-create')}}">
-                                        @csrf
-                                        <div class="cnter-wrap p-4">
-                                            <div class="section text-left md-2">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <label for="nama" class="mb-4">Nama</label>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="text" name="nama" class="form-control" required
-                                                               id="nama" autocomplete="off">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <label for="username" class="mb-4">Username</label>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="text" name="username" class="form-control" required
-                                                               id="username" autocomplete="off">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <label for="kantor" class="mb-4">Kantor</label>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <select name="kantor" class="form-select" required>
-                                                            <option value="" selected disabled>Pilih Kantor</option>
-                                                            @foreach($kantor as $data)
-                                                                <option value="{{$data}}">{{$data}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <label for="sekretaris" class="mb-4">Sekretaris</label>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <select name="sekretaris" class="form-select" required>
-                                                            <option value="" selected disabled>Pilih Sekretaris</option>
-                                                            @foreach($sekretaris as $data)
-                                                                <option value="{{$data->id_sekretaris}}">{{$data->nama}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <label for="password" class="mb-4">Password</label>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <div class="form-group mt-2">
-                                                            <div class="input-group">
-                                                                <input type="password" name="password"
-                                                                       class="form-control" required id="password"
-                                                                       autocomplete="off">
-                                                                <button class="btn btn-outline-secondary" type="button"
-                                                                        id="password-toggle-sensei"
-                                                                        onclick="togglePasswordVisibility()">
-                                                                    <i id="eye-icon" class="bi bi-eye"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-secondary" type="button"
-                                                            data-bs-dismiss="modal">Batal
-                                                    </button>
-                                                    <button type="submit" class="btn btn-primary" onclick="tambah()">
-                                                        Tambahkan
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                                @yield('modal-tambah')
                             </div>
                         </div>
                         {{--TABLE--}}
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable">
-                                    <thead>
-                                    <tr class="text-center">
-                                        <th>ID Sensei</th>
-                                        <th>Nama</th>
-                                        <th>Username</th>
-                                        <th>Kantor</th>
-                                        <th>Nama Sekretaris</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                    </thead>
-                                    @foreach($sensei as $data)
-                                        <tbody>
-                                        <tr class="text-center">
-                                            <td>{{$data->id_sensei}}</td>
-                                            <td>{{$data->nama}}</td>
-                                            <td>{{$data->username}}</td>
-                                            <td>{{$data->kantor}}</td>
-                                            <td>{{$data->sekretaris->nama}}</td>
-                                            <td style="width: 10%">
-                                                <div class="d-flex justify-content-center">
-                                                    <div class="dropdown" data-bs-toggle="modal"
-                                                         data-bs-target="#update-data">
-                                                        <button class="bi bi-pencil-square btn btn-transparent"
-                                                                id="edit-button" onclick="edit(this)"
-                                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                data-bs-title="Edit Data"
-                                                                data-id-sensei="{{$data->id_sensei}}"></button>
-                                                    </div>
-                                                    <div class="dropdown" data-bs-toggle="modal"
-                                                         data-bs-target="#del-data">
-                                                        <button class="bi bi-trash3 btn btn-transparent"
-                                                                id="del-button" onclick="hapus(this)"
-                                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                data-bs-title="Hapus Data"
-                                                                data-id-sensei="{{$data->id_sensei}}"></button>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    @endforeach
-                                </table>
+                                @yield('table')
                             </div>
                         </div>
                     </div>
@@ -335,6 +208,48 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="reset-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form method="post" action="{{route('schale.sensei-reset')}}">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin untuk reset password akun
+                                    ini?</h5>
+                                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">x</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="center-wrap p-4">
+                                    <div class="section text-center md-2">
+                                        <div class="col-md-15">
+                                            <div class="form-group mt-2">
+                                                <input type="hidden" name="id_sensei" id="id-delete" value="">
+                                                <h6>Masukkan Password untuk konfirmasi</h6>
+                                                <div class="input-group">
+                                                    <input type="password" name="password" class="form-control"
+                                                           id="password-delete" autocomplete="off">
+                                                    <button class="btn btn-outline-secondary" type="button"
+                                                            id="password-toggle" onclick="togglePasswordVisibility1()">
+                                                        <i id="eye-icon1" class="bi bi-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary" onclick="hapus(button)">Hapus</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <!-- End of Main Content -->
 
             <!-- Footer -->
@@ -360,6 +275,11 @@
 
     const hapusButton = document.querySelectorAll('#del-button');
     hapusButton.forEach(function (button) {
+        const tooltip = new bootstrap.Tooltip(button);
+    });
+
+    const resetButton = document.querySelectorAll('#reset-button');
+    resetButton.forEach(function (button) {
         const tooltip = new bootstrap.Tooltip(button);
     });
 
