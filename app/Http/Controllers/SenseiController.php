@@ -41,8 +41,8 @@ class SenseiController extends Controller
             if ($uniqueValidate){
                 $query = $senseiModel->insertSensei($request->all());
                 if ($query)
-                    return back()->withErrors('sukses', 'Data Sensei telah ditambahkan!')
-                        ->withErrors('sukses', 'Data Sensei telah ditambahkan!');
+                    return back()->with('sukses', 'Data Sensei telah ditambahkan!')
+                        ->with('sukses', 'Data Sensei telah ditambahkan!');
                 else
                     return back()->withErrors('Sistem error! Data Sensei gagal ditambahkan.')
                         ->withErrors('Sistem error! Data Sensei gagal ditambahkan.');
@@ -105,7 +105,7 @@ class SenseiController extends Controller
      */
     public function destroy(Request $request, SenseiModel $senseiModel): RedirectResponse
     {
-        $validatedData = $request->validate([ 'password' => 'required', ]);
+        $validatedData = $request->validate(['password' => 'required',]);
         if ($validatedData){
             $inputPw = $request->input('password');
             $schaleUser = Auth::guard('schale')->user();
