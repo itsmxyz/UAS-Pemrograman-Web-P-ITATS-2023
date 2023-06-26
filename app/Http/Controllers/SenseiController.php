@@ -41,7 +41,7 @@ class SenseiController extends Controller
             if ($uniqueValidate){
                 $query = $senseiModel->insertSensei($request->all());
                 if ($query)
-                    return back()->with('sukses', 'Data Sensei telah ditambahkan!');
+                    return back()->with(['sukses' =>'Data telah ditambahkan!']);
                 else
                     return back()->withErrors('Sistem error! Data Sensei gagal ditambahkan.')
                         ->withErrors('Sistem error! Data Sensei gagal ditambahkan.');
@@ -89,7 +89,7 @@ class SenseiController extends Controller
             }
             $query = $senseiModel->updateSensei($request->all());
             if ($query)
-                return back()->with('sukses','Data Sensei berhasil diubah!');
+                return back()->with(['sukses' =>'Data berhasil diubah!']);
             else
                 return back()->withErrors('Sistem error! Data Sensei gagal ditambahkan.')
                     ->withErrors('Sistem error! Data Sensei gagal ditambahkan.');
@@ -113,7 +113,7 @@ class SenseiController extends Controller
             else {
                 $query = $senseiModel->deleteSensei($request->input('id_sensei'));
                 if ($query)
-                    return back()->with('sukses','Data Sensei berhasil dihapus!');
+                    return back()->with(['sukses' =>'Data telah dihapus!']);
                 else
                     return back()->withErrors('Sistem error! Data Sensei gagal dihapus.')
                         ->withErrors('Sistem error! Data Sensei gagal dihapus.');
@@ -134,7 +134,7 @@ class SenseiController extends Controller
             else {
                 $query = $senseiModel->resetPwSensei($request->input('id_sensei'));
                 if ($query)
-                    return back()->with('sukses', 'Password Sensei berhasil direset!');
+                    return back()->with(['sukses' =>'Password telah direset!']);
                 else
                     return back()->withErrors('Sistem error! Password Sensei gagal direset.')
                         ->withErrors('Sistem error! Password Sensei gagal direset.');
