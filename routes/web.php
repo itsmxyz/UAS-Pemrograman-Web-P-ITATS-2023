@@ -52,7 +52,7 @@ Route::middleware('schale')->group(function () {
     Route::post('/schale/sekretaris/create-sekretaris', [SekretarisController::class, 'store'])->name('schale.sekretaris-create');
     Route::post('/schale/sekretaris/update-sekretaris', [SekretarisController::class, 'update'])->name('schale.sekretaris-update');
     Route::post('/schale/sekretaris/delete-sekretaris', [SekretarisController::class, 'destroy'])->name('schale.sekretaris-delete');
-    Route::post('/schale/sekretaris/reset-sekretaris', [SekretarisController::class, 'destroy'])->name('schale.sekretaris-reset');
+    Route::post('/schale/sekretaris/reset-sekretaris', [SekretarisController::class, 'resetPassword'])->name('schale.sekretaris-reset');
     Route::get('/data-siswa', [SiswaController::class, 'show']);
 });
 

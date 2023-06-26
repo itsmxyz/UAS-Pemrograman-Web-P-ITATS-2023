@@ -99,6 +99,7 @@ class SekretarisController extends Controller
      */
     public final function destroy(Request $request, SekretarisModel $sekretarisModel): RedirectResponse
     {
+        dd($request->all());
         $validatedData = $request->validate([ 'password' => 'required', ]);
         if ($validatedData){
             $inputPw = $request->input('password');
@@ -106,7 +107,7 @@ class SekretarisController extends Controller
             if (!Hash::check($inputPw, $schaleUser->getAuthPassword()))
                 return back()->with('error', 'Password yang anda masukkan Salah!');
             else {
-                $query = $sekretarisModel->deleteSekretaris($request->input('id_sensei'));
+                $query = $sekretarisModel->deleteSekretaris($request->input('id_sekretaris'));
                 if ($query)
                     return back()->with('sukses', 'Data Sensei berhasil dihapus!');
                 else
