@@ -40,8 +40,10 @@ class SenseiController extends Controller
             $uniqueValidate = $request->validate($uniqueRule);
             if ($uniqueValidate){
                 $query = $senseiModel->insertSensei($request->all());
-                if ($query)
-                    return back()->with(['sukses' =>'Data telah ditambahkan!']);
+                if ($query) {
+                    session()->flash('sukses', 'Data telah ditambahkan!');
+                    return back();
+                }
                 else
                     return back()->withErrors('Sistem error! Data Sensei gagal ditambahkan.')
                         ->withErrors('Sistem error! Data Sensei gagal ditambahkan.');
@@ -88,8 +90,10 @@ class SenseiController extends Controller
                         ->withErrors('Username telah digunakan!');
             }
             $query = $senseiModel->updateSensei($request->all());
-            if ($query)
-                return back()->with(['sukses' =>'Data berhasil diubah!']);
+            if ($query) {
+                session()->flash('sukses','Data berhasil diubah!');
+                return back();
+            }
             else
                 return back()->withErrors('Sistem error! Data Sensei gagal ditambahkan.')
                     ->withErrors('Sistem error! Data Sensei gagal ditambahkan.');
@@ -112,8 +116,10 @@ class SenseiController extends Controller
                     ->withErrors('Password yang anda masukkan Salah!');
             else {
                 $query = $senseiModel->deleteSensei($request->input('id_sensei'));
-                if ($query)
-                    return back()->with(['sukses' =>'Data telah dihapus!']);
+                if ($query) {
+                    session()->flash('success', 'Data telah dihapus!');
+                    return back();
+                }
                 else
                     return back()->withErrors('Sistem error! Data Sensei gagal dihapus.')
                         ->withErrors('Sistem error! Data Sensei gagal dihapus.');
@@ -133,8 +139,10 @@ class SenseiController extends Controller
                     ->withErrors('Password yang anda masukkan Salah!');
             else {
                 $query = $senseiModel->resetPwSensei($request->input('id_sensei'));
-                if ($query)
-                    return back()->with(['sukses' =>'Password telah direset!']);
+                if ($query) {
+                    session()->flash('sukses','Password telah direset!');
+                    return back();
+                }
                 else
                     return back()->withErrors('Sistem error! Password Sensei gagal direset.')
                         ->withErrors('Sistem error! Password Sensei gagal direset.');
