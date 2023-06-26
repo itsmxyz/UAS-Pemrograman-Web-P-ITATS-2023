@@ -129,7 +129,8 @@ class SenseiController extends Controller
             $inputPw = $request->input('password');
             $schaleUser = Auth::guard('schale')->user();
             if (!Hash::check($inputPw, $schaleUser->getAuthPassword()))
-                return back()->with('error', 'Password yang anda masukkan Salah!');
+                return back()->withErrors('Password yang anda masukkan Salah!')
+                    ->withErrors('Password yang anda masukkan Salah!');
             else {
                 $query = $senseiModel->resetPwSensei($request->input('id_sensei'));
                 if ($query)
