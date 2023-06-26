@@ -85,16 +85,20 @@ class SenseiController extends Controller
                 $uniqueRule = [ 'username' => 'required||unique:sensei,username',];
                 $uniqueValidate = $request->validate($uniqueRule);
                 if (!$uniqueValidate)
-                    return back()->with('error', 'Username telah digunakan!');
+                    return back()->withErrors('Username telah digunakan!')
+                        ->withErrors('Username telah digunakan!');
             }
             $query = $senseiModel->updateSensei($request->all());
             if ($query)
-                return back()->with('sukses', 'Data Sensei telah ditambahkan!');
+                return back()->with('Data Sensei telah ditambahkan!')
+                    ->withErrors('Data Sensei telah ditambahkan!');
             else
-                return back()->with('error', 'Sistem error! Data Sensei gagal ditambahkan.');
+                return back()->withErrors('Sistem error! Data Sensei gagal ditambahkan.')
+                    ->withErrors('Sistem error! Data Sensei gagal ditambahkan.');
         }
         else
-            return back()->with('error', 'Data tidak valid. Mohon cek kembali input anda!');
+            return back()->withErrors('Data tidak valid. Mohon cek kembali input anda!')
+                ->withErrors('Data tidak valid. Mohon cek kembali input anda!');
     }
     /**
      * Remove the specified resource from storage.
