@@ -89,7 +89,7 @@ class SenseiController extends Controller
             }
             $query = $senseiModel->updateSensei($request->all());
             if ($query)
-                return back()->with('Data Sensei berhasil diubah!');
+                return back()->with('sukses','Data Sensei berhasil diubah!');
             else
                 return back()->withErrors('Sistem error! Data Sensei gagal ditambahkan.')
                     ->withErrors('Sistem error! Data Sensei gagal ditambahkan.');
