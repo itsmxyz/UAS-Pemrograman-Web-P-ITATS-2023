@@ -41,8 +41,7 @@ class SenseiController extends Controller
             if ($uniqueValidate){
                 $query = $senseiModel->insertSensei($request->all());
                 if ($query)
-                    return back()->with('sukses', 'Data Sensei telah ditambahkan!')
-                        ->with('sukses', 'Data Sensei telah ditambahkan!');
+                    return back()->with('sukses', 'Data Sensei telah ditambahkan!');
                 else
                     return back()->withErrors('Sistem error! Data Sensei gagal ditambahkan.')
                         ->withErrors('Sistem error! Data Sensei gagal ditambahkan.');
@@ -90,8 +89,7 @@ class SenseiController extends Controller
             }
             $query = $senseiModel->updateSensei($request->all());
             if ($query)
-                return back()->with('Data Sensei telah ditambahkan!')
-                    ->withErrors('Data Sensei telah ditambahkan!');
+                return back()->with('Data Sensei berhasil diubah!');
             else
                 return back()->withErrors('Sistem error! Data Sensei gagal ditambahkan.')
                     ->withErrors('Sistem error! Data Sensei gagal ditambahkan.');
@@ -115,8 +113,7 @@ class SenseiController extends Controller
             else {
                 $query = $senseiModel->deleteSensei($request->input('id_sensei'));
                 if ($query)
-                    return back()->withErrors('Data Sensei berhasil dihapus!')
-                        ->withErrors('Data Sensei berhasil dihapus!');
+                    return back()->with('sukses','Data Sensei berhasil dihapus!');
                 else
                     return back()->withErrors('Sistem error! Data Sensei gagal dihapus.')
                         ->withErrors('Sistem error! Data Sensei gagal dihapus.');
@@ -138,10 +135,11 @@ class SenseiController extends Controller
                 if ($query)
                     return back()->with('sukses', 'Password Sensei berhasil direset!');
                 else
-                    return back()->with('error', 'Sistem error! Password Sensei gagal direset.');
+                    return back()->withErrors('Sistem error! Password Sensei gagal direset.')
+                        ->withErrors('Sistem error! Password Sensei gagal direset.');
             }
         }
         else
-            return back()->with('error', 'Masukkan password untuk konfirmasi!');
+            return back()->withErrors('Masukkan password untuk konfirmasi!');
     }
 }
