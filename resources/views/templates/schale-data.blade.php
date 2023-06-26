@@ -136,24 +136,6 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label for="password" class="mb-4"> Reset Password</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <div class="form-group mt-2">
-                                                <div class="input-group">
-                                                    <input type="password" disabled name="password" class="form-control"
-                                                           required id="passwor-dupdate" autocomplete="off">
-                                                    <button class="btn btn-outline-secondary" type="button"
-                                                            id="password-toggle-sensei"
-                                                            onclick="togglePasswordVisibility2()">
-                                                        <i class="bi bi-wrench-adjustable-circle-fill"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal
                                         </button>
@@ -191,8 +173,8 @@
                                                     <input type="password" name="password" class="form-control"
                                                            id="password-delete" autocomplete="off">
                                                     <button class="btn btn-outline-secondary" type="button"
-                                                            id="password-toggle" onclick="togglePasswordVisibility1()">
-                                                        <i id="eye-icon1" class="bi bi-eye"></i>
+                                                            id="password-toggle" onclick="togglePasswordVisibility()">
+                                                        <i id="eye-icon" class="bi bi-eye"></i>
                                                     </button>
                                                 </div>
                                             </div>
@@ -227,14 +209,14 @@
                                     <div class="section text-center md-2">
                                         <div class="col-md-15">
                                             <div class="form-group mt-2">
-                                                <input type="hidden" name="id_sensei" id="id-delete" value="">
+                                                <input type="hidden" name="id_sensei" id="id-reset" value="">
                                                 <h6>Masukkan Password untuk konfirmasi</h6>
                                                 <div class="input-group">
                                                     <input type="password" name="password" class="form-control"
-                                                           id="password-delete" autocomplete="off">
+                                                           id="password-reset" autocomplete="off">
                                                     <button class="btn btn-outline-secondary" type="button"
                                                             id="password-toggle" onclick="togglePasswordVisibility1()">
-                                                        <i id="eye-icon1" class="bi bi-eye"></i>
+                                                        <i id="eye-icons" class="bi bi-eye"></i>
                                                     </button>
                                                 </div>
                                             </div>
@@ -244,7 +226,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-primary" onclick="hapus(button)">Hapus</button>
+                                <button type="submit" class="btn btn-primary" onclick="reset(button)">Hapus</button>
                             </div>
                         </form>
                     </div>
@@ -301,43 +283,18 @@
 
     function hapus(button) {
         var row = button.closest("tr");
-
         var idSensei = row.cells[0].innerText;
         document.getElementById('id-delete').value = idSensei;
     }
-
-    // function togglePasswordVisibility2() {
-    //     var passwordInput = document.getElementById("password-update");
-    //     var eyeIcon = document.getElementById("eye-icon2");
-    //
-    //     if (passwordInput.type === "password") {
-    //         passwordInput.type = "text";
-    //         eyeIcon.classList.remove("bi-eye");
-    //         eyeIcon.classList.add("bi-eye-slash");
-    //     } else {
-    //         passwordInput.type = "password";
-    //         eyeIcon.classList.remove("bi-eye-slash");
-    //         eyeIcon.classList.add("bi-eye");
-    //     }
-    // }
-
-    function togglePasswordVisibility1() {
-        var passwordInput = document.getElementById("password-delete");
-        var eyeIcon = document.getElementById("eye-icon1");
-
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            eyeIcon.classList.remove("bi-eye");
-            eyeIcon.classList.add("bi-eye-slash");
-        } else {
-            passwordInput.type = "password";
-            eyeIcon.classList.remove("bi-eye-slash");
-            eyeIcon.classList.add("bi-eye");
-        }
+    function reset(button) {
+        var row = button.closest("tr");
+        var idSensei = row.cells[0].innerText;
+        document.getElementById('id-reset').value = idSensei;
     }
 
+    //Delete
     function togglePasswordVisibility() {
-        var passwordInput = document.getElementById("password");
+        var passwordInput = document.getElementById("password-delete");
         var eyeIcon = document.getElementById("eye-icon");
 
         if (passwordInput.type === "password") {
@@ -350,6 +307,23 @@
             eyeIcon.classList.add("bi-eye");
         }
     }
+
+    //reset
+    function togglePasswordVisibility1() {
+        var passwordInput = document.getElementById("password-reset");
+        var eyeIcon = document.getElementById("eye-icons");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("bi-eye");
+            eyeIcon.classList.add("bi-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("bi-eye-slash");
+            eyeIcon.classList.add("bi-eye");
+        }
+    }
+
 </script>
 </html>
 
