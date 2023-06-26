@@ -8,13 +8,15 @@
             });
         </script>
     @endforeach
-@elseif(session('sukses'))
+@endif
+
+@if(session()->has('sukses'))
     <script>
         Swal.fire({
             position: 'center',
             icon: 'success',
             title: 'Berhasil',
-            text: {{session('sukses')}},
+            text: {{session()->get('sukses')}},
             showConfirmButton: false,
             timer: 1500
         })
