@@ -124,9 +124,9 @@ class SenseiController extends Controller
             else {
                 $query = $senseiModel->resetPwSensei($request->input('id_sensei'));
                 if ($query)
-                    return back()->with('sukses', 'Data Sensei berhasil dihapus!');
+                    return back()->with('sukses', 'Password Sensei berhasil direset!');
                 else
-                    return back()->with('error', 'Sistem error! Data Sensei gagal dihapus.');
+                    return back()->with('error', 'Sistem error! Password Sensei gagal direset.');
             }
         }
         else
