@@ -26,6 +26,8 @@
 </head>
 
 <body id="page-top">
+@include('templates.eror-template')
+
 <!-- Page Wrapper -->
 <div id="wrapper">
     <!-- Sidebar -->
@@ -52,9 +54,7 @@
                         <div class="card-header py-3 d-flex justify-content-between">
                             @yield('header-table')
                             <div class="ml-auto">
-                                <div class="dropdown" data-bs-toggle="modal" data-bs-target="#add-data">
-                                    @yield('btn-tambah')
-                                </div>
+                                @yield('btn-tambah')
                             </div>
                         </div>
                         {{--Tambah DATA MODAL--}}
@@ -76,82 +76,7 @@
 
             @yield('edit-form')
 
-            <div class="modal fade" id="del-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form method="post" action="{{route('schale.sensei-delete')}}">
-                            @csrf
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus data ini?</h5>
-                                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">x</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="center-wrap p-4">
-                                    <div class="section text-center md-2">
-                                        <div class="col-md-15">
-                                            <div class="form-group mt-2">
-                                                <input type="hidden" name="id_sensei" id="id-delete" value="">
-                                                <h6>Masukkan Password untuk konfirmasi</h6>
-                                                <div class="input-group">
-                                                    <input type="password" name="password" class="form-control" id="password-delete" autocomplete="off">
-                                                    <button class="btn btn-outline-secondary" type="button" id="password-toggle-delete" onclick="togglePasswordVisibility()">
-                                                        <i id="eye-icon-delete" class="bi bi-eye"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-primary" onclick="hapus()">Hapus</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Reset Modal -->
-            <div class="modal fade" id="reset-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form method="post" action="{{route('schale.sensei-reset')}}">
-                            @csrf
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin untuk reset password akun ini?</h5>
-                                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">x</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="center-wrap p-4">
-                                    <div class="section text-center md-2">
-                                        <div class="col-md-15">
-                                            <div class="form-group mt-2">
-                                                <input type="hidden" name="id_sensei" id="id-reset" value="">
-                                                <h6>Masukkan Password untuk konfirmasi</h6>
-                                                <div class="input-group">
-                                                    <input type="password" name="password" class="form-control" id="password-reset" autocomplete="off">
-                                                    <button class="btn btn-outline-secondary" type="button" id="password-toggle-reset" onclick="togglePasswordVisibility1()">
-                                                        <i id="eye-icons-reset" class="bi bi-eye"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-primary" onclick="reset()">Reset</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            @yield('delete-reset-form')
             <!-- End of Main Content -->
 
             <!-- Footer -->
@@ -167,98 +92,9 @@
     </div>
     <!-- End of Page Wrapper -->
     @include('templates.logout-template')
-    @include('templates.eror-template')
 </div>
 </body>
-<script>
-    const editButton = document.querySelectorAll('#edit-button');
-    editButton.forEach(function (button) {
-        const tooltip = new bootstrap.Tooltip(button);
-    });
-
-    const hapusButton = document.querySelectorAll('#del-button');
-    hapusButton.forEach(function (button) {
-        const tooltip = new bootstrap.Tooltip(button);
-    });
-
-    const resetButton = document.querySelectorAll('#reset-button');
-    resetButton.forEach(function (button) {
-        const tooltip = new bootstrap.Tooltip(button);
-    });
-
-    function edit(button) {
-        var row = button.closest("tr");
-
-        var idSensei = row.cells[0].innerText;
-        var nama = row.cells[1].innerText;
-        var username = row.cells[2].innerText;
-        var kantor = row.cells[3].innerText;
-        var namaSekretaris = row.cells[4].innerText;
-
-        document.getElementById('id-update').value = idSensei;
-        document.getElementById('nama-update').value = nama;
-        document.getElementById('username-update').value = username;
-        document.getElementById('kantor-update').value = kantor;
-        document.getElementById('sekretaris-update').value = namaSekretaris;
-    }
-
-    function hapus(button) {
-        var row = button.closest("tr");
-        var idSensei = row.cells[0].innerText;
-        document.getElementById('id-delete').value = idSensei;
-    }
-    function reset(button) {
-        var row = button.closest("tr");
-        var idSensei = row.cells[0].innerText;
-        document.getElementById('id-reset').value = idSensei;
-    }
-
-    //Delete
-    function togglePasswordVisibility() {
-        var passwordInput = document.getElementById("password-delete");
-        var eyeIcon = document.getElementById("eye-icon-delete");
-
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            eyeIcon.classList.remove("bi-eye");
-            eyeIcon.classList.add("bi-eye-slash");
-        } else {
-            passwordInput.type = "password";
-            eyeIcon.classList.remove("bi-eye-slash");
-            eyeIcon.classList.add("bi-eye");
-        }
-    }
-
-    function togglePasswordVisibility1() {
-        var passwordInput = document.getElementById("password-reset");
-        var eyeIcon = document.getElementById("eye-icons-reset");
-
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            eyeIcon.classList.remove("bi-eye");
-            eyeIcon.classList.add("bi-eye-slash");
-        } else {
-            passwordInput.type = "password";
-            eyeIcon.classList.remove("bi-eye-slash");
-            eyeIcon.classList.add("bi-eye");
-        }
-    }
-
-    function togglePasswordVisibility2() {
-        var passwordInput = document.getElementById("password-tambah");
-        var eyeIcon = document.getElementById("eye-icon2");
-
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            eyeIcon.classList.remove("bi-eye");
-            eyeIcon.classList.add("bi-eye-slash");
-        } else {
-            passwordInput.type = "password";
-            eyeIcon.classList.remove("bi-eye-slash");
-            eyeIcon.classList.add("bi-eye");
-        }
-    }
-</script>
+@yield('js')
 </html>
 
 
