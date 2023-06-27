@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('data_kelas', function (Blueprint $table) {
-            $table->string('kelas_kode');
-            $table->foreignId('siswa_nis')->constrained('siswa', 'nis_siswa')->onDelete('cascade');
-            $table->foreign('kelas_kode')->references('kode_kelas')->on('kelas')->onDelete('cascade');
+            $table->foreignId('kelas_id')->constrained('kelas', 'id_kelas')->onDelete('cascade');
+            $table->foreignId('mapel_id')->constrained('mata_pelajaran', 'id_mapel')->onDelete('cascade');
             $table->timestamps();
         });
     }

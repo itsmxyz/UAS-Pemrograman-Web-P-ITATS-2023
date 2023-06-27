@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('siswa', function (Blueprint $table) {
             $table->id('nis_siswa')->startingValue(40110);
-            $table->string('nama');
+            $table->string('nama_siswa');
             $table->string('jenis_kelamin');
+            $table->foreignId('kelas_id')->default(1000)->constrained('kelas', 'id_kelas');
             $table->timestamps();
         });
     }

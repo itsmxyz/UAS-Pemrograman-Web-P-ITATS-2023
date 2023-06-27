@@ -13,17 +13,18 @@ class KelasModel extends Model
     use HasFactory;
     protected $table = 'kelas';
     protected $primaryKey = 'kode_kelas';
-    protected $fillable = ['nama', 'mata_pelajaran', 'sensei_id'];
+    protected $fillable = ['nama_kelas', 'mata_pelajaran', 'sensei_id'];
     protected $guarded = ['kode_kelas'];
 
-    public final function siswa(): BelongsToMany
+    public function siswa()
     {
-        return $this->belongsToMany(SiswaModel::class, 'data_kelas', 'kelas_kode', 'siswa_nis');
+        return $this->hasMany(SiswaModel::class, 'kelas_id', 'id_kelas');
     }
 
-    public final function sensei()
+    public function mataPelajaran(): BelongsToMany
     {
-        return $this->belongsTo(SenseiModel::class, 'sensei_id', 'id_sensei');
+        return $this->belongsToMany(MataPelajaranModel::class, 'kelas_mata_pelajaran',
+            'kelas_id', 'mapel_id');
     }
 
     public final function insertKelas(array $input): bool
@@ -31,7 +32,7 @@ class KelasModel extends Model
         try {
             $this->create([
                 'kode_kelas' => $input['kode_kelas'],
-                'nama' => $input['nama_kelas'],
+                'nama_kelas' => $input['nama_kelas'],
                 'mata_pelajaran' => $input['mata_pelajaran'],
                 'sensei_id' => $input['id_sensei'],
             ]);

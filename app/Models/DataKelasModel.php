@@ -12,6 +12,15 @@ class DataKelasModel extends Model
     private $siswaModel, $kelaModel;
     use HasFactory;
     protected $table = 'data_kelas';
+    public function kelas()
+    {
+        return $this->belongsTo(KelasModel::class, 'kelas_id','id_kelas');
+    }
+
+    public function mataPelajaran()
+    {
+        return $this->belongsTo(MataPelajaranModel::class, 'mapel_id', 'id_mapel');
+    }
 
     public function __construct()
     {
@@ -48,7 +57,7 @@ class DataKelasModel extends Model
                 ->join('sensei')
                 ->on('kelas.sensei_id', '=', 'sensei.id_sensei')
                 ->where('sensei.id_sensei', $idSensei)
-                ->select('kode_kelas as kode_kelas', 'nama as nama_kelas', 'mata_pelajaran as mata_pelajaran')
+                ->select('kode_kelas as kode_kelas', 'nama_kelas as nama_kelas', 'mata_pelajaran as mata_pelajaran')
                 ->get();
             return collect($daftarKelas);
         }catch (QueryException $e){

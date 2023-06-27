@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use function Symfony\Component\Translation\t;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SiswaModel>
@@ -17,8 +18,9 @@ class SiswaModelFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => $this->faker->name(gender: 'female'),
+            'nama_siswa' => $this->faker->name(gender: 'female'),
             'jenis_kelamin' => $this->faker->randomElement(['cewek']),
+            'kelas_id' => mt_rand(1000,1003),
         ];
     }
 }

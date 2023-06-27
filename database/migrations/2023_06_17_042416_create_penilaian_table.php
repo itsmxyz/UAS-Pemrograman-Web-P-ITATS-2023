@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('penilaian', function (Blueprint $table) {
             $table->id('id_penilaian');
-            $table->string('kelas_kode');
+            $table->foreignId('mapel_id')->constrained('mata_pelajaran', 'id_mapel')->onDelete('cascade');
             $table->foreignId('siswa_nis')->constrained('siswa', 'nis_siswa')->onDelete('cascade');
             for ($i = 1; $i <= 8; $i++) {
                 $table->integer('penilaian'.$i)->default(0);
             }
-            $table->foreign('kelas_kode')->references('kode_kelas')->on('kelas')->onDelete('cascade');
             $table->timestamps();
         });
     }

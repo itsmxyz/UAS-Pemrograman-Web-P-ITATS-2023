@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('absensi', function (Blueprint $table) {
             $table->id('id_absensi');
-            $table->string('kelas_kode');
+            $table->foreignId('mapel_id')->constrained('mata_pelajaran', 'id_mapel')->onDelete('cascade');
             $table->foreignId('siswa_nis')->constrained('siswa', 'nis_siswa')->onDelete('cascade');
             for ($i = 1; $i <= 20; $i++) {
                 $table->enum('absensi'.$i, ['Hadir', 'Izin', 'Sakit', 'Alpha', 'Kosong'])->default('Kosong');
             }
-            $table->foreign('kelas_kode')->references('kode_kelas')->on('kelas')->onDelete('cascade');
             $table->timestamps();
         });
     }
