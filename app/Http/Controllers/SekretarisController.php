@@ -41,7 +41,12 @@ class SekretarisController extends Controller
             ];
             $uniqueValidate = $request->validate($uniqueRule);
             if ($uniqueValidate){
-                $query = $sekretarisModel->insertSekretaris($request->all());
+                $input = [
+                    'nama' => $request->input('nama'),
+                    'username' => $request->input('username'),
+                    'password' => Hash::make($request->input('password')),
+                ];
+                $query = $sekretarisModel->insertSekretaris($input);
                 if ($query)
                     return back()->with('sukses', 'Data Sensei telah ditambahkan!');
                 else
@@ -99,7 +104,6 @@ class SekretarisController extends Controller
      */
     public final function destroy(Request $request, SekretarisModel $sekretarisModel): RedirectResponse
     {
-        dd($request->all());
         $validatedData = $request->validate([ 'password' => 'required', ]);
         if ($validatedData){
             $inputPw = $request->input('password');
@@ -118,6 +122,7 @@ class SekretarisController extends Controller
             return back()->with('error', 'Masukkan password untuk konfirmasi!');
     }
     public final function resetPassword(Request $request, SekretarisModel $sekretarisModel){
+        dd($request->all());
         $validatedData = $request->validate([ 'password' => 'required', ]);
         if ($validatedData){
             $inputPw = $request->input('password');

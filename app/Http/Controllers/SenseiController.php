@@ -39,7 +39,14 @@ class SenseiController extends Controller
             ];
             $uniqueValidate = $request->validate($uniqueRule);
             if ($uniqueValidate){
-                $query = $senseiModel->insertSensei($request->all());
+                $input = [
+                    'nama' => $request->input('nama'),
+                    'username' => $request->input('username'),
+                    'password' => Hash::make($request->input('password')),
+                    'kantor' => $request->input('kantor'),
+                    'sekretaris_id' => $request->input('sekretaris')
+                ];
+                $query = $senseiModel->insertSensei($input);
                 if ($query) {
                     return back()->with('sukses', 'Data telah ditambahkan!');
                 }
