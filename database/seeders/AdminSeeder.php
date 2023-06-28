@@ -14,12 +14,6 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         AdminModel::create([
-            'username' => 'Mint','password' => bcrypt('hehey')
-        ]);
-        AdminModel::create([
-            'username' => 'ngawi','password' => bcrypt('belut')
-        ]);
-        AdminModel::create([
             'username' => 'nenen','password' => bcrypt('akmw')
         ]);
     }

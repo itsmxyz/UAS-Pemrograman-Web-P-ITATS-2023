@@ -14,6 +14,6 @@ class SiswaSeeder extends Seeder
     public function run(): void
     {
         //
-        SiswaModel::factory(10)->create();
+        SiswaModel::factory(75)->create();
     }
 }
