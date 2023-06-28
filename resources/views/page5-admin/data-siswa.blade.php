@@ -327,6 +327,7 @@
             }
         }
 
+
         //reset
         function togglePasswordVisibility1() {
             var passwordInput = document.getElementById("password-reset");
