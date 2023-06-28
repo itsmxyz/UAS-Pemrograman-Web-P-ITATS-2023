@@ -29,11 +29,22 @@
         </a>
     </li>
 
+    <hr class="sidebar-divider">
+
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('schale.sekretaris')}}">
             <i class="bi bi-person"></i>
             <span>Sekretaris</span>
+        </a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+            <i class="bi bi-person"></i>
+            <span>Siswa</span>
         </a>
     </li>
 

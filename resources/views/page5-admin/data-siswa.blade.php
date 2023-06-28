@@ -1,254 +1,361 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('templates.schale-data')
+@section('tittle')
+    <title>Data Siswa</title>
+@endsection
+@section('header-tittle')
+    <h1 class="h3 mb-2 text-gray-800" id="tabel">Data Siswa</h1>
+@endsection
 
-<head>
+@section('header-table')
+    <h6 class="m-0 font-weight-bold text-primary">Tabel Data iswa</h6>
+@endsection
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+@section('btn-tambah')
+    <div class="dropdown" data-bs-toggle="modal" data-bs-target="#add-data">
+        <button class="btn btn-primary btn-transparent" id="add-button">Tambah Data</button>
+    </div>
+@endsection
 
-    <title>Data Sensei</title>
-    @include('templates.cdn-link')
-
-    <!-- Custom fonts for this template-->
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="{{asset('assets/css/style-dashboard.css')}}" rel="stylesheet">
-
-</head>
-
-<body id="page-top">
-<!-- Page Wrapper -->
-<div id="wrapper">
-    <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.blade.php">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="bi bi-emoji-laughing-fill"></i>
+@section('modal-tambah')
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Tambahkan Data Siswa</h5>
+            <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">x</span>
+            </button>
+        </div>
+        <form method="post" action="{{route('schale.sekretaris-create')}}">
+            @csrf
+            <div class="center-wrap p-4">
+                <div class="section text-left md-2">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="nama" class="mb-4">Nama</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" name="nama" class="form-control" required
+                                   id="nama" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="username" class="mb-4">Username</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" name="username" class="form-control" required
+                                   id="username" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="password_sekretaris" class="mb-4">Password</label>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-group mt-2">
+                                <div class="input-group">
+                                    <input type="password" name="password"
+                                           class="form-control" required id="password-tambah"
+                                           autocomplete="off">
+                                    <button class="btn btn-outline-secondary" type="button"
+                                            id="password-toggle-add"
+                                            onclick="togglePasswordVisibility2()">
+                                        <i id="eye-icon2" class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button"
+                                data-bs-dismiss="modal">Batal
+                        </button>
+                        <button type="submit" class="btn btn-primary">Tambahkan</button>
+                    </div>
+                </div>
             </div>
-            <div class="sidebar-brand-text mx-3">Halo Admin</div>
-        </a>
+        </form>
+    </div>
+@endsection
 
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
+@section('table')
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable">
+                <thead>
+                <tr class="text-center">
+                    <th>ID Siswa</th>
+                    <th>Nama</th>
+                    <th>Penilaian</th>
+                    <th>Aksi</th>
+                </tr>
+                </thead>
+                @foreach($sekretaris as $data)
+                    <tbody>
+                    <tr class="text-center">
+                        <td>{{$data->id_sekretaris}}</td>
+                        <td>{{$data->nama}}</td>
+                        <td>{{$data->username}}</td>
+                        <td style="width: 10%">
+                            <div class="d-flex justify-content-center">
+                                <div class="dropdown" data-bs-toggle="modal"
+                                     data-bs-target="#update-data">
+                                    <button class="bi bi-pencil-square btn btn-transparent"
+                                            id="edit-button" onclick="edit(this)"
+                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                            data-bs-title="Edit Data"
+                                            data-id-sekretaris="{{$data->id_sekretaris}}"></button>
+                                </div>
+                                <div class="dropdown" data-bs-toggle="modal"
+                                     data-bs-target="#del-data">
+                                    <button class="bi bi-trash3 btn btn-transparent"
+                                            id="del-button" onclick="hapus(this)"
+                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                            data-bs-title="Hapus Data"
+                                            data-id-sekretaris="{{$data->id_sekretaris}}"></button>
+                                </div>
+                                <div class="dropdown" data-bs-toggle="modal"
+                                     data-bs-target="#reset-data">
+                                    <button class="bi bi-arrow-clockwise btn btn-transparent"
+                                            id="reset-button" onclick="reset(this)"
+                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                            data-bs-title="Reset Password"
+                                            data-id-sekretaris="{{$data->id_sekretaris}}"></button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                @endforeach
+            </table>
+        </div>
+    </div>
+@endsection
 
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="/admin">
-                <i class="bi bi-house-door"></i>
-                <span>Dashboard Admin</span></a>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/data-sensei">
-                <i class="bi bi-person"></i>
-                <span>Sensei</span>
-            </a>
-        </li>
-
-        <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/data-sekretaris">
-                <i class="bi bi-person"></i>
-                <span>Sekretaris</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/data-sekretaris">
-                <i class="bi bi-person"></i>
-                <span>Siswa</span>
-            </a>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
-
-        <!-- Sidebar Toggler (Sidebar) -->
-        {{--        <div class="text-center d-none d-md-inline">--}}
-        {{--            <button id="toggleSidebar" class="bi bi-chevron-bar-left btn btn-transparent btn btn-lg"></button>--}}
-        {{--        </div>--}}
-
-    </ul>
-    <!-- End of Sidebar -->
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-                <!-- Topbar Search -->
-                <form
-                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="bi bi-search"></i>
-                            </button>
+@section('edit-form')
+    <div class="modal fade" id="update-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Siswa</h5>
+                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
+                <form method="post" action="{{route('schale.sekretaris-update')}}">
+                    @csrf
+                    <div class="center-wrap p-4">
+                        <div class="section text-left md-2">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="nama" class="mb-4">Nama</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="hidden" name="id_sekretaris" id="id_sekretaris">
+                                    <input type="text" name="nama" class="form-control" required
+                                           id="nama-update" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="username" class="mb-4">Username</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" name="username" class="form-control" required
+                                           id="username-update" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal
+                                </button>
+                                <button type="submit" class="btn btn-primary" id="edit-btn"
+                                        onclick="edit(button)">Edit
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </form>
-
-                <!-- Nav Item - User Information -->
-                <nav class="nav-item dropdown">
-                    <div class="nav-link dropdown-toggle no-arrow" href="#" role="button"
-                         data-bs-toggle="dropdown">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 fw-bold">Admin</span>
-                        <img class="img-profile rounded-circle"
-                             src="{{asset('assets/img/klub/veritas/veritas_leader.png')}}">
-                    </div>
-                    <!-- Dropdown - User Information -->
-                    <ul class="dropdown-menu dropdown-menu-end shadow animated--grow-in" aria-labelledby="userDropdown">
-                        <li>
-                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal">
-                                <i class="bi bi-box-arrow-left"></i>
-                                Logout
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-
-                </ul>
-
-            </nav>
-            <!-- End of Topbar -->
-
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-                <!-- Content Row -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800" id="tabel">Data Siswa</h1>
-
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-flex justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Tabel Data Siswa</h6>
-                            <div class="ml-auto">
-                                <div class="dropdown" data-bs-toggle="modal" data-bs-target="#add-data">
-                                    <button class="btn btn-primary btn-transparent" id="add-button">Tambah Data</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal fade" id="add-data" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Tambahkan Data Siswa</h5>
-                                        <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">x</span>
-                                        </button>
-                                    </div>
-                                    <form method="post">
-                                        @csrf
-                                        <div class="cnter-wrap p-4">
-                                            <div class="section text-center">
-                                                <table>
-                                                    <tr>
-                                                        <td><label>Nama Siswa :</label></td>
-                                                        <td>
-                                                            <input type="text" name="nama_sensei" class="form-control"
-                                                                   id="nama" autocomplete="off"><br>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><label for="kelas">Kelas :</label></td>
-                                                        <td>
-                                                            <input type="text" name="kelas" class="form-control"
-                                                                   id="kelas" autocomplete="off"><br>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-secondary" type="button"
-                                                            data-bs-dismiss="modal">Batal
-                                                    </button>
-                                                    <a class="btn btn-primary" href="/belutlogin">Tambahkan</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                    <tr>
-                                        <th>ID Siswa</th>
-                                        <th>Nama Siswa</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                    </thead>
-                                    @foreach($sensei as $data)
-                                        <tbody>
-                                        <tr>
-                                            <td>{{$data->id_sensei}}</td>
-                                            <td>{{$data->nama_sensei}}</td>
-                                            <td>{{$data->kantor_sensei}}</td>
-                                            <td>{{$data->sekretaris->nama_sekretaris}}</td>
-                                            <td>
-                                                <button class="bi bi-pencil-square btn btn-transparent"
-                                                        id="edit-button"></button>
-                                                <button class="bi bi-trash3 btn btn-transparent"
-                                                        id="del-button"></button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    @endforeach
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Millennium School 2023</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-
         </div>
     </div>
-    <!-- End of Page Wrapper -->
+@endsection
 
-    <!-- Logout Modal-->
-    @include('templates.logout-template')
-</div>
-</body>
+@section('reset-form')
+    <!-- Reset Modal -->
+    <div class="modal fade" id="reset-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="post" action="{{route('schale.sekretaris-reset')}}">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin untuk reset password akun ini?</h5>
+                        <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="center-wrap p-4">
+                            <div class="section text-center md-2">
+                                <div class="col-md-15">
+                                    <div class="form-group mt-2">
+                                        <input type="hidden" name="id_sekretaris" id="id-reset" value="">
+                                        <h6>Masukkan Password untuk konfirmasi</h6>
+                                        <div class="input-group">
+                                            <input type="password" name="password" class="form-control" id="password-reset" autocomplete="off">
+                                            <button class="btn btn-outline-secondary" type="button" id="password-toggle-reset" onclick="togglePasswordVisibility1()">
+                                                <i id="eye-icons-reset" class="bi bi-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary" onclick="reset()">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
 
-</html>
+@section('delete-form')
+    <div class="modal fade" id="del-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="post" action="{{route('schale.sekretaris-delete')}}">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus data ini?</h5>
+                        <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="center-wrap p-4">
+                            <div class="section text-center md-2">
+                                <div class="col-md-15">
+                                    <div class="form-group mt-2">
+                                        <input type="hidden" name="id_sekretaris" id="id-delete" value="">
+                                        <h6>Masukkan Password untuk konfirmasi</h6>
+                                        <div class="input-group">
+                                            <input type="password" name="password" class="form-control" id="password-delete" autocomplete="off">
+                                            <button class="btn btn-outline-secondary" type="button" id="password-toggle-delete" onclick="togglePasswordVisibility()">
+                                                <i id="eye-icon-delete" class="bi bi-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary" onclick="hapus()">Hapus</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
 
+@section('js')
+    <script>
 
+        const editButton = document.querySelectorAll('#edit-button');
+        editButton.forEach(function (button) {
+            const tooltip = new bootstrap.Tooltip(button);
+        });
+
+        const hapusButton = document.querySelectorAll('#del-button');
+        hapusButton.forEach(function (button) {
+            const tooltip = new bootstrap.Tooltip(button);
+        });
+
+        const resetButton = document.querySelectorAll('#reset-button');
+        resetButton.forEach(function (button) {
+            const tooltip = new bootstrap.Tooltip(button);
+        });
+
+        function edit(button) {
+            // Mendapatkan elemen baris induk tombol yang diklik
+            var row = button.closest("tr");
+
+            // Mendapatkan nilai-nilai dari kolom lain dalam baris yang sama
+            var idSekretaris = row.cells[0].innerText;
+            var nama = row.cells[1].innerText;
+            var username = row.cells[2].innerText;
+            var password = row.cells[3].innerText;
+
+            // Menampilkan nilai input ke konsol
+            console.log("Nama: " + nama);
+            console.log("Username: " + username);
+
+            // Mengambil data form update
+            document.getElementById("nama-update").value = nama;
+            document.getElementById("username-update").value = username;
+        }
+
+        function hapus(button) {
+            var row = button.closest("tr")
+            var idSekretaris = row.cells[0].innerText;
+            console.log("idSekretaris: " + idSekretaris);
+            document.getElementById("id-delete").value = idSekretaris;
+        }
+
+        function reset(button) {
+            var row = button.closest("tr");
+            var idSekretaris = row.cells[0].innerText;
+            document.getElementById('id-reset').value = idSekretaris;
+        }
+
+        //Delete
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("password-delete");
+            var eyeIcon = document.getElementById("eye-icon-delete");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.classList.remove("bi-eye");
+                eyeIcon.classList.add("bi-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.classList.remove("bi-eye-slash");
+                eyeIcon.classList.add("bi-eye");
+            }
+        }
+
+        //reset
+        function togglePasswordVisibility1() {
+            var passwordInput = document.getElementById("password-reset");
+            var eyeIcon = document.getElementById("eye-icons-reset");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.classList.remove("bi-eye");
+                eyeIcon.classList.add("bi-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.classList.remove("bi-eye-slash");
+                eyeIcon.classList.add("bi-eye");
+            }
+        }
+
+        function togglePasswordVisibility2() {
+            var passwordInput = document.getElementById("password-tambah");
+            var eyeIcon = document.getElementById("eye-icon2");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.classList.remove("bi-eye");
+                eyeIcon.classList.add("bi-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.classList.remove("bi-eye-slash");
+                eyeIcon.classList.add("bi-eye");
+            }
+        }
+    </script>
+@endsection
