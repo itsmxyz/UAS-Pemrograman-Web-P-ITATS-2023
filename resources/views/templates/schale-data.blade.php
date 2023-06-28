@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Data Sensei</title>
+    @yield('tittle')
     <link rel="icon"
           href="https://cdn.discordapp.com/attachments/1104037318521798746/1104123752586956830/millenium.png">
     @include('templates.cdn-link')
@@ -75,8 +75,8 @@
             </div>
 
             @yield('edit-form')
-
-            @yield('delete-reset-form')
+            @yield('reset-form')
+            @yield('delete-form')
             <!-- End of Main Content -->
 
             <!-- Footer -->
