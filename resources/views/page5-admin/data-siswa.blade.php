@@ -24,7 +24,7 @@
                 <span aria-hidden="true">x</span>
             </button>
         </div>
-        <form method="post" action="{{route('schale.sekretaris-create')}}">
+        <form method="post" action="#">
             @csrf
             <div class="center-wrap p-4">
                 <div class="section text-left md-2">
@@ -42,7 +42,11 @@
                             <label for="jenkel" class="mb-4">Jenis kelamin</label>
                         </div>
                         <div class="col-md-9">
-
+                            <select name="jekel" class="form-select" required>
+                                <option selected disabled>Pilih jenis kelamin</option>
+                                <option value="laki-laki">Laki - laki</option>
+                                <option value="perempuan">Perempuan</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row">
@@ -53,7 +57,7 @@
                             <select name="kelas" class="form-select" required>
                                 <option value="" selected disabled>Pilih Kelas</option>
                                 @foreach($kelas as $data)
-                                    <option value="{{$data->id_kelas}}">{{$data->nama_kelas}}</option>
+                                    <option value="{{$data->nama_kelas}}">{{$data->nama_kelas}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -83,13 +87,13 @@
                     <th>Aksi</th>
                 </tr>
                 </thead>
-                @foreach($kelas as $data)
+                @foreach($siswa as $data)
                     <tbody>
                     <tr class="text-center">
                         <td>{{$data->nis_siswa}}</td>
                         <td>{{$data->nama_siswa}}</td>
                         <td>{{$data->jenis_kelamin}}</td>
-                        <td>{{$data->nama_kelas}}</td>
+                        <td><a href="{{$data->nama_kelas}}">{{$data->nama_kelas}}</a></td>
                         <td style="width: 10%">
                             <div class="d-flex justify-content-center">
                                 <div class="dropdown" data-bs-toggle="modal"
@@ -98,7 +102,7 @@
                                             id="edit-button" onclick="edit(this)"
                                             data-bs-toggle="tooltip" data-bs-placement="top"
                                             data-bs-title="Edit Data"
-                                            data-id-sekretaris="{{$data->id_sekretaris}}"></button>
+                                            data-id-siswa="{{$data->nis_siswa}}"></button>
                                 </div>
                                 <div class="dropdown" data-bs-toggle="modal"
                                      data-bs-target="#del-data">
@@ -106,7 +110,7 @@
                                             id="del-button" onclick="hapus(this)"
                                             data-bs-toggle="tooltip" data-bs-placement="top"
                                             data-bs-title="Hapus Data"
-                                            data-id-sekretaris="{{$data->id_sekretaris}}"></button>
+                                            data-id-siswa="{{$data->nis_siswa}}"></button>
                                 </div>
                                 <div class="dropdown" data-bs-toggle="modal"
                                      data-bs-target="#reset-data">
@@ -114,7 +118,7 @@
                                             id="reset-button" onclick="reset(this)"
                                             data-bs-toggle="tooltip" data-bs-placement="top"
                                             data-bs-title="Hapus Kelas"
-                                            data-id-sekretaris="{{$data->id_sekretaris}}"></button>
+                                            data-id-siswa="{{$data->nis_siswa}}"></button>
                                 </div>
                             </div>
                         </td>
@@ -122,6 +126,7 @@
                     </tbody>
                 @endforeach
             </table>
+            {{$siswa->links()}}
         </div>
     </div>
 @endsection
@@ -137,7 +142,7 @@
                         <span aria-hidden="true">x</span>
                     </button>
                 </div>
-                <form method="post" action="{{route('schale.sekretaris-update')}}">
+                <form method="post" action="#">
                     @csrf
                     <div class="center-wrap p-4">
                         <div class="section text-left md-2">
@@ -156,8 +161,11 @@
                                     <label for="jenkel" class="mb-4">Jenis Kelamin</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" name="jenkel" class="form-control" required
-                                           id="jenkel-update" autocomplete="off">
+                                    <select name="jekel" class="form-select" required>
+                                        <option selected disabled>Pilih jenis kelamin</option>
+                                        <option value="laki-laki">Laki - laki</option>
+                                        <option value="perempuan">Perempuan</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row">
@@ -165,10 +173,10 @@
                                     <label for="kelas" class="mb-4">Kelas</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <select name="kelas-update" class="form-select" required>
+                                    <select name="kelas" class="form-select" required>
                                         <option value="" selected disabled>Pilih Kelas</option>
                                         @foreach($kelas as $data)
-                                            <option value="{{$data->id_kelas}}">{{$data->nama_kelas}}</option>
+                                            <option value="{{$data->nama_kelas}}">{{$data->nama_kelas}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -193,7 +201,7 @@
     <div class="modal fade" id="reset-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="post" action="{{route('schale.sekretaris-reset')}}">
+                <form method="post" action="#">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin untuk menghapus siswa ini dari kelas?</h5>
@@ -233,7 +241,7 @@
     <div class="modal fade" id="del-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="post" action="{{route('schale.sekretaris-delete')}}">
+                <form method="post" action="#">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus data ini?</h5>

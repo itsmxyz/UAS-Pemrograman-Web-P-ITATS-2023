@@ -43,7 +43,7 @@
     <hr class="sidebar-divider">
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="{{route('schale.siswa')}}">
             <i class="bi bi-person"></i>
             <span>Siswa</span>
         </a>
