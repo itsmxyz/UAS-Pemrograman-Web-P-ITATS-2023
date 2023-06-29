@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SiswaModel;
 use App\Http\Requests\StoreSiswaRequest;
 use App\Http\Requests\UpdateSiswaRequest;
+use Psr\Log\NullLogger;
 
 class SiswaController extends Controller
 {
@@ -35,9 +36,11 @@ class SiswaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SiswaModel $siswa)
+    public function show(SiswaModel $siswaModel)
     {
         //
+        $dataSiswa =  $siswaModel->getDataSiswa();
+        return view('page5.data-siswa', ['siswa' => $dataSiswa]);
     }
 
     /**

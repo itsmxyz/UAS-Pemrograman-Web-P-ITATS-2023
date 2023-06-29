@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class SiswaModel extends Model
 {
@@ -21,5 +24,18 @@ class SiswaModel extends Model
     }
     public function penilaian() {
         return $this->hasMany(PenilaianModel::class,'siswa_nis','nis_siswa');
+    }
+
+    public function getDataSiswa(): Collection
+    {
+        try {
+            $dataSiswa = DB::table('siswa')
+                ->select('nis_siswa as nis_siswa','nama_siswa as nama_siswa','jenis_kelamin as jenis_kelamin','kelas.nama_kelas')
+                ->join('kelas', 'kelas_id','=','kelas.id_kelas')
+                ->get();
+            return collect($dataSiswa);
+        }catch (QueryException $e){
+            return collect();
+        }
     }
 }
