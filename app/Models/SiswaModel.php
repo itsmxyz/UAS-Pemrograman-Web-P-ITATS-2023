@@ -26,14 +26,15 @@ class SiswaModel extends Model
         return $this->hasMany(PenilaianModel::class,'siswa_nis','nis_siswa');
     }
 
-    public function getDataSiswa(): Collection
+    public function getDataSiswa()
     {
         try {
             $dataSiswa = DB::table('siswa')
                 ->select('nis_siswa as nis_siswa','nama_siswa as nama_siswa','jenis_kelamin as jenis_kelamin','kelas.nama_kelas')
                 ->join('kelas', 'kelas_id','=','kelas.id_kelas')
-                ->get();
-            return collect($dataSiswa);
+                ->orderBy('nis_siswa','ASC')
+                ->paginate(15);
+            return $dataSiswa;
         }catch (QueryException $e){
             return collect();
         }
