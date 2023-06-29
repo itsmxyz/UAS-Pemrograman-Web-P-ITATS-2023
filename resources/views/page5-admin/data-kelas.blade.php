@@ -30,11 +30,38 @@
                 <div class="section text-left md-2">
                     <div class="row">
                         <div class="col-md-3">
-                            <label for="nama" class="mb-4">Nama Kelas</label>
+                            <label for="kode-kelas" class="mb-4">Kode Kelas</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" name="kode" class="form-control" required
+                                   id="kode-kelas" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="nama-kelas" class="mb-4">Nama Kelas</label>
                         </div>
                         <div class="col-md-9">
                             <input type="text" name="nama" class="form-control" required
                                    id="nama-kelas" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="kode-mapel" class="mb-4">Kode Mata Pelajaran</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" name="mapel" class="form-control" required
+                                   id="kode-mapel" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="nama-mapel" class="mb-4">Nama Mata Pelajaran</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input type="text" name="nama-mapel" class="form-control" required
+                                   id="nama-mapel" autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -50,57 +77,80 @@
 @endsection
 
 @section('table')
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable">
-                <thead>
-                <tr class="text-center">
-                    <th>ID Sekretaris</th>
-                    <th>Nama</th>
-                    <th>Username</th>
-                    <th>Aksi</th>
-                </tr>
-                </thead>
-                @foreach($sekretaris as $data)
-                    <tbody>
-                    <tr class="text-center">
-                        <td>{{$data->id_sekretaris}}</td>
-                        <td>{{$data->nama}}</td>
-                        <td>{{$data->username}}</td>
-                        <td style="width: 10%">
-                            <div class="d-flex justify-content-center">
-                                <div class="dropdown" data-bs-toggle="modal"
-                                     data-bs-target="#update-data">
-                                    <button class="bi bi-pencil-square btn btn-transparent"
-                                            id="edit-button" onclick="edit(this)"
-                                            data-bs-toggle="tooltip" data-bs-placement="top"
-                                            data-bs-title="Edit Data"
-                                            data-id-sekretaris="{{$data->id_sekretaris}}"></button>
-                                </div>
-                                <div class="dropdown" data-bs-toggle="modal"
-                                     data-bs-target="#del-data">
-                                    <button class="bi bi-trash3 btn btn-transparent"
-                                            id="del-button" onclick="hapus(this)"
-                                            data-bs-toggle="tooltip" data-bs-placement="top"
-                                            data-bs-title="Hapus Data"
-                                            data-id-sekretaris="{{$data->id_sekretaris}}"></button>
-                                </div>
-                                <div class="dropdown" data-bs-toggle="modal"
-                                     data-bs-target="#reset-data">
-                                    <button class="bi bi-arrow-clockwise btn btn-transparent"
-                                            id="reset-button" onclick="reset(this)"
-                                            data-bs-toggle="tooltip" data-bs-placement="top"
-                                            data-bs-title="Reset Password"
-                                            data-id-sekretaris="{{$data->id_sekretaris}}"></button>
+    <div class="album py-5">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                @foreach($kelas as $data)
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                            <div class="card-body">
+                                <p class="card-text">{{$data->nama_kelas}}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                                href ="{{route('schale.kelas-view'), ['id_kelas' => $data->id_kelas]}}">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                                    </div>
+                                    <small class="text-muted">{{$data->nama_sensei}}</small>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                    </tbody>
+                        </div>
+                    </div>
                 @endforeach
-            </table>
+            </div>
         </div>
     </div>
+{{--            <table class="table table-bordered" id="dataTable">--}}
+{{--                <thead>--}}
+{{--                <tr class="text-center">--}}
+{{--                    <th>Kode Kelas</th>--}}
+{{--                    <th>Nama kelas</th>--}}
+{{--                    <th>Kode Mata Pelajaran</th>--}}
+{{--                    <th>Nama Mata pelajaran</th>--}}
+{{--                    <th>Aksi</th>--}}
+{{--                </tr>--}}
+{{--                </thead>--}}
+{{--                @foreach($kelas as $data)--}}
+{{--                    <tbody>--}}
+{{--                    <tr class="text-center">--}}
+{{--                        <td>{{$data->id_kelas}}</td>--}}
+{{--                        <td>{{$data->nama_kelas}}</td>--}}
+{{--                        <td>{{$data->id_mapel}}</td>--}}
+{{--                        <td>{{$data->nama_mapel}}</td>--}}
+{{--                        <td style="width: 10%">--}}
+{{--                            <div class="d-flex justify-content-center">--}}
+{{--                                <div class="dropdown" data-bs-toggle="modal"--}}
+{{--                                     data-bs-target="#update-data">--}}
+{{--                                    <button class="bi bi-pencil-square btn btn-transparent"--}}
+{{--                                            id="edit-button" onclick="edit(this)"--}}
+{{--                                            data-bs-toggle="tooltip" data-bs-placement="top"--}}
+{{--                                            data-bs-title="Edit Data"--}}
+{{--                                            data-id-sekretaris="{{$data->id_kelas}}"></button>--}}
+{{--                                </div>--}}
+{{--                                <div class="dropdown" data-bs-toggle="modal"--}}
+{{--                                     data-bs-target="#del-data">--}}
+{{--                                    <button class="bi bi-trash3 btn btn-transparent"--}}
+{{--                                            id="del-button" onclick="hapus(this)"--}}
+{{--                                            data-bs-toggle="tooltip" data-bs-placement="top"--}}
+{{--                                            data-bs-title="Hapus Data"--}}
+{{--                                            data-id-sekretaris="{{$data->id_sekretaris}}"></button>--}}
+{{--                                </div>--}}
+{{--                                <div class="dropdown" data-bs-toggle="modal"--}}
+{{--                                     data-bs-target="#reset-data">--}}
+{{--                                    <button class="bi bi-arrow-clockwise btn btn-transparent"--}}
+{{--                                            id="reset-button" onclick="reset(this)"--}}
+{{--                                            data-bs-toggle="tooltip" data-bs-placement="top"--}}
+{{--                                            data-bs-title="Reset Password"--}}
+{{--                                            data-id-sekretaris="{{$data->id_sekretaris}}"></button>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </td>--}}
+{{--                    </tr>--}}
+{{--                    </tbody>--}}
+{{--                @endforeach--}}
+{{--            </table>--}}
+{{--    </div>--}}
 @endsection
 
 @section('edit-form')
@@ -152,46 +202,46 @@
     </div>
 @endsection
 
-@section('reset-form')
-    <!-- Reset Modal -->
-    <div class="modal fade" id="reset-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form method="post" action="{{route('schale.sekretaris-reset')}}">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin untuk reset password akun ini?</h5>
-                        <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">x</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="center-wrap p-4">
-                            <div class="section text-center md-2">
-                                <div class="col-md-15">
-                                    <div class="form-group mt-2">
-                                        <input type="hidden" name="id_sekretaris" id="id-reset" value="">
-                                        <h6>Masukkan Password untuk konfirmasi</h6>
-                                        <div class="input-group">
-                                            <input type="password" name="password" class="form-control" id="password-reset" autocomplete="off">
-                                            <button class="btn btn-outline-secondary" type="button" id="password-toggle-reset" onclick="togglePasswordVisibility1()">
-                                                <i id="eye-icons-reset" class="bi bi-eye"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary" onclick="reset()">Reset</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-@endsection
+{{--@section('reset-form')--}}
+{{--    <!-- Reset Modal -->--}}
+{{--    <div class="modal fade" id="reset-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
+{{--        <div class="modal-dialog" role="document">--}}
+{{--            <div class="modal-content">--}}
+{{--                <form method="post" action="{{route('schale.sekretaris-reset')}}">--}}
+{{--                    @csrf--}}
+{{--                    <div class="modal-header">--}}
+{{--                        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin untuk reset password akun ini?</h5>--}}
+{{--                        <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">--}}
+{{--                            <span aria-hidden="true">x</span>--}}
+{{--                        </button>--}}
+{{--                    </div>--}}
+{{--                    <div class="modal-body">--}}
+{{--                        <div class="center-wrap p-4">--}}
+{{--                            <div class="section text-center md-2">--}}
+{{--                                <div class="col-md-15">--}}
+{{--                                    <div class="form-group mt-2">--}}
+{{--                                        <input type="hidden" name="id_sekretaris" id="id-reset" value="">--}}
+{{--                                        <h6>Masukkan Password untuk konfirmasi</h6>--}}
+{{--                                        <div class="input-group">--}}
+{{--                                            <input type="password" name="password" class="form-control" id="password-reset" autocomplete="off">--}}
+{{--                                            <button class="btn btn-outline-secondary" type="button" id="password-toggle-reset" onclick="togglePasswordVisibility1()">--}}
+{{--                                                <i id="eye-icons-reset" class="bi bi-eye"></i>--}}
+{{--                                            </button>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="modal-footer">--}}
+{{--                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>--}}
+{{--                        <button type="submit" class="btn btn-primary" onclick="reset()">Reset</button>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--@endsection--}}
 
 @section('delete-form')
     <div class="modal fade" id="del-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -52,7 +52,7 @@
     <hr class="sidebar-divider">
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="{{route('schale.kelas')}}">
             <i class="bi bi-person"></i>
             <span>Kelas</span>
         </a>

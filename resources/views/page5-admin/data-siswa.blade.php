@@ -7,7 +7,7 @@
 @endsection
 
 @section('header-table')
-    <h6 class="m-0 font-weight-bold text-primary">Tabel Data iswa</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Tabel Data Siswa</h6>
 @endsection
 
 @section('btn-tambah')
