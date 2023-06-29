@@ -49,6 +49,15 @@
         </a>
     </li>
 
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+            <i class="bi bi-person"></i>
+            <span>Kelas</span>
+        </a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 </ul>

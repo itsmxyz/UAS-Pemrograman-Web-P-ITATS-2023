@@ -1,25 +1,25 @@
 @extends('templates.schale-data')
 @section('tittle')
-    <title>Data Siswa</title>
+    <title>Data Kelas</title>
 @endsection
 @section('header-tittle')
-    <h1 class="h3 mb-2 text-gray-800" id="tabel">Data Siswa</h1>
+    <h1 class="h3 mb-2 text-gray-800" id="tabel">Data Kelas</h1>
 @endsection
 
 @section('header-table')
-    <h6 class="m-0 font-weight-bold text-primary">Tabel Data iswa</h6>
+    <h6 class="m-0 font-weight-bold text-primary">Tabel Data Kelas</h6>
 @endsection
 
 @section('btn-tambah')
     <div class="dropdown" data-bs-toggle="modal" data-bs-target="#add-data">
-        <button class="btn btn-primary btn-transparent" id="add-button">Tambah Data</button>
+        <button class="btn btn-primary btn-transparent" id="add-button">Tambah Kelas</button>
     </div>
 @endsection
 
 @section('modal-tambah')
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Tambahkan Data Siswa</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Tambahkan Kelas</h5>
             <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">x</span>
             </button>
@@ -30,32 +30,11 @@
                 <div class="section text-left md-2">
                     <div class="row">
                         <div class="col-md-3">
-                            <label for="nama" class="mb-4">Nama</label>
+                            <label for="nama" class="mb-4">Nama Kelas</label>
                         </div>
                         <div class="col-md-9">
                             <input type="text" name="nama" class="form-control" required
-                                   id="nama" autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label for="jenkel" class="mb-4">Jenis kelamin</label>
-                        </div>
-                        <div class="col-md-9">
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label for="kelas" class="mb-4">Kelas</label>
-                        </div>
-                        <div class="col-md-9">
-                            <select name="kelas" class="form-select" required>
-                                <option value="" selected disabled>Pilih Kelas</option>
-                                @foreach($kelas as $data)
-                                    <option value="{{$data->id_kelas}}">{{$data->nama_kelas}}</option>
-                                @endforeach
-                            </select>
+                                   id="nama-kelas" autocomplete="off">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -76,20 +55,18 @@
             <table class="table table-bordered" id="dataTable">
                 <thead>
                 <tr class="text-center">
-                    <th>NIS</th>
+                    <th>ID Sekretaris</th>
                     <th>Nama</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Kelas</th>
+                    <th>Username</th>
                     <th>Aksi</th>
                 </tr>
                 </thead>
-                @foreach($kelas as $data)
+                @foreach($sekretaris as $data)
                     <tbody>
                     <tr class="text-center">
-                        <td>{{$data->nis_siswa}}</td>
-                        <td>{{$data->nama_siswa}}</td>
-                        <td>{{$data->jenis_kelamin}}</td>
-                        <td>{{$data->nama_kelas}}</td>
+                        <td>{{$data->id_sekretaris}}</td>
+                        <td>{{$data->nama}}</td>
+                        <td>{{$data->username}}</td>
                         <td style="width: 10%">
                             <div class="d-flex justify-content-center">
                                 <div class="dropdown" data-bs-toggle="modal"
@@ -113,7 +90,7 @@
                                     <button class="bi bi-arrow-clockwise btn btn-transparent"
                                             id="reset-button" onclick="reset(this)"
                                             data-bs-toggle="tooltip" data-bs-placement="top"
-                                            data-bs-title="Hapus Kelas"
+                                            data-bs-title="Reset Password"
                                             data-id-sekretaris="{{$data->id_sekretaris}}"></button>
                                 </div>
                             </div>
@@ -132,7 +109,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Siswa</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Sekretaris</h5>
                     <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">x</span>
                     </button>
@@ -146,31 +123,18 @@
                                     <label for="nama" class="mb-4">Nama</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="hidden" name="id_iswa" id="id_siswa">
+                                    <input type="hidden" name="id_sekretaris" id="id_sekretaris">
                                     <input type="text" name="nama" class="form-control" required
                                            id="nama-update" autocomplete="off">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label for="jenkel" class="mb-4">Jenis Kelamin</label>
+                                    <label for="username" class="mb-4">Username</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" name="jenkel" class="form-control" required
-                                           id="jenkel-update" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label for="kelas" class="mb-4">Kelas</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <select name="kelas-update" class="form-select" required>
-                                        <option value="" selected disabled>Pilih Kelas</option>
-                                        @foreach($kelas as $data)
-                                            <option value="{{$data->id_kelas}}">{{$data->nama_kelas}}</option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" name="username" class="form-control" required
+                                           id="username-update" autocomplete="off">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -196,7 +160,7 @@
                 <form method="post" action="{{route('schale.sekretaris-reset')}}">
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin untuk menghapus siswa ini dari kelas?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin untuk reset password akun ini?</h5>
                         <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">x</span>
                         </button>
@@ -206,7 +170,7 @@
                             <div class="section text-center md-2">
                                 <div class="col-md-15">
                                     <div class="form-group mt-2">
-                                        <input type="hidden" name="id_siswa" id="id-reset" value="">
+                                        <input type="hidden" name="id_sekretaris" id="id-reset" value="">
                                         <h6>Masukkan Password untuk konfirmasi</h6>
                                         <div class="input-group">
                                             <input type="password" name="password" class="form-control" id="password-reset" autocomplete="off">
@@ -221,7 +185,7 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary" onclick="reset()">Hapus dari kelas</button>
+                        <button type="submit" class="btn btn-primary" onclick="reset()">Reset</button>
                     </div>
                 </form>
             </div>
@@ -246,7 +210,7 @@
                             <div class="section text-center md-2">
                                 <div class="col-md-15">
                                     <div class="form-group mt-2">
-                                        <input type="hidden" name="id_siswa" id="id-delete" value="">
+                                        <input type="hidden" name="id_sekretaris" id="id-delete" value="">
                                         <h6>Masukkan Password untuk konfirmasi</h6>
                                         <div class="input-group">
                                             <input type="password" name="password" class="form-control" id="password-delete" autocomplete="off">
@@ -292,33 +256,31 @@
             var row = button.closest("tr");
 
             // Mendapatkan nilai-nilai dari kolom lain dalam baris yang sama
-            var idSiswa = row.cells[0].innerText;
+            var idSekretaris = row.cells[0].innerText;
             var nama = row.cells[1].innerText;
-            var jenkel = row.cells[2].innerText;
-            var kelas = row.cells[3].innerText;
+            var username = row.cells[2].innerText;
+            var password = row.cells[3].innerText;
 
             // Menampilkan nilai input ke konsol
             console.log("Nama: " + nama);
-            console.log("Username: " + jenkel);
-            console.log("Kelas: " + kelas);
+            console.log("Username: " + username);
 
             // Mengambil data form update
             document.getElementById("nama-update").value = nama;
-            document.getElementById("jenkel-update").value = jenkel;
-            document.getElementById("kelas-update").value = kelas;
+            document.getElementById("username-update").value = username;
         }
 
         function hapus(button) {
             var row = button.closest("tr")
-            var idSiswa = row.cells[0].innerText;
-            console.log("idSiswa: " + idSiswa);
-            document.getElementById("id-delete").value = idSiswa;
+            var idSekretaris = row.cells[0].innerText;
+            console.log("idSekretaris: " + idSekretaris);
+            document.getElementById("id-delete").value = idSekretaris;
         }
 
         function reset(button) {
             var row = button.closest("tr");
-            var idSiswa = row.cells[0].innerText;
-            document.getElementById('id-reset').value = idSiswa;
+            var idSekretaris = row.cells[0].innerText;
+            document.getElementById('id-reset').value = idSekretaris;
         }
 
         //Delete
@@ -336,7 +298,6 @@
                 eyeIcon.classList.add("bi-eye");
             }
         }
-
 
         //reset
         function togglePasswordVisibility1() {
@@ -370,3 +331,4 @@
         }
     </script>
 @endsection
+
