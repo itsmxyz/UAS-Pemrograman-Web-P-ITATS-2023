@@ -26,12 +26,14 @@ class DataKelasQuery extends Model
     }
     public function getAllKelas() {
         try {
+
             $dataKelas = DB::table('data_kelas')
                 ->select('id_kelas as kode_kelas', 'nama_kelas',
                     'id_mapel','nama_mapel','sensei_id')
                 ->distinct()
                 ->join('kelas','kelas_id','=','kelas.id_kelas')
                 ->join('mata_pelajaran','mapel_id','=','mata_pelajaran.id_mapel')
+                ->union(DB::table(''))
                 ->paginate(10);
             return $dataKelas;
         }catch (QueryException $e) {
