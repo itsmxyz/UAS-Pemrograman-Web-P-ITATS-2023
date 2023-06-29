@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 class KelasModel extends Model
 {
@@ -18,5 +20,15 @@ class KelasModel extends Model
     }
     public function mataPelajaran(){
         return $this->belongsToMany(MataPelajaranModel::class, 'data_kelas','kelas,id','mapel_id');
+    }
+    public function getNamaKelas() {
+        try {
+            $kelas = DB::table('kelas')
+                ->select('nama_kelas as nama_kelas')
+                ->get();
+            return collect($kelas);
+        }catch (QueryException $e){
+            return collect();
+        }
     }
 }

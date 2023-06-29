@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\AdminModel;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
+use App\Models\KelasModel;
 use App\Models\SekretarisModel;
 use App\Models\SenseiModel;
+use App\Models\SiswaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -37,6 +39,14 @@ class AdminController extends Controller
     public final function getDataSekretaris(SekretarisModel $sekretarisModel){
         return view('page5-admin.data-sekretaris', [
             'sekretaris' => $sekretarisModel->getAll()
+        ]);
+    }
+    public final function getDataSiswa(SiswaModel $siswaModel, KelasModel $kelasModel) {
+        $dataSiswa = $siswaModel->getDataSiswa();
+        $namaKelas = $kelasModel->getNamaKelas();
+        return view('page5-admin.data-siswa', [
+            'siswa' => $dataSiswa,
+            'kelas' => $namaKelas,
         ]);
     }
 

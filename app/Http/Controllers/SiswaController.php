@@ -39,8 +39,6 @@ class SiswaController extends Controller
     public function show(SiswaModel $siswaModel)
     {
         //
-        $dataSiswa =  $siswaModel->getDataSiswa();
-        return view('page5-admin.data-siswa', ['siswa' => $dataSiswa]);
     }
 
     /**
