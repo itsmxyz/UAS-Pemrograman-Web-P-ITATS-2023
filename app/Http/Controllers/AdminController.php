@@ -52,9 +52,7 @@ class AdminController extends Controller
     }
     public final function getDataKelas(DataKelasQuery $dataKelasQuery) {
         $dataKelas = $dataKelasQuery->getAllKelas();
-        return view('page5-admin.data-kelas', [
-            'kelas' => $dataKelas
-        ]);
+        return view('page5-admin.data-kelas', [ 'kelas' => $dataKelas]);
     }
 
     /**
