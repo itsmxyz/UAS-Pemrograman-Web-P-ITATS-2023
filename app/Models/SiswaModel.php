@@ -30,7 +30,8 @@ class SiswaModel extends Model
     {
         try {
             $dataSiswa = DB::table('siswa')
-                ->select('nis_siswa as nis_siswa','nama_siswa as nama_siswa','jenis_kelamin as jenis_kelamin','kelas.nama_kelas')
+                ->select('nis_siswa as nis_siswa','nama_siswa as nama_siswa',
+                    'jenis_kelamin as jenis_kelamin','kelas.id_kelas','kelas.nama_kelas')
                 ->join('kelas', 'kelas_id','=','kelas.id_kelas')
                 ->orderBy('nis_siswa','ASC')
                 ->paginate(15);
