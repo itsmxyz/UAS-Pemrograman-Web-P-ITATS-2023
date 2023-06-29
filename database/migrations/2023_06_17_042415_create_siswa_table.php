@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id('nis_siswa')->startingValue(40110);
             $table->string('nama_siswa');
             $table->string('jenis_kelamin');
-            $table->foreignId('kelas_id')->default(1000)->constrained('kelas', 'id_kelas');
+            $table->string('kelas_id')->default('00000');
+            $table->foreign('kelas_id')->references('id_kelas')->on('kelas');
             $table->timestamps();
         });
     }

@@ -20,6 +20,7 @@ class SiswaModelFactory extends Factory
         return [
             'nama_siswa' => $this->faker->name('female'),
             'jenis_kelamin' => $this->faker->titleFemale(),
+            'kelas_id' => $this->faker->randomElement([ '2022XA','2022XB','2022XC','2022XIA','00000'])
         ];
     }
 }

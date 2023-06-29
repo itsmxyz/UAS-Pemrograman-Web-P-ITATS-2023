@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AdminModel;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
+use App\Models\DataKelasQuery;
 use App\Models\KelasModel;
 use App\Models\SekretarisModel;
 use App\Models\SenseiModel;
@@ -47,6 +48,12 @@ class AdminController extends Controller
         return view('page5-admin.data-siswa', [
             'siswa' => $dataSiswa,
             'kelas' => $namaKelas,
+        ]);
+    }
+    public final function getDataKelas(DataKelasQuery $dataKelasQuery) {
+        $dataKelas = $dataKelasQuery->getAllKelas();
+        return view('page5.admin.data-kelas', [
+            'kelas' => $dataKelas
         ]);
     }
 

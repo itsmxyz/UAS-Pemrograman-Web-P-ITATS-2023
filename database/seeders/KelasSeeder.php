@@ -14,10 +14,10 @@ class KelasSeeder extends Seeder
     public function run(): void
     {
         //
-        KelasModel::create([ 'kode_kelas' => ' - ', 'nama_kelas' => 'Siswa baru',]);
-        KelasModel::create([ 'kode_kelas' => '2022XA', 'nama_kelas' => 'X-A',]);
-        KelasModel::create([ 'kode_kelas' => '2022XB', 'nama_kelas' => 'X-B',]);
-        KelasModel::create([ 'kode_kelas' => '2022XC', 'nama_kelas' => 'X-C',]);
-        KelasModel::create([ 'kode_kelas' => '2022XIA', 'nama_kelas' => 'XI-A',]);
+        KelasModel::create([ 'id_kelas' => '00000', 'nama_kelas' => 'Siswa baru','wali_kelas' => '8001']);
+        KelasModel::create([ 'id_kelas' => '2022XA', 'nama_kelas' => 'X-A','wali_kelas' => '8002']);
+        KelasModel::create([ 'id_kelas' => '2022XB', 'nama_kelas' => 'X-B','wali_kelas' => '8003']);
+        KelasModel::create([ 'id_kelas' => '2022XC', 'nama_kelas' => 'X-C','wali_kelas' => '8004']);
+        KelasModel::create([ 'id_kelas' => '2022XIA', 'nama_kelas' => 'XI-A','wali_kelas' => '8000']);
     }
 }
