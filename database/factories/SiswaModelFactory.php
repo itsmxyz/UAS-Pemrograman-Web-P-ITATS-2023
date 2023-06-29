@@ -18,9 +18,8 @@ class SiswaModelFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama_siswa' => $this->faker->name(gender: 'female'),
-            'jenis_kelamin' => $this->faker->randomElement(['cewek']),
-            'kelas_id' => mt_rand(1000,1003),
+            'nama_siswa' => $this->faker->name('female'),
+            'jenis_kelamin' => $this->faker->titleFemale(),
         ];
     }
 }

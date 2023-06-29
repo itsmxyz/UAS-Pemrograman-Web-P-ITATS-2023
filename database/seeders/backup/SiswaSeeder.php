@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\backup;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\SiswaModel;
 use Illuminate\Database\Seeder;
 
-class AbsensiSeeder extends Seeder
+class SiswaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,5 +13,6 @@ class AbsensiSeeder extends Seeder
     public function run(): void
     {
         //
+        SiswaModel::factory(75)->create();
     }
 }

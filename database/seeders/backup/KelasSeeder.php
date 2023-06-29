@@ -1,9 +1,8 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\backup;
 
 use App\Models\KelasModel;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class KelasSeeder extends Seeder
@@ -13,7 +12,6 @@ class KelasSeeder extends Seeder
      */
     public function run(): void
     {
-        //
         KelasModel::create([ 'kode_kelas' => ' - ', 'nama_kelas' => 'SiswaModel baru',]);
         KelasModel::create([ 'kode_kelas' => '2022XA', 'nama_kelas' => 'X-A',]);
         KelasModel::create([ 'kode_kelas' => '2022XB', 'nama_kelas' => 'X-B',]);

@@ -1,8 +1,7 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\backup;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DataKelasSeeder extends Seeder

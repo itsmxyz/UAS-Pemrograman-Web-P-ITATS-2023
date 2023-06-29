@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/aa', [\App\Models\SiswaModel::class,'insertSiswa']);
+Route::get('/ab', [\App\Models\DataKelasQuery::class,'insertMapelToKelas']);
 
 Route::middleware('guest')->group(function () {
     Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
