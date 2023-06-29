@@ -14,7 +14,7 @@ class KelasSeeder extends Seeder
     public function run(): void
     {
         //
-        KelasModel::create([ 'kode_kelas' => ' - ', 'nama_kelas' => 'SiswaModel baru',]);
+        KelasModel::create([ 'kode_kelas' => ' - ', 'nama_kelas' => 'Siswa baru',]);
         KelasModel::create([ 'kode_kelas' => '2022XA', 'nama_kelas' => 'X-A',]);
         KelasModel::create([ 'kode_kelas' => '2022XB', 'nama_kelas' => 'X-B',]);
         KelasModel::create([ 'kode_kelas' => '2022XC', 'nama_kelas' => 'X-C',]);
