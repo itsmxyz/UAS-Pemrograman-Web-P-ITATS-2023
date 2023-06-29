@@ -40,7 +40,7 @@ class SiswaController extends Controller
     {
         //
         $dataSiswa =  $siswaModel->getDataSiswa();
-        return view('page5.data-siswa', ['siswa' => $dataSiswa]);
+        return view('page5-admin.data-siswa', ['siswa' => $dataSiswa]);
     }
 
     /**
