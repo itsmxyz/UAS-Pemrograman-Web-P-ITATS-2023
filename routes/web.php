@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/aa', [\App\Models\SiswaModel::class,'insertSiswa']);
-Route::get('/ab', [\App\Models\DataKelasQuery::class,'getAllKelas']);
+Route::get('/ab', [AdminController::class,'getAllDataKelas']);
 
 Route::middleware('guest')->group(function () {
     Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
@@ -48,8 +48,8 @@ Route::middleware('schale')->group(function () {
     Route::get('/schale/sensei', [AdminController::class, 'getDataSensei'])->name('schale.sensei');
     Route::get('/schale/sekretaris', [AdminController::class, 'getDataSekretaris'])->name('schale.sekretaris');
     Route::get('/schale/siswa', [AdminController::class, 'getDataSiswa'])->name('schale.siswa');
-    Route::get('/schale/kelas/all', [AdminController::class,'getDataKelas'])->name('schale.kelas');
-    Route::get('/schale/kelas/{id_kelas}', [AdminController::class,'getDataKelas'])->name('schale.kelas-view');
+    Route::get('/schale/kelas', [AdminController::class, 'getAllDataKelas'])->name('schale.kelas');
+    Route::get('/schale/kelas/{id_kelas}', [AdminController::class, 'getAllDataKelas'])->name('schale.kelas-view');
     Route::post('/schale/sensei/create-sensei', [SenseiController::class, 'store'])->name('schale.sensei-create');
     Route::post('/schale/sensei/update-sensei', [SenseiController::class, 'update'])->name('schale.sensei-update');
     Route::post('/schale/sensei/delete-sensei', [SenseiController::class, 'destroy'])->name('schale.sensei-delete');
@@ -59,7 +59,6 @@ Route::middleware('schale')->group(function () {
     Route::post('/schale/sekretaris/delete-sekretaris', [SekretarisController::class, 'destroy'])->name('schale.sekretaris-delete');
     Route::post('/schale/sekretaris/reset-sekretaris', [SekretarisController::class, 'resetPassword'])->name('schale.sekretaris-reset');
 });
-
 
 Route::middleware('auth:sensei')->group(function (){
     Route::get('/sensei/dashboard', [SenseiController::class, 'index'])->name('sensei.dashboard');

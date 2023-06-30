@@ -30,6 +30,16 @@ class SenseiModel extends Model implements Authenticatable
     public final function getAll(): \Illuminate\Database\Eloquent\Collection|array {
         return $this->with('sekretaris')->get();
     }
+    public final function getAllIdNamaSensei() {
+        try {
+            $sensei = DB::table('sensei')
+                ->select('id_sensei', 'nama')
+                ->get();
+            return $sensei;
+        }catch (QueryException $e){
+            return collect();
+        }
+    }
     public final function insertSensei(array $validatedData):bool {
         try {
            $this->create([

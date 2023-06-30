@@ -50,9 +50,16 @@ class AdminController extends Controller
             'kelas' => $namaKelas,
         ]);
     }
-    public final function getDataKelas(DataKelasQuery $dataKelasQuery) {
-        $dataKelas = $dataKelasQuery->getAllKelas();
-        return view('page5-admin.data-kelas', [ 'kelas' => $dataKelas]);
+    public final function getAllDataKelas(DataKelasQuery $dataKelasQuery, SenseiModel $senseiModel) {
+        $dataAllKelas = $dataKelasQuery->getAllKelas();
+        $sensei = $senseiModel->getAllIdNamaSensei();
+        return view('page5-admin.data-kelas-all', [
+            'kelas' => $dataAllKelas,
+            'sensei'=> $sensei,
+        ]);
+    }
+    public final function getDataKelasbyID(DataKelasQuery $dataKelasQuery, $id_kelas) {
+        $dataKelas = '';
     }
 
     /**

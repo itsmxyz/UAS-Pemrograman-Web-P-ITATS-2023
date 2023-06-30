@@ -15,24 +15,42 @@ class DataKelasQuery extends Model
         $kelas = KelasModel::find(1002);
         $mapel = MataPelajaranModel::find(1003);
 
-
-        $hasil = DB::table('data_kelas')
-            ->select('kelas.nama_kelas as kelas', 'mata_pelajaran.nama_mapel as mapel')
-            ->join('kelas','kelas_id','=','kelas.id_kelas')
-            ->join('mata_pelajaran','mapel_id','=','mata_pelajaran.id_mapel')
-            ->where('kelas_id', 1004)
-            ->get();
-        dd($hasil);
     }
     public function getAllKelas() {
         try {
             $dataKelas = DB::table('kelas')
-                ->select('id_kelas as id_kelas','nama_kelas','sensei.nama_sensei')
+                ->select('id_kelas','nama_kelas','sensei.nama as wali_kelas')
                 ->distinct()
-                ->join('sensei','sensei_id','=','sensei.id_sensei')
-                ->paginate(9);
+                ->join('sensei','wali_kelas','=','sensei.id_sensei')
+                ->where('id_kelas','>','1000')
+                ->paginate(6);
             return $dataKelas;
         }catch (QueryException $e) {
+            return collect();
+        }
+    }
+    public function getDataKelasById($id_kelas) {
+        try {
+            $dataKelas = DB::table('data_kelas')
+                ->select('id_kelas','nama_kelas','kode_mapel','nama_mapel')
+                ->join('kelas','kelas_id','=','kelas.id_kelas')
+                ->join('mata_pelajaran','mapel_id','=','mata_pelajaran.id_mapel')
+                ->where('kelas_id', $id_kelas)
+                ->get();
+            return $dataKelas;
+        }catch (QueryException $e){
+            return collect();
+        }
+    }
+    public function getSiswaByIdKelas($id_kelas) {
+        try {
+            $siswaKelas = DB::table('siswa')
+                ->select('nis_siswa','nama_siswa')
+                ->join('kelas','kelas_id','=','kelas.id_kelas')
+                ->where('kelas_id',$id_kelas)
+                ->get();
+            return $siswaKelas;
+        }catch (QueryException $e){
             return collect();
         }
     }
