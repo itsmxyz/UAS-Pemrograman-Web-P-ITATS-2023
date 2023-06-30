@@ -40,4 +40,16 @@ class SiswaModel extends Model
             return collect();
         }
     }
+
+    public function getJumlahSiswa(){
+        try {
+            $jumlahSiswa = DB::table('siswa')
+                ->selectRaw('count(*) as jumlahSiswa')
+                ->first()
+                ->jumlahSiswa;
+            return $jumlahSiswa;
+        }catch (QueryException $e){
+            return 0;
+        }
+    }
 }
