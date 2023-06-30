@@ -23,11 +23,13 @@ class AdminController extends Controller
 
         return view('page5-admin.login-admin');
     }
-    public final function index(SenseiModel $senseiModel, SekretarisModel $sekretarisModel)
+    public final function index(SenseiModel $senseiModel, SekretarisModel $sekretarisModel, kelasModel $kelasModel)
     {
+        $jumlahKelas = $kelasModel->getJumlahKelas();
         return view('page5-admin.dashboard-admin', [
             'jumlahsensei' => $senseiModel->jumlahSensei(),
             'jumlahsekretaris' => $sekretarisModel->jumlahSekretaris(),
+            'jmlhKelas' => $jumlahKelas,
         ]);
     }
     public final function getDataSensei(SenseiModel $senseiModel, SekretarisModel $sekretarisModel){

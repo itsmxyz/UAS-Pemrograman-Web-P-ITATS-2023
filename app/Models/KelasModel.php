@@ -32,16 +32,15 @@ class KelasModel extends Model
         }
     }
 
-    public function getJumalhALlKelas()
+    public function getJumlahKelas()
     {
         try {
             $jumlahKelas = DB::table('kelas')
                 ->selectRaw('count(*) as jumlahKelas')
                 ->first()
                 ->jumlahKelas;
-            return $this->getJumalhALlKelas();
-        }
-        catch (QueryException $e){
+            return $jumlahKelas;
+        }catch (QueryException $e){
             return 0;
         }
     }
