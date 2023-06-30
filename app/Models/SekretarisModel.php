@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -18,8 +19,7 @@ class SekretarisModel extends Model implements Authenticatable
     protected $fillable = ['nama','username','password'];
     protected $guarded = ['id_sekretaris'];
 
-    public final function sensei(): HasMany
-    {
+    public final function sensei(): HasMany {
         return $this->hasMany(SenseiModel::class, 'sekretaris_id', 'id_sekretaris');
     }
     public final function getAll()

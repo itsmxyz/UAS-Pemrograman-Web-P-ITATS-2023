@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/aa', [\App\Models\SiswaModel::class,'insertSiswa']);
+Route::get('/aa', [\App\Models\LogAktivitasModel::class,'insertLog']);
 Route::get('/ab', [AdminController::class,'getAllDataKelas']);
 
 Route::middleware('guest')->group(function () {

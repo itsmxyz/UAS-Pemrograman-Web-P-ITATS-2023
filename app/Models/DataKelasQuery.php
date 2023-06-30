@@ -11,11 +11,6 @@ class DataKelasQuery extends Model
 {
     use HasFactory;
 
-    public function insertMapelToKelas() {
-        $kelas = KelasModel::find(1002);
-        $mapel = MataPelajaranModel::find(1003);
-
-    }
     public function getAllKelas() {
         try {
             $dataKelas = DB::table('kelas')
@@ -42,7 +37,7 @@ class DataKelasQuery extends Model
             return collect();
         }
     }
-    public function getSiswaByIdKelas($id_kelas) {
+    public function getAllSiswaByIdKelas($id_kelas) {
         try {
             $siswaKelas = DB::table('siswa')
                 ->select('nis_siswa','nama_siswa')

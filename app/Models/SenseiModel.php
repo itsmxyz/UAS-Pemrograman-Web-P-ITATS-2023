@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -26,6 +27,9 @@ class SenseiModel extends Model implements Authenticatable
     }
     public final function kelas(): HasMany {
         return $this->hasMany(MataPelajaranModel::class,'sensei_id','id_sensei');
+    }
+    public final function logAktivitas(): MorphMany {
+        return $this->morphMany(LogAktivitasModel::class,'user');
     }
     public final function getAll(): \Illuminate\Database\Eloquent\Collection|array {
         return $this->with('sekretaris')->get();
