@@ -58,6 +58,7 @@ class AdminController extends Controller
             'sensei'=> $sensei,
         ]);
     }
+
     public final function getDataKelasbyID(DataKelasQuery $dataKelasQuery, $id_kelas) {
         $dataKelas = '';
     }
