@@ -210,8 +210,13 @@
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <div class="btn-group">
                                                             <button type="button" class="btn btn-sm btn-outline-primary">View</button>
-                                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                                            <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+
+                                                            <div class="dropdown" data-bs-toggle="modal" data-bs-target="#update-data">
+                                                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                                            </div>
+                                                            <div class="dropdown" data-bs-toggle="modal" data-bs-target="#delete-data">
+                                                                <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+                                                            </div>
                                                         </div>
                                                         <small class="text-body-secondary ml-2">{{$kelass->wali_kelas}} Sensei</small>
                                                     </div>
@@ -225,6 +230,105 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="update-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Data Kelas</h5>
+                            <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                        <form method="post" action="#">
+                            @csrf
+                            <div class="center-wrap p-4">
+                                <div class="section text-left md-2">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="kode" class="mb-4">Kode Kelas</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" name="kode-kelas" class="form-control" required
+                                                   id="kode-update" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="nama" class="mb-4">Nama Kelas</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="hidden" name="id_kelas" id="id_kelas">
+                                            <input type="text" name="nama" class="form-control" required
+                                                   id="nama-update" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label for="wali_kelas" class="mb-4">Wali Kelas</label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <select name="wali_kelas" class="form-select" required>
+                                                <option value="" selected disabled>Pilih Wali Kelas</option>
+                                                @foreach($sensei as $senseii)
+                                                    <option
+                                                        value="{{$senseii->id_sensei}}">{{$senseii->nama}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal
+                                        </button>
+                                        <button type="submit" class="btn btn-primary" id="edit-btn"
+                                                onclick="edit(button)">Edit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="delete-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form method="post" action="#">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus data ini?</h5>
+                                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">x</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="center-wrap p-4">
+                                    <div class="section text-center md-2">
+                                        <div class="col-md-15">
+                                            <div class="form-group mt-2">
+                                                <input type="hidden" name="id_sekretaris" id="id-delete" value="">
+                                                <h6>Masukkan Password untuk konfirmasi</h6>
+                                                <div class="input-group">
+                                                    <input type="password" name="password" class="form-control" id="password-delete" autocomplete="off">
+                                                    <button class="btn btn-outline-secondary" type="button" id="password-toggle-delete" onclick="togglePasswordVisibility()">
+                                                        <i id="eye-icon-delete" class="bi bi-eye"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-primary" onclick="hapus()">Hapus</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -247,7 +351,22 @@
 
 </div>
 </body>
-@yield('js')
+<script>
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("password-delete");
+        var eyeIcon = document.getElementById("eye-icon-delete");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("bi-eye");
+            eyeIcon.classList.add("bi-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("bi-eye-slash");
+            eyeIcon.classList.add("bi-eye");
+        }
+    }
+</script>
 </html>
 
 
