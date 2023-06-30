@@ -122,13 +122,14 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    @yield('header-tittle')
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex justify-content-between">
-                            @yield('header-table')
+                            <h6 class="m-0 font-weight-bold text-primary">Data Kelas</h6>
                             <div class="ml-auto">
-                                @yield('btn-tambah')
+                                <div class="dropdown" data-bs-toggle="modal" data-bs-target="#add-data">
+                                    <button class="btn btn-primary btn-transparent" id="add-button">Tambah Kelas</button>
+                                </div>
                             </div>
                         </div>
                         {{--Tambah DATA MODAL--}}
