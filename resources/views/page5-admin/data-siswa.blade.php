@@ -44,8 +44,8 @@
                         <div class="col-md-9">
                             <select name="jekel" class="form-select" required>
                                 <option selected disabled>Pilih jenis kelamin</option>
-                                <option value="laki-laki">Laki - laki</option>
-                                <option value="perempuan">Perempuan</option>
+                                <option value="Pria">Pria</option>
+                                <option value="Wanita">Wanita</option>
                             </select>
                         </div>
                     </div>
@@ -163,8 +163,8 @@
                                 <div class="col-md-9">
                                     <select name="jekel" class="form-select" required>
                                         <option selected disabled>Pilih jenis kelamin</option>
-                                        <option value="laki-laki">Laki - laki</option>
-                                        <option value="perempuan">Perempuan</option>
+                                        <option value="Pria">Pria</option>
+                                        <option value="Wanita">Wanita</option>
                                     </select>
                                 </div>
                             </div>
