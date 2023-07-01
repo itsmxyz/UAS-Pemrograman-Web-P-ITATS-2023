@@ -30,8 +30,8 @@ class SiswaModel extends Model
     {
         try {
             $dataSiswa = DB::table('siswa')
-                ->select('nis_siswa as nis_siswa','nama_siswa as nama_siswa',
-                    'jenis_kelamin as jenis_kelamin','kelas.id_kelas','kelas.nama_kelas')
+                ->select('nis_siswa','nama_siswa', 'jenis_kelamin',
+                    'id_kelas','nama_kelas')
                 ->join('kelas', 'kelas_id','=','kelas.id_kelas')
                 ->orderBy('nis_siswa','ASC')
                 ->paginate(15);
@@ -40,7 +40,6 @@ class SiswaModel extends Model
             return collect();
         }
     }
-
     public function getJumlahSiswa(){
         try {
             $jumlahSiswa = DB::table('siswa')
@@ -50,6 +49,40 @@ class SiswaModel extends Model
             return $jumlahSiswa;
         }catch (QueryException $e){
             return 0;
+        }
+    }
+    public final function insertNewSiswa(array $input): bool {
+        try {
+            $this->create([
+               'nama_siswa' => $input['nama_siswa'],
+               'jenis_kelamin' => $input['jekel'],
+               'kelas_id' => $input['id_kelas'],
+            ]);
+            return true;
+        }catch (QueryException $e){
+            return false;
+        }
+    }
+    public final function updateSiswa(array $input): bool {
+        try {
+            $siswa = $this->findOrFail($input['nis_siswa']);
+            $siswa->update([
+                'nama_siswa' => $input['nama_siswa'],
+                'jenis_kelamin' => $input['jekel'],
+                'kelas_id' => $input['id_kelas'],
+            ]);
+            return true;
+        }catch (QueryException $e){
+            return false;
+        }
+    }
+    public final function deleteSiswa($nis_siswa): bool {
+        try {
+            $siswa = $this->findOrFail($nis_siswa);
+            $siswa->delete();
+            return true;
+        }catch (QueryException $e){
+            return false;
         }
     }
 }

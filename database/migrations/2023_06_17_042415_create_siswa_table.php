@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('siswa', function (Blueprint $table) {
             $table->id('nis_siswa')->startingValue(40110);
             $table->string('nama_siswa');
-            $table->string('jenis_kelamin');
+            $table->enum('jenis_kelamin', ['Laki-laki','Perempuan']);
             $table->string('kelas_id')->default('00000');
             $table->foreign('kelas_id')->references('id_kelas')->on('kelas');
             $table->timestamps();

@@ -24,7 +24,7 @@ class KelasModel extends Model
     public function getNamaKelas() {
         try {
             $kelas = DB::table('kelas')
-                ->select('nama_kelas as nama_kelas')
+                ->select('id_kelas, nama_kelas')
                 ->get();
             return collect($kelas);
         }catch (QueryException $e){

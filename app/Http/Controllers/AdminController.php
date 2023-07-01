@@ -48,10 +48,10 @@ class AdminController extends Controller
     }
     public final function getDataSiswa(SiswaModel $siswaModel, KelasModel $kelasModel) {
         $dataSiswa = $siswaModel->getDataSiswa();
-        $namaKelas = $kelasModel->getNamaKelas();
+        $daftarKelas = $kelasModel->getNamaKelas();
         return view('page5-admin.data-siswa', [
             'siswa' => $dataSiswa,
-            'kelas' => $namaKelas,
+            'kelas' => $daftarKelas,
         ]);
     }
     public final function getAllDataKelas(DataKelasQuery $dataKelasQuery, SenseiModel $senseiModel) {
@@ -64,7 +64,8 @@ class AdminController extends Controller
     }
 
     public final function getDataKelasbyID(DataKelasQuery $dataKelasQuery, $id_kelas) {
-        $dataKelas = '';
+        $kelas = $dataKelasQuery->getDataKelasById($id_kelas);
+        return view('page5-admin.data-kelas-single', ['kelas' => $kelas]);
     }
 
     /**

@@ -28,9 +28,6 @@ class SenseiModel extends Model implements Authenticatable
     public final function kelas(): HasMany {
         return $this->hasMany(MataPelajaranModel::class,'sensei_id','id_sensei');
     }
-    public final function logAktivitas(): MorphMany {
-        return $this->morphMany(LogAktivitasModel::class,'user');
-    }
     public final function getAll(): \Illuminate\Database\Eloquent\Collection|array {
         return $this->with('sekretaris')->get();
     }

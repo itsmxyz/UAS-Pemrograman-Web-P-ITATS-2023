@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/aa', [\App\Models\LogAktivitasModel::class,'insertLog']);
-Route::get('/ab', [AdminController::class,'getAllDataKelas']);
+Route::get('/ab/{id_kelas}', [\App\Models\DataKelasQuery::class,'getDataKelasById']);
 
 Route::middleware('guest')->group(function () {
     Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
@@ -49,7 +49,7 @@ Route::middleware('schale')->group(function () {
     Route::get('/schale/sekretaris', [AdminController::class, 'getDataSekretaris'])->name('schale.sekretaris');
     Route::get('/schale/siswa', [AdminController::class, 'getDataSiswa'])->name('schale.siswa');
     Route::get('/schale/kelas', [AdminController::class, 'getAllDataKelas'])->name('schale.kelas');
-    Route::get('/schale/kelas/{id_kelas}', [AdminController::class, 'getAllDataKelas'])->name('schale.kelas-view');
+    Route::get('/schale/kelas/{id_kelas}', [AdminController::class, 'getDataKelasbyID'])->name('schale.kelas-edit');
     Route::post('/schale/sensei/create-sensei', [SenseiController::class, 'store'])->name('schale.sensei-create');
     Route::post('/schale/sensei/update-sensei', [SenseiController::class, 'update'])->name('schale.sensei-update');
     Route::post('/schale/sensei/delete-sensei', [SenseiController::class, 'destroy'])->name('schale.sensei-delete');
@@ -58,6 +58,10 @@ Route::middleware('schale')->group(function () {
     Route::post('/schale/sekretaris/update-sekretaris', [SekretarisController::class, 'update'])->name('schale.sekretaris-update');
     Route::post('/schale/sekretaris/delete-sekretaris', [SekretarisController::class, 'destroy'])->name('schale.sekretaris-delete');
     Route::post('/schale/sekretaris/reset-sekretaris', [SekretarisController::class, 'resetPassword'])->name('schale.sekretaris-reset');
+    Route::post('/schale/siswa/create-siswa', [SiswaController::class,'store'])->name('schale.siswa-create');
+    Route::post('/schale/siswa/update-siswa', [SiswaController::class,'update'])->name('schale.siswa-update');
+    Route::post('/schale/siswa/delete-siswa', [SiswaController::class,'destroy'])->name('schale.siswa-delete');
+
 });
 
 Route::middleware('auth:sensei')->group(function (){

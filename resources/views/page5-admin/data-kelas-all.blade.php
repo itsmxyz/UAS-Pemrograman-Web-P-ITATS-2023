@@ -208,8 +208,9 @@
                                                     <p class="card-text">{{$kelass->nama_kelas}}</p>
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <div class="btn-group">
-                                                            <button type="button" class="btn btn-sm btn-outline-primary">View</button>
-
+                                                            <div class="dropdown" data-bs-toggle="modal" data-bs-target="#view-data">
+                                                                <button type="button" class="btn btn-sm btn-outline-primary">View</button>
+                                                            </div>
                                                             <div class="dropdown" data-bs-toggle="modal" data-bs-target="#update-data">
                                                                 <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                                             </div>
@@ -229,6 +230,55 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="view-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Kelas</h5>
+                            <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                        <div class="center-wrap p-4">
+                            <div class="section text-left md-2">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="kode" class="mb-4">Kode Kelas</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" name="id_kelas" class="form-control" required
+                                               id="kode-view" autocomplete="off" disabled>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="nama" class="mb-4">Nama Kelas</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" name="nama_kelas" class="form-control" required
+                                               id="nama-update" autocomplete="off" disabled>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="wali_kelas" class="mb-4">Wali Kelas</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" name="wali_kelas" class="form-control" required
+                                               id="sensei-update" autocomplete="off" disabled>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Tutup</button>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

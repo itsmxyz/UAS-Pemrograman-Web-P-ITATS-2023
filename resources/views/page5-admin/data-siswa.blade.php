@@ -24,7 +24,7 @@
                 <span aria-hidden="true">x</span>
             </button>
         </div>
-        <form method="post" action="#">
+        <form method="post" action="{{route('schale.siswa-create')}}">
             @csrf
             <div class="center-wrap p-4">
                 <div class="section text-left md-2">
@@ -44,24 +44,12 @@
                         <div class="col-md-9">
                             <select name="jekel" class="form-select" required>
                                 <option selected disabled>Pilih jenis kelamin</option>
-                                <option value="Pria">Pria</option>
-                                <option value="Wanita">Wanita</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Wanita</option>
                             </select>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label for="kelas" class="mb-4">Kelas</label>
-                        </div>
-                        <div class="col-md-9">
-                            <select name="kelas" class="form-select" required>
-                                <option value="" selected disabled>Pilih Kelas</option>
-                                @foreach($kelas as $data)
-                                    <option value="{{$data->nama_kelas}}">{{$data->nama_kelas}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+                    <input type="hidden" name="id_kelas" value="00000">
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button"
                                 data-bs-dismiss="modal">Batal
