@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreKelasRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreKelasRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::guard('schale')->check();
     }
 
     /**
@@ -22,7 +23,9 @@ class StoreKelasRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'kode_kelas' => 'required',
+            'nama_kelas' => 'required',
+            'wali_kelas' => 'required'
         ];
     }
 }

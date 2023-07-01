@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\KelasModel;
 use App\Http\Requests\StoreKelasRequest;
 use App\Http\Requests\UpdateKelasRequest;
+use Illuminate\Http\Request;
 
 class KelasController extends Controller
 {
@@ -27,9 +28,18 @@ class KelasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreKelasRequest $request)
+    public function store(StoreKelasRequest $request, KelasModel $kelasModel)
     {
-        //
+        $inputData = [
+            'id_kelas' => $request->input('kode_kelas'),
+            'nama_kelas' => $request->input('nama_kelas'),
+            'wali_kelas' => $request->input('wali_kelas'),
+        ];
+        $query = $kelasModel->insertKelas($inputData);
+        if ($query)
+            return back()->with('sukses','Data Kelas berhasil ditambahkan!');
+        else
+            return back()->withErrors(['error' => 'Data Kelas gagal ditambahkan!']);
     }
 
     /**

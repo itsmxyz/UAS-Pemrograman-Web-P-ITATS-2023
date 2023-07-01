@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SekretarisController;
 use App\Http\Controllers\SenseiController;
@@ -29,8 +30,7 @@ Route::get('/ab/{id_kelas}', [\App\Models\DataKelasQuery::class,'getDataKelasByI
 
 Route::middleware('guest')->group(function () {
     Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
-    Route::get('/login-choice', function (){ return view('page2-login.login-choice'); });
-    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::get('/login-choice', function (){ return view('page2-login.login-choice'); })->name('login');
     Route::get('/login-sensei', function (){ return view('page2-login.login-sensei'); })->name('sensei.login');
     Route::get('/login-sekretaris', function (){ return view('page2-login.login-sekretaris'); })->name('sekretaris.login');
     Route::post('/schale-auth', [LoginController::class, 'authSchale'])->name('auth.schale');
@@ -61,7 +61,9 @@ Route::middleware('schale')->group(function () {
     Route::post('/schale/siswa/create-siswa', [SiswaController::class,'store'])->name('schale.siswa-create');
     Route::post('/schale/siswa/update-siswa', [SiswaController::class,'update'])->name('schale.siswa-update');
     Route::post('/schale/siswa/delete-siswa', [SiswaController::class,'destroy'])->name('schale.siswa-delete');
-
+    Route::post('/schale/kelas/create-kelas', [KelasController::class,'store'])->name('schale.kelas-create');
+    Route::post('/schale/kelas/update-kelas', [KelasController::class,'update'])->name('schale.kelas-update');
+    Route::post('/schale/kelas/delete-kelas', [KelasController::class,'delete'])->name('schale.kelas-delete');
 });
 
 Route::middleware('auth:sensei')->group(function (){

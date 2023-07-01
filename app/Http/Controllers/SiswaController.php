@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SiswaModel;
 use App\Http\Requests\StoreSiswaRequest;
 use App\Http\Requests\UpdateSiswaRequest;
+use Illuminate\Support\Facades\Hash;
 use Psr\Log\NullLogger;
 
 class SiswaController extends Controller
@@ -28,9 +29,14 @@ class SiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSiswaRequest $request)
+    public function store(StoreSiswaRequest $request, SiswaModel $siswaModel)
     {
         //
+        $query = $siswaModel->insertNewSiswa($request->all());
+        if ($query)
+            return back()->with('sukses','Data Siswa berhasil ditambahkan!');
+        else
+            return back()->withErrors(['error' => 'Data Siswa gagal ditambahkan!']);
     }
 
     /**
@@ -55,6 +61,7 @@ class SiswaController extends Controller
     public function update(UpdateSiswaRequest $request, SiswaModel $siswa)
     {
         //
+
     }
 
     /**

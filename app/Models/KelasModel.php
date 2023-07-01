@@ -12,8 +12,7 @@ class KelasModel extends Model
     use HasFactory;
     protected $table = 'kelas';
     protected $primaryKey = 'id_kelas';
-    protected $guarded = ['id_kelas'];
-    protected $fillable = ['kode_kelas', 'nama_kelas'];
+    protected $fillable = ['id_kelas','nama_kelas','wali_kelas'];
 
     public function siswa() {
         return $this->hasMany('siswa','kelas_id','id_kelas');
@@ -31,7 +30,6 @@ class KelasModel extends Model
             return collect();
         }
     }
-
     public function getJumlahKelas()
     {
         try {
@@ -42,6 +40,18 @@ class KelasModel extends Model
             return $jumlahKelas;
         }catch (QueryException $e){
             return 0;
+        }
+    }
+    public final function insertKelas(array $input) {
+        try {
+            $this->create([
+                'id_kelas' => $input['id_kelas'],
+                'nama_kelas' => $input['nama_kelas'],
+                'wali_kelas' => $input['wali_kelas'],
+            ]);
+            return true;
+        }catch (QueryException $e){
+            return false;
         }
     }
 }

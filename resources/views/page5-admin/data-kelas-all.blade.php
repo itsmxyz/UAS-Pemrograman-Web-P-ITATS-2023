@@ -143,7 +143,7 @@
                                             <span aria-hidden="true">x</span>
                                         </button>
                                     </div>
-                                    <form method="post" action="">
+                                    <form method="post" action="{{route('schale.kelas-create')}}">
                                         @csrf
                                         <div class="center-wrap p-4">
                                             <div class="section text-left md-2">
@@ -153,8 +153,7 @@
                                                     </div>
                                                     <div class="col-md-9">
                                                         <input type="text" name="kode_kelas" class="form-control"
-                                                               required
-                                                               id="kode_kelas" autocomplete="off">
+                                                               required id="kode_kelas" autocomplete="off">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -204,10 +203,13 @@
                                                     src="https://cdn.discordapp.com/attachments/1124256362302550057/1124256438450147399/20230522_194233.jpg"
                                                     class="bd-placeholder-img card-img-top" width="100%" height="225"
                                                     alt="Thumbnail">
-                                                <div class="card-body">
-                                                    <p class="card-text">{{$kelass->nama_kelas}}</p>
+                                                <div class="card-body d-grid">
+                                                    <div class="d-flex justify-content-between">
+                                                        <p class="card-text" id="nama-kelas">{{$kelass->nama_kelas}}</p>
+                                                        <p class="card-text" id="id-kelas">{{$kelass->id_kelas}}</p>
+                                                    </div>
                                                     <div class="d-flex justify-content-between align-items-center">
-                                                        <div class="btn-group">
+                                                        <div class="btn-group d-flex" >
                                                             <div class="dropdown" data-bs-toggle="modal" data-bs-target="#view-data">
                                                                 <button type="button" class="btn btn-sm btn-outline-primary">View</button>
                                                             </div>
@@ -218,7 +220,7 @@
                                                                 <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
                                                             </div>
                                                         </div>
-                                                        <small class="text-body-secondary ml-2">{{$kelass->wali_kelas}} Sensei</small>
+                                                        <small class="text-body-secondary ml-2" id="wali-kelas">{{$kelass->wali_kelas}} Sensei</small>
                                                     </div>
                                                 </div>
                                             </div>

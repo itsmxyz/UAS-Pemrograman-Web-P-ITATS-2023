@@ -16,7 +16,6 @@ class DataKelasQuery extends Model
         try {
             $dataKelas = DB::table('kelas')
                 ->select('id_kelas','nama_kelas','sensei.nama as wali_kelas')
-                ->distinct()
                 ->join('sensei','wali_kelas','=','sensei.id_sensei')
                 ->where('id_kelas','>','1000')
                 ->orderBy('nama_kelas','ASC')
