@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class StoreKelasRequest extends FormRequest
@@ -23,7 +24,7 @@ class StoreKelasRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'kode_kelas' => 'required',
+            'kode_kelas' => 'required||unique:kelas,id_kelas',
             'nama_kelas' => 'required',
             'wali_kelas' => 'required'
         ];

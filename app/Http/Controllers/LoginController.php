@@ -17,7 +17,7 @@ class LoginController extends Controller
         elseif (Auth::guard('schale')->check()){
             return redirect()->route('schale.dashboard');
         }
-        return view('page2-login.login');
+        return view('page2-login.login-choice');
     }
     public function authSensei(Request $request): RedirectResponse
     {

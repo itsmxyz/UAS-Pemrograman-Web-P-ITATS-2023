@@ -153,7 +153,7 @@
                                                     </div>
                                                     <div class="col-md-9">
                                                         <input type="text" name="kode_kelas" class="form-control"
-                                                               required id="kode_kelas" autocomplete="off">
+                                                               required id="kode-kelas-new" autocomplete="off" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -163,7 +163,7 @@
                                                     <div class="col-md-9">
                                                         <input type="text" name="nama_kelas" class="form-control"
                                                                required
-                                                               id="nama_kelas" autocomplete="off">
+                                                               id="nama_kelas" autocomplete="off" oninput="kodeKelas(this.value)">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -253,7 +253,7 @@
                                         <label for="kode" class="mb-4">Kode Kelas</label>
                                     </div>
                                     <div class="col-md-9">
-                                        <input type="text" name="id_kelas" class="form-control" required
+                                        <input type="text" name="id_kelas" class="form-control"
                                                id="kode-view" autocomplete="off" disabled>
                                     </div>
                                 </div>
@@ -263,7 +263,7 @@
                                     </div>
                                     <div class="col-md-9">
                                         <input type="text" name="nama_kelas" class="form-control" required
-                                               id="nama-update" autocomplete="off" disabled>
+                                               id="nama-update" autocomplete="off">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -416,6 +416,11 @@
             eyeIcon.classList.remove("bi-eye-slash");
             eyeIcon.classList.add("bi-eye");
         }
+    }
+    function kodeKelas(namaKelas) {
+        var kodeKelas = document.getElementById('kode-kelas-new');
+        var tahun = {{date('Y')}};
+        kodeKelas.value = tahun+namaKelas.toUpperCase().replace(/[^a-zA-Z]/g, "");
     }
 </script>
 </html>
