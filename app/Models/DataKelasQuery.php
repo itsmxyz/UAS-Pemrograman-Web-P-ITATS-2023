@@ -27,19 +27,25 @@ class DataKelasQuery extends Model
     }
     public function getDataKelasById($id_kelas) {
         try {
-            $siswa = DB::table('siswa')
-                ->select('nis_siswa','nama_siswa','jenis_kelamin')
-                ->join('kelas','kelas_id','=','kelas.id_kelas')
-                ->where('kelas_id','=',$id_kelas)
-                ->orderBy('nama_siswa','ASC')
-                ->get();
-
-            $kelas = DB::table('data_kelas')
-                ->select('kelas.nama_kelas','mata_pelajaran.nama_mapel')->distinct()
-                ->join('kelas','kelas_id','=','kelas.id_kelas')
-                ->join('mata_pelajaran','mapel_id','=','mata_pelajaran.id_mapel')
-                ->where('kelas_id','=',$id_kelas)
-                ->get();
+            try {
+                $siswa = DB::table('siswa')
+                    ->select('nis_siswa','nama_siswa','jenis_kelamin')
+                    ->join('kelas','kelas_id','=','kelas.id_kelas')
+                    ->where('kelas_id','=',$id_kelas)
+                    ->orderBy('nama_siswa','ASC')
+                    ->get();
+            }catch (QueryException $e){
+                $siswa=[];
+            }
+            try {
+                $kelas = DB::table('kelas')
+                    ->select('id_kelas','nama_kelas','sensei.nama as wali_kelas')->distinct()
+                    ->join('sensei','wali_kelas','=','id_sensei')
+                    ->where('id_kelas','=',$id_kelas)
+                    ->first();
+            }catch (QueryException $e){
+                $kelas=[];
+            }
             return compact('siswa','kelas');
         } catch (QueryException $e) {
             return collect();

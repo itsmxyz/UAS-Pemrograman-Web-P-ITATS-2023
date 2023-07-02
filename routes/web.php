@@ -63,7 +63,7 @@ Route::middleware('schale')->group(function () {
     Route::post('/schale/siswa/update-siswa', [SiswaController::class,'update'])->name('schale.siswa-update');
     Route::post('/schale/siswa/delete-siswa', [SiswaController::class,'destroy'])->name('schale.siswa-delete');
     Route::post('/schale/kelas/create-kelas', [KelasController::class,'store'])->name('schale.kelas-create');
-    Route::post('/schale/kelas/update-kelas', [KelasController::class,'update'])->name('schale.kelas-update');
+    Route::post('/schale/kelas/update-kelas/{id_kelas}', [KelasController::class,'update'])->name('schale.kelas-update');
     Route::post('/schale/kelas/delete-kelas', [KelasController::class,'delete'])->name('schale.kelas-delete');
 });
 

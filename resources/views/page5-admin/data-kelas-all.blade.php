@@ -215,8 +215,8 @@
                                 <label for="kode" class="mb-4">Kode Kelas</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="id_kelas" class="form-control"
-                                       id="kode-view" autocomplete="off" disabled>
+                                <input type="text"  name="id_kelas" readonly class="form-control-plaintext"
+                                       id="kode-view" autocomplete="off">
                             </div>
                         </div>
                         <div class="row">
@@ -224,7 +224,7 @@
                                 <label for="nama" class="mb-4">Nama Kelas</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="nama_kelas" class="form-control" required
+                                <input type="text" name="nama_kelas" readonly class="form-control-plaintext"
                                        id="nama-update" autocomplete="off">
                             </div>
                         </div>
@@ -233,8 +233,8 @@
                                 <label for="wali_kelas" class="mb-4">Wali Kelas</label>
                             </div>
                             <div class="col-md-9">
-                                <input type="text" name="wali_kelas" class="form-control" required
-                                       id="sensei-update" autocomplete="off" disabled>
+                                <input type="text" name="wali_kelas" readonly class="form-control-plaintext"
+                                       id="sensei-update" autocomplete="off">
                             </div>
                         </div>
                         <div class="modal-footer">
