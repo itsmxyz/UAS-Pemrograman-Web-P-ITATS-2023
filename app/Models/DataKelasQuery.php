@@ -28,7 +28,7 @@ class DataKelasQuery extends Model
     public function getDataKelasById($id_kelas) {
         try {
             $siswa = DB::table('siswa')
-                ->select('nis_siswa','nama_siswa')
+                ->select('nis_siswa','nama_siswa','jenis_kelamin')
                 ->join('kelas','kelas_id','=','kelas.id_kelas')
                 ->where('kelas_id','=',$id_kelas)
                 ->orderBy('nama_siswa','ASC')
@@ -40,7 +40,7 @@ class DataKelasQuery extends Model
                 ->join('mata_pelajaran','mapel_id','=','mata_pelajaran.id_mapel')
                 ->where('kelas_id','=',$id_kelas)
                 ->get();
-            return compact('kelas','siswa');
+            return compact('siswa','kelas');
         } catch (QueryException $e) {
             return collect();
         }

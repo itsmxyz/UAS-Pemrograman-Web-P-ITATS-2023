@@ -170,14 +170,14 @@
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group d-flex" >
-                                        <div class="dropdown" data-bs-toggle="modal" data-bs-target="#print-data">
-                                            <button type="button" class="btn btn-sm btn-outline-primary bi bi-printer-fill"></button>
-                                        </div>
-                                        <div class="dropdown" data-bs-toggle="modal" data-bs-target="#view-data">
-                                            <button type="button" class="btn btn-sm btn-outline-primary">View</button>
-                                        </div>
-                                        <div class="dropdown" data-bs-toggle="modal" data-bs-target="#update-data">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary bi bi-printer-fill"
+                                                data-bs-toggle="modal" data-bs-target="#print-data"></button>
+                                        <button type="button" class="btn btn-sm btn-outline-primary"
+                                                data-bs-toggle="modal" data-bs-target="#view-data">View</button>
+                                        <div class="dropdown">
+                                            <a class="btn btn-sm btn-outline-secondary"
+                                                    href="{{route('schale.kelas-edit', ['id_kelas'=>$kelass->id_kelas])}}">
+                                                Edit</a>
                                         </div>
                                         <div class="dropdown" data-bs-toggle="modal" data-bs-target="#delete-data">
                                             <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
@@ -242,67 +242,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="update-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Kelas</h5>
-                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                </div>
-                <form method="post" action="#">
-                    @csrf
-                    <div class="center-wrap p-4">
-                        <div class="section text-left md-2">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label for="kode" class="mb-4">Kode Kelas</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="text" name="kode-kelas" class="form-control" required
-                                           id="kode-update" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label for="nama" class="mb-4">Nama Kelas</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <input type="hidden" name="id_kelas" id="id_kelas">
-                                    <input type="text" name="nama" class="form-control" required
-                                           id="nama-update" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label for="wali_kelas" class="mb-4">Wali Kelas</label>
-                                </div>
-                                <div class="col-md-9">
-                                    <select name="wali_kelas" class="form-select" required>
-                                        <option value="" selected disabled>Pilih Wali Kelas</option>
-                                        @foreach($sensei as $senseii)
-                                            <option
-                                                value="{{$senseii->id_sensei}}">{{$senseii->nama}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal
-                                </button>
-                                <button type="submit" class="btn btn-primary" id="edit-btn"
-                                        onclick="edit(button)">Edit
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
