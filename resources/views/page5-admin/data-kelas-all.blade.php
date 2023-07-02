@@ -173,6 +173,7 @@
                                         <button type="button" class="btn btn-sm btn-outline-primary bi bi-printer-fill"
                                                 data-bs-toggle="modal" id="printButton" onclick="print"></button>
                                         <button type="button" class="btn btn-sm btn-outline-primary"
+                                                onclick="fillModal('{{ $kelass->id_kelas }}', '{{ $kelass->nama_kelas }}', '{{ $kelass->wali_kelas }}')"
                                                 data-bs-toggle="modal" data-bs-target="#view-data">View</button>
                                         <div class="dropdown">
                                             <a class="btn btn-sm btn-outline-secondary"
@@ -287,34 +288,12 @@
 
 @section('js')
     <script>
-        {{--function print(){--}}
-        {{--    // Logika untuk memicu cetak saat tombol ditekan--}}
-        {{--    document.getElementById('printButton').addEventListener('click', function() {--}}
-        {{--        // Mengirim permintaan cetak ke endpoint API--}}
-        {{--        fetch("{{ route('print.data') }}", {--}}
-        {{--            method: 'POST',--}}
-        {{--            headers: {--}}
-        {{--                'Content-Type': 'application/json',--}}
-        {{--                'X-CSRF-TOKEN': '{{ csrf_token() }}' // Token CSRF Laravel--}}
-        {{--            },--}}
-        {{--            body: JSON.stringify({ data: 'Data yang ingin dicetak' }) // Ganti dengan data yang ingin Anda cetak--}}
-        {{--        })--}}
-        {{--            .then(response => response.blob())--}}
-        {{--            .then(blob => {--}}
-        {{--                // Membuat URL blob untuk file cetak--}}
-        {{--                const url = window.URL.createObjectURL(blob);--}}
-
-        {{--                // Membuat elemen anchor untuk men-download file cetak--}}
-        {{--                const a = document.createElement('a');--}}
-        {{--                a.href = url;--}}
-        {{--                a.download = 'file.pdf'; // Nama file cetak--}}
-        {{--                a.click();--}}
-
-        {{--                // Membersihkan URL blob setelah file didownload--}}
-        {{--                window.URL.revokeObjectURL(url);--}}
-        {{--            });--}}
-        {{--    });--}}
-        {{--}--}}
+        function fillModal(kode, nama, sensei) {
+            var modal = $('#view-data');
+            modal.find('#kode-view').val(kode);
+            modal.find('#nama-update').val(nama);
+            modal.find('#sensei-update').val(sensei);
+        }
 
         function togglePasswordVisibility() {
             var passwordInput = document.getElementById("password-delete");

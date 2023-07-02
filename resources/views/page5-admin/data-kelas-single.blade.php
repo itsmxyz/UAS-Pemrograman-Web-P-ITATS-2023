@@ -3,7 +3,7 @@
     <h6 class="m-0 font-weight-bold text-primary">Kelas {{$kelas['kelas']->nama_kelas}}</h6>
     <div class="ml-auto">
         <div class="dropdown" data-bs-toggle="modal" data-bs-target="#add-data">
-            <button class="btn btn-primary btn-transparent" id="add-button">Tambah Kelas</button>
+            <button class="btn btn-primary btn-transparent" id="add-button">Tambah Siswa</button>
         </div>
     </div>
 @endsection
@@ -35,8 +35,14 @@
                         <label for="username" class="mb-4">Wali Kelas</label>
                     </div>
                     <div class="col-md-5">
-                        <input type="text" name="nama_kelas" class="form-control" required
-                               id="nama-kelas" autocomplete="off" value="{{$kelas['kelas']->wali_kelas}}">
+                        <select name="jekel" class="form-select" required>
+                            <option value="{{$kelas['kelas']->id_sensei}}">{{$kelas['kelas']->wali_kelas}}</option>
+                            @foreach($sensei as $senseii)
+                                @if($kelas['kelas']->wali_kelas!= $senseii->nama)
+                                    <option value="{{$senseii->id_sensei}}">{{$senseii->nama}}</option>
+                                @endif
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
@@ -74,14 +80,6 @@
                             <td style="width: 10%">
                                 <div class="d-flex justify-content-center">
                                     <div class="dropdown" data-bs-toggle="modal"
-                                         data-bs-target="#update-data">
-                                        <button class="bi bi-pencil-square btn btn-transparent"
-                                                id="edit-button" onclick="edit(this)"
-                                                data-bs-toggle="tooltip" data-bs-placement="top"
-                                                data-bs-title="Edit Data"
-                                                data-id-siswa="{{$data->nis_siswa}}"></button>
-                                    </div>
-                                    <div class="dropdown" data-bs-toggle="modal"
                                          data-bs-target="#del-data">
                                         <button class="bi bi-trash3 btn btn-transparent"
                                                 id="del-button" onclick="hapus(this)"
@@ -98,11 +96,15 @@
             @endif
         </div>
     </div>
-
 @endsection
 
 @section('js')
 <script>
+    const hapusButton = document.querySelectorAll('#del-button');
+    hapusButton.forEach(function (button) {
+        const tooltip = new bootstrap.Tooltip(button);
+    });
+
     function showHideSiswa() {
         var toggleButton = document.getElementById('showHideSiswa');
         var buttonText = toggleButton.textContent;
@@ -111,6 +113,21 @@
             toggleButton.textContent = 'Tampilkan Data Siswa';
         } else {
             toggleButton.textContent = 'Sembunyikan Data Siswa';
+        }
+    }
+
+    function togglePasswordVisibility() {
+        var passwordInput = document.getElementById("password-delete");
+        var eyeIcon = document.getElementById("eye-icon-delete");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("bi-eye");
+            eyeIcon.classList.add("bi-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("bi-eye-slash");
+            eyeIcon.classList.add("bi-eye");
         }
     }
 </script>

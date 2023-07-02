@@ -39,7 +39,7 @@ class DataKelasQuery extends Model
             }
             try {
                 $kelas = DB::table('kelas')
-                    ->select('id_kelas','nama_kelas','sensei.nama as wali_kelas')->distinct()
+                    ->select('id_kelas','nama_kelas','sensei.id_sensei','sensei.nama as wali_kelas')->distinct()
                     ->join('sensei','wali_kelas','=','id_sensei')
                     ->where('id_kelas','=',$id_kelas)
                     ->first();
