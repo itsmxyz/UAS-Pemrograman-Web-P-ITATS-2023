@@ -16,8 +16,8 @@
             integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <!-- Custom fonts for this template-->
     <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="{{asset('assets/css/style-dashboard.css')}}" rel="stylesheet">
@@ -34,7 +34,7 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
     <!-- Sidebar -->
-    @include('templates.sidebar-schale')
+    @include('templates.schale-sidebar')
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -42,7 +42,7 @@
 
         <!-- Main Content -->
         <div id="content">
-            @include('templates.navbar-schale')
+            @include('templates.schale-navbar')
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -138,7 +138,7 @@
 
 
     <!-- End of Page Wrapper -->
-    @include('templates.logout-template')
+    @include('templates.schale-logout')
 </div>
 
 <script>

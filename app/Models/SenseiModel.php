@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Collection;
@@ -27,6 +26,9 @@ class SenseiModel extends Model implements Authenticatable
     }
     public final function kelas(): HasMany {
         return $this->hasMany(MataPelajaranModel::class,'sensei_id','id_sensei');
+    }
+    public final function aktivitas(): MorphMany {
+        return $this->morphMany(LogAktivitasModel::class, 'user');
     }
     public final function getAll(): \Illuminate\Database\Eloquent\Collection|array {
         return $this->with('sekretaris')->get();
@@ -48,7 +50,7 @@ class SenseiModel extends Model implements Authenticatable
                'username' => $validatedData['username'],
                'password' => $validatedData['password'],
                'kantor' => $validatedData['kantor'],
-               'sekretaris_id' => $validatedData['sekretaris'],
+               'sekretaris_id' => $validatedData['sekretaris_id'],
            ]);
         }catch (QueryException $e){
             return false;

@@ -8,7 +8,7 @@
             });
         </script>
     @endforeach
-@elseif(session('sukses'))
+@elseif(session()->has('sukses'))
     <script>
         Swal.fire({
             position: 'center',
