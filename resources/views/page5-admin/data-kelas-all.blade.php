@@ -1,27 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('templates.schale-kelas')
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
+@section('tittle')
     <title>Data Kelas</title>
-    <link rel="icon"
-          href="https://cdn.discordapp.com/attachments/1104037318521798746/1104123752586956830/millenium.png">
-    @include('templates.cdn-link')
+@endsection
 
-    <!-- Custom fonts for this template-->
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="{{asset('assets/css/style-dashboard.css')}}" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@section('custom-css')
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -91,338 +74,302 @@
             --bs-btn-active-bg: #5a23c8;
             --bs-btn-active-border-color: #5a23c8;
         }
-
         .bd-mode-toggle {
             z-index: 1500;
         }
     </style>
+@endsection
 
-</head>
+@section('card-header')
+    <h6 class="m-0 font-weight-bold text-primary">Data Kelas</h6>
+    <div class="ml-auto">
+        <div class="dropdown" data-bs-toggle="modal" data-bs-target="#add-data">
+            <button class="btn btn-primary btn-transparent" id="add-button">Tambah Kelas</button>
+        </div>
+    </div>
+@endsection
 
-<body id="page-top">
-@include('templates.eror-template')
-
-<!-- Page Wrapper -->
-<div id="wrapper">
-    <!-- Sidebar -->
-    @include('templates.sidebar-schale')
-    <!-- End of Sidebar -->
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-        <!-- Main Content -->
-        <div id="content">
-            @include('templates.navbar-schale')
-            <!-- End of Topbar -->
-
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-                <!-- Content Row -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-flex justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Data Kelas</h6>
-                            <div class="ml-auto">
-                                <div class="dropdown" data-bs-toggle="modal" data-bs-target="#add-data">
-                                    <button class="btn btn-primary btn-transparent" id="add-button">Tambah Kelas</button>
-                                </div>
-                            </div>
-                        </div>
-                        {{--Tambah DATA MODAL--}}
-                        <div class="modal fade" id="add-data" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Tambahkan Data Kelas</h5>
-                                        <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">x</span>
-                                        </button>
-                                    </div>
-                                    <form method="post" action="{{route('schale.kelas-create')}}">
-                                        @csrf
-                                        <div class="center-wrap p-4">
-                                            <div class="section text-left md-2">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <label for="nama" class="mb-4">Kode Kelas</label>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="text" name="kode_kelas" class="form-control"
-                                                               required id="kode-kelas-new" autocomplete="off" readonly>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <label for="username" class="mb-4">Nama Kelas</label>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <input type="text" name="nama_kelas" class="form-control"
-                                                               required
-                                                               id="nama_kelas" autocomplete="off" oninput="kodeKelas(this.value)">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <label for="wali_kelas" class="mb-4">Wali Kelas</label>
-                                                    </div>
-                                                    <div class="col-md-9">
-                                                        <select name="wali_kelas" class="form-select" required>
-                                                            <option value="" selected disabled>Pilih Wali Kelas</option>
-                                                            @foreach($sensei as $senseii)
-                                                                <option
-                                                                    value="{{$senseii->id_sensei}}">{{$senseii->nama}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-secondary" type="button"
-                                                            data-bs-dismiss="modal">Batal
-                                                    </button>
-                                                    <button type="submit" class="btn btn-primary">Tambahkan</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        {{--DATA--}}
-                        <div class="album py-5 bg-body-tertiary">
-                            <div class="container">
-                                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                                    @foreach($kelas as $kelass)
-                                        <div class="col">
-                                            <div class="card shadow-sm">
-                                                <img
-                                                    src="https://cdn.discordapp.com/attachments/1124256362302550057/1124256438450147399/20230522_194233.jpg"
-                                                    class="bd-placeholder-img card-img-top" width="100%" height="225"
-                                                    alt="Thumbnail">
-                                                <div class="card-body d-grid">
-                                                    <div class="d-flex justify-content-between">
-                                                        <p class="card-text" id="nama-kelas">{{$kelass->nama_kelas}}</p>
-                                                        <p class="card-text" id="id-kelas">{{$kelass->id_kelas}}</p>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between align-items-center">
-                                                        <div class="btn-group d-flex" >
-                                                            <div class="dropdown" data-bs-toggle="modal" data-bs-target="#view-data">
-                                                                <button type="button" class="btn btn-sm btn-outline-primary">View</button>
-                                                            </div>
-                                                            <div class="dropdown" data-bs-toggle="modal" data-bs-target="#update-data">
-                                                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                                            </div>
-                                                            <div class="dropdown" data-bs-toggle="modal" data-bs-target="#delete-data">
-                                                                <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
-                                                            </div>
-                                                        </div>
-                                                        <small class="text-body-secondary ml-2" id="wali-kelas">{{$kelass->wali_kelas}} Sensei</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <div class="mt-3">
-                                    {{$kelas->links()}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+@section('modal-tambah')
+    {{--Tambah DATA MODAL--}}
+    <div class="modal fade" id="add-data" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambahkan Data Kelas</h5>
+                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
                 </div>
-            </div>
-
-            <div class="modal fade" id="view-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Kelas</h5>
-                            <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">x</span>
-                            </button>
-                        </div>
-                        <div class="center-wrap p-4">
-                            <div class="section text-left md-2">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label for="kode" class="mb-4">Kode Kelas</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" name="id_kelas" class="form-control"
-                                               id="kode-view" autocomplete="off" disabled>
-                                    </div>
+                <form method="post" action="{{route('schale.kelas-create')}}">
+                    @csrf
+                    <div class="center-wrap p-4">
+                        <div class="section text-left md-2">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="nama" class="mb-4">Kode Kelas</label>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label for="nama" class="mb-4">Nama Kelas</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" name="nama_kelas" class="form-control" required
-                                               id="nama-update" autocomplete="off">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label for="wali_kelas" class="mb-4">Wali Kelas</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" name="wali_kelas" class="form-control" required
-                                               id="sensei-update" autocomplete="off" disabled>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Tutup</button>
+                                <div class="col-md-9">
+                                    <input type="text" name="kode_kelas" class="form-control"
+                                           required id="kode-kelas-new" autocomplete="off" readonly>
                                 </div>
                             </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="update-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Edit Data Kelas</h5>
-                            <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">x</span>
-                            </button>
-                        </div>
-                        <form method="post" action="#">
-                            @csrf
-                            <div class="center-wrap p-4">
-                                <div class="section text-left md-2">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label for="kode" class="mb-4">Kode Kelas</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <input type="text" name="kode-kelas" class="form-control" required
-                                                   id="kode-update" autocomplete="off">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label for="nama" class="mb-4">Nama Kelas</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <input type="hidden" name="id_kelas" id="id_kelas">
-                                            <input type="text" name="nama" class="form-control" required
-                                                   id="nama-update" autocomplete="off">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <label for="wali_kelas" class="mb-4">Wali Kelas</label>
-                                        </div>
-                                        <div class="col-md-9">
-                                            <select name="wali_kelas" class="form-select" required>
-                                                <option value="" selected disabled>Pilih Wali Kelas</option>
-                                                @foreach($sensei as $senseii)
-                                                    <option
-                                                        value="{{$senseii->id_sensei}}">{{$senseii->nama}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal
-                                        </button>
-                                        <button type="submit" class="btn btn-primary" id="edit-btn"
-                                                onclick="edit(button)">Edit
-                                        </button>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="username" class="mb-4">Nama Kelas</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" name="nama_kelas" class="form-control"
+                                           required
+                                           id="nama_kelas" autocomplete="off" oninput="kodeKelas(this.value)">
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="delete-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <form method="post" action="#">
-                            @csrf
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus data ini?</h5>
-                                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">x</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="center-wrap p-4">
-                                    <div class="section text-center md-2">
-                                        <div class="col-md-15">
-                                            <div class="form-group mt-2">
-                                                <input type="hidden" name="id_sekretaris" id="id-delete" value="">
-                                                <h6>Masukkan Password untuk konfirmasi</h6>
-                                                <div class="input-group">
-                                                    <input type="password" name="password" class="form-control" id="password-delete" autocomplete="off">
-                                                    <button class="btn btn-outline-secondary" type="button" id="password-toggle-delete" onclick="togglePasswordVisibility()">
-                                                        <i id="eye-icon-delete" class="bi bi-eye"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="wali_kelas" class="mb-4">Wali Kelas</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select name="wali_kelas" class="form-select" required>
+                                        <option value="" selected disabled>Pilih Wali Kelas</option>
+                                        @foreach($sensei as $senseii)
+                                            <option
+                                                value="{{$senseii->id_sensei}}">{{$senseii->nama}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-primary" onclick="hapus()">Hapus</button>
+                                <button class="btn btn-secondary" type="button"
+                                        data-bs-dismiss="modal">Batal
+                                </button>
+                                <button type="submit" class="btn btn-primary">Tambahkan</button>
                             </div>
-                        </form>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+{{--DATA--}}
+@section('konten')
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                @foreach($kelas as $kelass)
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img
+                                src="https://cdn.discordapp.com/attachments/1124256362302550057/1124256438450147399/20230522_194233.jpg"
+                                class="bd-placeholder-img card-img-top" width="100%" height="225"
+                                alt="Thumbnail">
+                            <div class="card-body d-grid">
+                                <div class="d-flex justify-content-between">
+                                    <p class="card-text" id="nama-kelas">{{$kelass->nama_kelas}}</p>
+                                    <p class="card-text" id="id-kelas">{{$kelass->id_kelas}}</p>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group d-flex" >
+                                        <div class="dropdown" data-bs-toggle="modal" data-bs-target="#print-data">
+                                            <button type="button" class="btn btn-sm btn-outline-primary bi bi-printer-fill"></button>
+                                        </div>
+                                        <div class="dropdown" data-bs-toggle="modal" data-bs-target="#view-data">
+                                            <button type="button" class="btn btn-sm btn-outline-primary">View</button>
+                                        </div>
+                                        <div class="dropdown" data-bs-toggle="modal" data-bs-target="#update-data">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        </div>
+                                        <div class="dropdown" data-bs-toggle="modal" data-bs-target="#delete-data">
+                                            <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                    <small class="text-body-secondary ml-4" id="wali-kelas">{{$kelass->wali_kelas}} Sensei</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <div class="mt-3">
+                {{$kelas->links()}}
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('modals')
+    <div class="modal fade" id="view-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Kelas</h5>
+                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
+                <div class="center-wrap p-4">
+                    <div class="section text-left md-2">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="kode" class="mb-4">Kode Kelas</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" name="id_kelas" class="form-control"
+                                       id="kode-view" autocomplete="off" disabled>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="nama" class="mb-4">Nama Kelas</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" name="nama_kelas" class="form-control" required
+                                       id="nama-update" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="wali_kelas" class="mb-4">Wali Kelas</label>
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" name="wali_kelas" class="form-control" required
+                                       id="sensei-update" autocomplete="off" disabled>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Tutup</button>
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Millennium School 2023</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
         </div>
     </div>
-    <!-- End of Page Wrapper -->
-    @include('templates.logout-template')
 
-</div>
-</body>
-<script>
-    function togglePasswordVisibility() {
-        var passwordInput = document.getElementById("password-delete");
-        var eyeIcon = document.getElementById("eye-icon-delete");
+    <div class="modal fade" id="update-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Kelas</h5>
+                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
+                <form method="post" action="#">
+                    @csrf
+                    <div class="center-wrap p-4">
+                        <div class="section text-left md-2">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="kode" class="mb-4">Kode Kelas</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" name="kode-kelas" class="form-control" required
+                                           id="kode-update" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="nama" class="mb-4">Nama Kelas</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="hidden" name="id_kelas" id="id_kelas">
+                                    <input type="text" name="nama" class="form-control" required
+                                           id="nama-update" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="wali_kelas" class="mb-4">Wali Kelas</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select name="wali_kelas" class="form-select" required>
+                                        <option value="" selected disabled>Pilih Wali Kelas</option>
+                                        @foreach($sensei as $senseii)
+                                            <option
+                                                value="{{$senseii->id_sensei}}">{{$senseii->nama}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal
+                                </button>
+                                <button type="submit" class="btn btn-primary" id="edit-btn"
+                                        onclick="edit(button)">Edit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            eyeIcon.classList.remove("bi-eye");
-            eyeIcon.classList.add("bi-eye-slash");
-        } else {
-            passwordInput.type = "password";
-            eyeIcon.classList.remove("bi-eye-slash");
-            eyeIcon.classList.add("bi-eye");
+    <div class="modal fade" id="delete-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="post" action="#">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus data ini?</h5>
+                        <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="center-wrap p-4">
+                            <div class="section text-center md-2">
+                                <div class="col-md-15">
+                                    <div class="form-group mt-2">
+                                        <input type="hidden" name="id_sekretaris" id="id-delete" value="">
+                                        <h6>Masukkan Password untuk konfirmasi</h6>
+                                        <div class="input-group">
+                                            <input type="password" name="password" class="form-control" id="password-delete" autocomplete="off">
+                                            <button class="btn btn-outline-secondary" type="button" id="password-toggle-delete" onclick="togglePasswordVisibility()">
+                                                <i id="eye-icon-delete" class="bi bi-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary" onclick="hapus()">Hapus</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('js')
+    <script>
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById("password-delete");
+            var eyeIcon = document.getElementById("eye-icon-delete");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.classList.remove("bi-eye");
+                eyeIcon.classList.add("bi-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.classList.remove("bi-eye-slash");
+                eyeIcon.classList.add("bi-eye");
+            }
         }
-    }
-    function kodeKelas(namaKelas) {
-        var kodeKelas = document.getElementById('kode-kelas-new');
-        var tahun = {{date('Y')}};
-        kodeKelas.value = tahun+namaKelas.toUpperCase().replace(/[^a-zA-Z]/g, "");
-    }
-</script>
-</html>
+        function kodeKelas(namaKelas) {
+            var kodeKelas = document.getElementById('kode-kelas-new');
+            var tahun = {{date('Y')}};
+            kodeKelas.value = tahun+namaKelas.toUpperCase().replace(/[^a-zA-Z]/g, "");
+        }
+    </script>
+@endsection
+
+
 
 
