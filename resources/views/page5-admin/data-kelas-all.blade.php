@@ -171,7 +171,8 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group d-flex" >
                                         <button type="button" class="btn btn-sm btn-outline-primary bi bi-printer-fill"
-                                                data-bs-toggle="modal" id="printButton" onclick="print"></button>
+                                                id="printButton" href="{{route('schale-print-kelas',['id_kelas'=>$kelass->id_kelas])}}"
+                                                onclick="print({{$kelass->id_kelas}})"></button>
                                         <button type="button" class="btn btn-sm btn-outline-primary"
                                                 onclick="fillModal('{{ $kelass->id_kelas }}', '{{ $kelass->nama_kelas }}', '{{ $kelass->wali_kelas }}')"
                                                 data-bs-toggle="modal" data-bs-target="#view-data">View</button>
@@ -288,6 +289,19 @@
 
 @section('js')
     <script>
+        function print(id_kelas) {
+            var id = id_kelas;
+            var url = '{{ route("schale-print-kelas", ":id_kelas") }}';
+            url = url.replace(':id_kelas',id);
+            var newWindow = window.open(url, '_blank');
+            newWindow.onload = function() {
+                newWindow.print();
+                newWindow.onafterprint = function() {
+                    newWindow.close();
+                };
+            };
+        }
+
         function fillModal(kode, nama, sensei) {
             var modal = $('#view-data');
             modal.find('#kode-view').val(kode);

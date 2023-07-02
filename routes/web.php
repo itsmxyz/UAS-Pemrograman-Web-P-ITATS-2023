@@ -75,3 +75,4 @@ Route::middleware('auth:sensei')->group(function (){
 Route::middleware('auth:sekretaris')->group(function (){
     Route::get('/sekretaris/dashboard', [SekretarisController::class, 'index'])->name('sekretaris.dashboard');
 });
+Route::get('/schale/print/kelas/{id_kelas}', [AdminController::class, 'printKelas'])->name('schale-print-kelas');

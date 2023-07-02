@@ -79,6 +79,11 @@ class AdminController extends Controller
             return back()->withErrors(['error' => 'Siswa gagal dihapus dari kelas!']);
     }
 
+    public final function printKelas($id_kelas, DataKelasQuery $dataKelasQuery){
+        $print = $dataKelasQuery->getDataKelasById($id_kelas);
+        return view('print.print-kelas',compact('print'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

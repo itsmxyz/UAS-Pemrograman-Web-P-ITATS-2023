@@ -7,6 +7,7 @@
         </div>
     </div>
 @endsection
+
 @section('konten')
     <form method="post" action="{{route('schale.kelas-update', ['id_kelas' => $kelas['kelas']->id_kelas])}}">
         @csrf
@@ -48,6 +49,7 @@
             </div>
         </div>
     </form>
+
 
     <a class="btn btn-primary btn-sm mx-auto mt-3 mb-3" data-bs-toggle="collapse" href="#tableSiswa" onclick="showHideSiswa()"
        role="button" aria-expanded="false" aria-controls="tableSiswa" id="showHideSiswa">
@@ -94,6 +96,98 @@
                     @endforeach
                 </table>
             @endif
+        </div>
+    </div>
+@endsection
+
+@section('modal-tambah')
+    <div class="modal fade" id="add-data" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambahkan Data Siswa</h5>
+                    <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                </div>
+                <form method="post" action="{{route('schale.siswa-create')}}">
+                    @csrf
+                    <div class="center-wrap p-4">
+                        <div class="section text-left md-2">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="nama" class="mb-4">Nama</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" name="nama" class="form-control" required
+                                           id="nama" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="jenkel" class="mb-4">Jenis kelamin</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select name="jekel" class="form-select" required>
+                                        <option selected disabled>Pilih jenis kelamin</option>
+                                        <option value="Laki-laki">Laki-laki</option>
+                                        <option value="Perempuan">Wanita</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="hidden" name="id_kelas" value="00000">
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button"
+                                        data-bs-dismiss="modal">Batal
+                                </button>
+                                <button type="submit" class="btn btn-primary">Tambahkan</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+@section('modals')
+    <div class="modal fade" id="del-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="post" action="#">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin ingin menghapus data ini?</h5>
+                        <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="center-wrap p-4">
+                            <div class="section text-center md-2">
+                                <div class="col-md-15">
+                                    <div class="form-group mt-2">
+                                        <input type="hidden" name="id_siswa" id="id-delete" value="">
+                                        <h6>Masukkan Password untuk konfirmasi</h6>
+                                        <div class="input-group">
+                                            <input type="password" name="password" class="form-control" id="password-delete" autocomplete="off">
+                                            <button class="btn btn-outline-secondary" type="button" id="password-toggle-delete" onclick="togglePasswordVisibility()">
+                                                <i id="eye-icon-delete" class="bi bi-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary" onclick="hapus()">Hapus</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 @endsection
