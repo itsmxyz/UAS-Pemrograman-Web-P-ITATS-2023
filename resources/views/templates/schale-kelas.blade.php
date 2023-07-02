@@ -30,7 +30,7 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
     <!-- Sidebar -->
-    @include('templates.sidebar-schale')
+    @include('templates.schale-sidebar')
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -38,7 +38,7 @@
 
         <!-- Main Content -->
         <div id="content">
-            @include('templates.navbar-schale')
+            @include('templates.schale-navbar')
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -73,7 +73,7 @@
         </div>
     </div>
     <!-- End of Page Wrapper -->
-    @include('templates.logout-template')
+    @include('templates.schale-logout')
 
 </div>
 </body>

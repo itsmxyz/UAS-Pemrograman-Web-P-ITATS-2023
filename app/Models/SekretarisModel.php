@@ -22,6 +22,9 @@ class SekretarisModel extends Model implements Authenticatable
     public final function sensei(): HasMany {
         return $this->hasMany(SenseiModel::class, 'sekretaris_id', 'id_sekretaris');
     }
+    public final function aktivitas(): MorphMany {
+        return $this->morphMany(LogAktivitasModel::class, 'user');
+    }
     public final function getAll()
     {
         return $this->load('sensei')->get();

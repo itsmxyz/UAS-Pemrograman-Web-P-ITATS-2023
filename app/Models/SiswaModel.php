@@ -34,7 +34,7 @@ class SiswaModel extends Model
                     'id_kelas','nama_kelas')
                 ->join('kelas', 'kelas_id','=','kelas.id_kelas')
                 ->orderBy('nis_siswa','ASC')
-                ->paginate(15);
+                ->paginate(20);
             return $dataSiswa;
         }catch (QueryException $e){
             return collect();
