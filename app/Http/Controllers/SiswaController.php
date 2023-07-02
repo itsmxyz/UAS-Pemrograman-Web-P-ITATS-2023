@@ -67,8 +67,9 @@ class SiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SiswaModel $siswa)
+    public function destroy(SiswaModel $siswaModel)
     {
         //
+
     }
 }

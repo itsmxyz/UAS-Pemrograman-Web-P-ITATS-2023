@@ -85,4 +85,13 @@ class SiswaModel extends Model
             return false;
         }
     }
+    public final function deleteSiswaFromKelas (array $input) {
+        try {
+            $this->whereIn('id_siswa', $input)->delete();
+            return true;
+        }catch (QueryException $e){
+            return false;
+        }
+
+    }
 }

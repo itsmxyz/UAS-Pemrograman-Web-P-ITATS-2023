@@ -71,6 +71,13 @@ class AdminController extends Controller
             'sensei'=> $sensei,
         ]);
     }
+    public final function deleteSiswaFromKelas($nis_siswa, SiswaModel $siswaModel) {
+        $query = $siswaModel->deleteSiswaFromKelas($nis_siswa);
+        if ($query)
+            return back()->with('sukses', 'Siswa berhasil dihapus dari kelas!');
+        else
+            return back()->withErrors(['error' => 'Siswa gagal dihapus dari kelas!']);
+    }
 
     /**
      * Show the form for creating a new resource.
