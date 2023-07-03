@@ -1,4 +1,4 @@
-@extends('templates.schale-user')
+@extends('templates.user-dashboard')
 
 @section('tittle')
     <title>Sensei Dashboard</title>
@@ -74,6 +74,7 @@
             --bs-btn-active-bg: #5a23c8;
             --bs-btn-active-border-color: #5a23c8;
         }
+
         .bd-mode-toggle {
             z-index: 1500;
         }
@@ -83,42 +84,99 @@
 @section('card-header')
     <h6 class="m-0 font-weight-bold text-primary">Data Kelas</h6>
 @endsection
+
+@section('sidebar-halo')
+    <div class="mx-3">
+        Haloo <br>
+        @if(auth()->guard('sensei')->check())
+            {{auth()->guard('sensei')->user()->nama}}
+        @elseif(auth()->guard('sekretaris')->check())
+            {{auth()->guard('sekretaris')->user()->nama}}
+        @endif
+    </div>
+@endsection
+
 {{--DATA--}}
-@section('konten')
-    <div class="album py-5 bg-body-tertiary">
-        <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                @foreach($kelas as $kelass)
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img
-                                src="https://cdn.discordapp.com/attachments/1124256362302550057/1124256438450147399/20230522_194233.jpg"
-                                class="bd-placeholder-img card-img-top" width="100%" height="225"
-                                alt="Thumbnail">
-                            <div class="card-body d-grid">
-                                <div class="d-flex justify-content-between">
-                                    <p class="card-text" id="nama-kelas">{{$kelass->nama_kelas}}</p>
-                                    <p class="card-text" id="id-kelas">{{$kelass->id_kelas}}</p>
+@section('statistik')
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Jumlah Kelas
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$jumlahKelas}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="bi bi-calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Mata Pelajaran
+                            </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold ">10</div>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group d-flex" >
-                                        <a type="button" class="btn btn-sm btn-outline-primary bi bi-printer-fill"
-                                           id="printButton" href="{{route('schale-print-kelas',['id_kelas'=>$kelass->id_kelas])}}"
-                                           onclick="print({{$kelass->id_kelas}})"></a>
-                                        <button type="button" class="btn btn-sm btn-outline-primary">View</button>
+                                <div class="col">
+                                    <div class="progress progress-sm mr-2">
+                                        <div class="progress-bar bg-info" role="progressbar"
+                                             style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                             aria-valuemax="100"></div>
                                     </div>
-                                    <small class="text-body-secondary ml-4" id="wali-kelas">{{$kelass->wali_kelas}} Sensei</small>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-auto">
+                            <i class="bi bi-calendar"></i>
+                        </div>
                     </div>
-                @endforeach
-            </div>
-            <div class="mt-3">
-                {{$kelas->links()}}
+                </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('sidebar-konten')
+    <li class="nav-item active">
+        <a class="nav-link" href="">
+            <i class="bi bi-house-door"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('sensei.kelas-all')}}">
+            <i class="bi bi-person"></i>
+            <span>Kelas</span>
+        </a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('schale.sekretaris')}}">
+            <i class="bi bi-person"></i>
+            <span>Mata pelajaran</span>
+        </a>
+    </li>
 @endsection
 
 @section('js')
@@ -126,11 +184,11 @@
         function print(id_kelas) {
             var id = id_kelas;
             var url = '{{ route("schale-print-kelas", ":id_kelas") }}';
-            url = url.replace(':id_kelas',id);
+            url = url.replace(':id_kelas', id);
             var newWindow = window.open(url, '_blank');
-            newWindow.onload = function() {
+            newWindow.onload = function () {
                 newWindow.print();
-                newWindow.onafterprint = function() {
+                newWindow.onafterprint = function () {
                     newWindow.close();
                 };
             };
@@ -157,10 +215,11 @@
                 eyeIcon.classList.add("bi-eye");
             }
         }
+
         function kodeKelas(namaKelas) {
             var kodeKelas = document.getElementById('kode-kelas-new');
             var tahun = {{date('Y')}};
-            kodeKelas.value = tahun+namaKelas.toUpperCase().replace(/[^a-zA-Z]/g, "");
+            kodeKelas.value = tahun + namaKelas.toUpperCase().replace(/[^a-zA-Z]/g, "");
         }
     </script>
 @endsection

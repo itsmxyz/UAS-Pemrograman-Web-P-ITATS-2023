@@ -81,7 +81,7 @@
 @endsection
 
 @section('card-header')
-    <h6 class="m-0 font-weight-bold text-primary">Data Kelas</h6>
+    <h4 class="ml-2 font-weight-bold text-primary">Data Kelas</h4>
     <div class="ml-auto">
         <div class="dropdown" data-bs-toggle="modal" data-bs-target="#add-data">
             <button class="btn btn-primary btn-transparent" id="add-button">Tambah Kelas</button>

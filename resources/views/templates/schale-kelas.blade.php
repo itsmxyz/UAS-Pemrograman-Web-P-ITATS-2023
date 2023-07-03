@@ -8,6 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="stylesheet" href="{{asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}">
     @yield('tittle')
     <link rel="icon"
           href="https://cdn.discordapp.com/attachments/1104037318521798746/1104123752586956830/millenium.png">
@@ -49,7 +50,7 @@
                     <!-- Page Heading -->
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-flex justify-content-between">
+                        <div class="card-header py-3 d-flex align-items-center justify-content-between">
                             @yield('card-header')
                         </div>
                         @yield('modal-tambah')

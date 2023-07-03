@@ -1,6 +1,7 @@
 @extends('templates.schale-kelas')
 @section('card-header')
-    <h6 class="m-0 font-weight-bold text-primary">Kelas {{$kelas['kelas']->nama_kelas}}</h6>
+    <a class="btn btn-primary btn-transparent" href="{{route('schale.kelas')}}"><i class="bi bi-caret-left"></i> Kembali</a>
+    <h6 class="ml-auto font-weight-bold text-primary">Kelas {{$kelas['kelas']->nama_kelas}}</h6>
     <div class="ml-auto">
         <div class="dropdown" data-bs-toggle="modal" data-bs-target="#add-data">
             <button class="btn btn-primary btn-transparent" id="add-button">Tambah Siswa</button>

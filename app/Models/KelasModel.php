@@ -66,4 +66,17 @@ class KelasModel extends Model
             return false;
         }
     }
+
+    public final function getJumlahKelasbySensei($id_sensei){
+        try {
+            $jumlahKelas = DB::table('kelas')
+                ->selectRaw('count(*) as jumlahKelas')
+                ->where('wali_kelas','=',$id_sensei)
+                ->first()
+                ->jumlahKelas;
+            return $jumlahKelas;
+        }catch (QueryException $e){
+            return 0;
+        }
+    }
 }

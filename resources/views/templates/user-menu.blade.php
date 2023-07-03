@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,9 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    @yield('tittle')
+    <title>Data Kelas</title>
     <link rel="icon"
           href="https://cdn.discordapp.com/attachments/1104037318521798746/1104123752586956830/millenium.png">
+    <!--Bootstrap 5.2.3-->
     @include('templates.cdn-link')
 
     <!-- Custom fonts for this template-->
@@ -25,12 +27,62 @@
 </head>
 
 <body id="page-top">
-@include('templates.eror-template')
 
 <!-- Page Wrapper -->
 <div id="wrapper">
     <!-- Sidebar -->
-    @include('templates.schale-sidebar')
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="user-dashboard.blade.php">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="bi bi-emoji-laughing-fill"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">
+                Haloo <br>
+                @if(auth()->guard('sensei')->check())
+                    {{auth()->guard('sensei')->user()->nama}}
+                @elseif(auth()->guard('sekretaris')->check())
+                    {{auth()->guard('sekretaris')->user()->nama}}
+                @endif
+            </div>
+        </a>
+
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href="http://127.0.0.1:8000/schale/dashboard">
+                <i class="bi bi-house-door"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{route('sensei.kelas-all')}}">
+                <i class="bi bi-person"></i>
+                <span>Kelas</span>
+            </a>
+        </li>
+
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#">
+                <i class="bi bi-person"></i>
+                <span>Mata Pelajaran</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+    </ul>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -38,7 +90,8 @@
 
         <!-- Main Content -->
         <div id="content">
-            @include('templates.schale-navbar')
+            <!-- Topbar -->
+            @include('templates.user-navbar')
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -46,19 +99,15 @@
                 <!-- Content Row -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3 d-flex justify-content-between">
-                            @yield('card-header')
+                        <div class="card-header py-3 d-flex align-items-center justify-content-between">
+                            @yield('header-kelas')
                         </div>
-                        @yield('modal-tambah')
-                        {{--Konten--}}
                         @yield('konten')
                     </div>
                 </div>
             </div>
-            @yield('modals')
             <!-- End of Main Content -->
 
             <!-- Footer -->
@@ -73,12 +122,11 @@
         </div>
     </div>
     <!-- End of Page Wrapper -->
+    <!-- Logout Modal-->
     @include('templates.schale-logout')
-
 </div>
 </body>
 @yield('js')
 </html>
-
 
 

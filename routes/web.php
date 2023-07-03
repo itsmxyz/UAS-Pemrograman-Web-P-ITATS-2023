@@ -25,7 +25,9 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/aa', [\App\Models\LogAktivitasModel::class,'insertLog']);
+Route::get('/aa', function (){
+    return view('templates.user-menu');
+});
 Route::get('/ab/{id_kelas}', [\App\Models\DataKelasQuery::class,'getDataKelasById']);
 
 Route::middleware('guest')->group(function () {
@@ -70,6 +72,9 @@ Route::middleware('schale')->group(function () {
 
 Route::middleware('auth:sensei')->group(function (){
     Route::get('/sensei/dashboard', [SenseiController::class, 'index'])->name('sensei.dashboard');
+    Route::get('/sensei/kelas/all', [SenseiController::class, 'show'])->name('sensei.kelas-all');
+    Route::get('/sensei/kelas/{id_kelas}', [SenseiController::class, 'showKelas'])->name('sensei.kelas-view');
+
 });
 
 Route::middleware('auth:sekretaris')->group(function (){

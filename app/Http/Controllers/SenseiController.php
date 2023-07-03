@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataKelasQuery;
+use App\Models\KelasModel;
 use App\Models\SenseiModel;
 use App\Http\Requests\StoreSenseiRequest;
 use App\Http\Requests\UpdateSenseiRequest;
@@ -17,9 +18,11 @@ class SenseiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(DataKelasQuery $dataKelasQuery)
+    public function index(KelasModel $kelasModel)
     {
-        return view('page3-dashboard.dashboard-sensei');
+        $id_sensei = Auth::guard('sensei')->user()->getAuthIdentifier();
+        $jumlahKelas = $kelasModel->getJumlahKelasbySensei($id_sensei);
+        return view('page3-user.sensei-dashboard',compact('jumlahKelas'));
     }
     /**
      * Show the form for creating a new resource.
@@ -68,7 +71,11 @@ class SenseiController extends Controller
      */
     public function show(DataKelasQuery $dataKelasQuery)
     {
-        //
+        $id_sensei = Auth::guard('sensei')->user()->getAuthIdentifier();
+        $dataKelas = $dataKelasQuery->getAllKelasBySenseiID($id_sensei);
+        return view('page3-user.sensei-kelas-all', [
+            'kelas' => $dataKelas,
+        ]);
     }
     /**
      * Show the form for editing the specified resource.
@@ -155,12 +162,8 @@ class SenseiController extends Controller
         else
             return back()->withErrors('Masukkan password untuk konfirmasi!');
     }
-    public final function showKelas($id_sensei) {
-        $dataKelasQuery = new DataKelasQuery();
-        $id_sensei = Auth::guard('sensei')->user()->getAuthIdentifier();
-        $dataKelas = $dataKelasQuery->getAllKelasBySenseiID($id_sensei);
-        return view('page3-dashboard.sensei-kelas-all', [
-            'kelas' => $dataKelas,
-        ]);
+    public final function showKelas(DataKelasQuery $dataKelasQuery, $id_kelas) {
+        $kelas = $dataKelasQuery->getDataKelasById($id_kelas);
+        return view('page3-user.sensei-kelas-view', compact('kelas'));
     }
 }
