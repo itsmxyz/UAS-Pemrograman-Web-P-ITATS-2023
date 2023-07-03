@@ -170,9 +170,9 @@
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group d-flex" >
-                                        <button type="button" class="btn btn-sm btn-outline-primary bi bi-printer-fill"
+                                        <a type="button" class="btn btn-sm btn-outline-primary bi bi-printer-fill"
                                                 id="printButton" href="{{route('schale-print-kelas',['id_kelas'=>$kelass->id_kelas])}}"
-                                                onclick="print({{$kelass->id_kelas}})"></button>
+                                                onclick="print({{$kelass->id_kelas}})"></a>
                                         <button type="button" class="btn btn-sm btn-outline-primary"
                                                 onclick="fillModal('{{ $kelass->id_kelas }}', '{{ $kelass->nama_kelas }}', '{{ $kelass->wali_kelas }}')"
                                                 data-bs-toggle="modal" data-bs-target="#view-data">View</button>
