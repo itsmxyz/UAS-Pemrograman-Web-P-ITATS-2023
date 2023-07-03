@@ -16,12 +16,11 @@ class SenseiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(DataKelasQuery $dataKelasQuery)
     {
-        //
         $id_sensei = Auth::guard('sensei')->user()->getAuthIdentifier();
-        dd($id_sensei);
         $dataKelas = $dataKelasQuery->getKelasBySensei($id_sensei);
+        dd($dataKelas);
         return view('page3-dashboard.dashboard-sensei', [
             'kelas' => $dataKelas,
         ]);
