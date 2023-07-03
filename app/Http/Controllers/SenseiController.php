@@ -18,6 +18,7 @@ class SenseiController extends Controller
      */
     public function index(DataKelasQuery $dataKelasQuery)
     {
+
         $id_sensei = Auth::guard('sensei')->user()->getAuthIdentifier();
         $dataKelas = $dataKelasQuery->getKelasBySensei($id_sensei);
         dd($dataKelas);
