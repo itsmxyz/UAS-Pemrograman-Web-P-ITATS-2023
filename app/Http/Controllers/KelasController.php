@@ -68,8 +68,13 @@ class KelasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(KelasModel $kelas)
+    public function destroy(KelasModel $kelasModel, $id_kelas)
     {
         //
+        $query = $kelasModel->deleteKelas($id_kelas);
+        if ($query)
+            return back()->with('sukses','Kelas berhasil dihapus!');
+        else
+            return back()->withErrors(['error'=>'Kelas gagal dihapus!']);
     }
 }

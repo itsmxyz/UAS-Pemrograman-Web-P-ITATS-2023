@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -15,7 +16,7 @@ return new class extends Migration
             $table->id('nis_siswa')->startingValue(40110);
             $table->string('nama_siswa');
             $table->enum('jenis_kelamin', ['Laki-laki','Perempuan']);
-            $table->string('kelas_id')->default('00000');
+            $table->string('kelas_id')->default('0000');
             $table->foreign('kelas_id')->references('id_kelas')->on('kelas');
             $table->timestamps();
         });

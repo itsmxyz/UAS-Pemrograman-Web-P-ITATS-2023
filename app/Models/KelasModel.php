@@ -54,4 +54,16 @@ class KelasModel extends Model
             return false;
         }
     }
+
+    public final function deleteKelas($id_kelas): bool {
+        try {
+            $siswaModel = new SiswaModel();
+            $kelas = $this->findOrFail($id_kelas);
+            $siswaModel->deleteSiswa(compact($id_kelas));
+            $kelas->delete();
+            return true;
+        }catch (QueryException $e){
+            return false;
+        }
+    }
 }
