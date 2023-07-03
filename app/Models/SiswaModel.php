@@ -92,6 +92,10 @@ class SiswaModel extends Model
         }catch (QueryException $e){
             return false;
         }
-
+    }
+    public final function resetSiswaKelas ($id_kelas) {
+        $this->whereIn('kelas_id',$id_kelas)->update([
+            'kelas_id' => 00000
+        ]);
     }
 }

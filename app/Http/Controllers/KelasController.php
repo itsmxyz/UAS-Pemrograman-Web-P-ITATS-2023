@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\KelasModel;
 use App\Http\Requests\StoreKelasRequest;
 use App\Http\Requests\UpdateKelasRequest;
+use App\Models\SiswaModel;
 
 class KelasController extends Controller
 {
@@ -71,6 +72,8 @@ class KelasController extends Controller
     public function destroy(KelasModel $kelasModel, $id_kelas)
     {
         //
+        $siswaModel = new SiswaModel();
+        $siswaModel->resetSiswaKelas($id_kelas);
         $query = $kelasModel->deleteKelas($id_kelas);
         if ($query)
             return back()->with('sukses','Kelas berhasil dihapus!');

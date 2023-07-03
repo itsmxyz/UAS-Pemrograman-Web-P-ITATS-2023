@@ -6,6 +6,7 @@ use App\Models\DataKelasQuery;
 use App\Models\SenseiModel;
 use App\Http\Requests\StoreSenseiRequest;
 use App\Http\Requests\UpdateSenseiRequest;
+use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -18,12 +19,7 @@ class SenseiController extends Controller
      */
     public function index(DataKelasQuery $dataKelasQuery)
     {
-
-        $id_sensei = Auth::guard('sensei')->user()->getAuthIdentifier();
-        $dataKelas = $dataKelasQuery->getAllKelasBySenseiID($id_sensei);
-        return view('page3-dashboard.dashboard-sensei', [
-            'kelas' => $dataKelas,
-        ]);
+        return view('page3-dashboard.dashboard-sensei');
     }
     /**
      * Show the form for creating a new resource.
@@ -158,5 +154,13 @@ class SenseiController extends Controller
         }
         else
             return back()->withErrors('Masukkan password untuk konfirmasi!');
+    }
+    public final function showKelas($id_sensei) {
+        $dataKelasQuery = new DataKelasQuery();
+        $id_sensei = Auth::guard('sensei')->user()->getAuthIdentifier();
+        $dataKelas = $dataKelasQuery->getAllKelasBySenseiID($id_sensei);
+        return view('page3-dashboard.sensei-kelas-all', [
+            'kelas' => $dataKelas,
+        ]);
     }
 }
