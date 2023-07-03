@@ -20,7 +20,7 @@ class SenseiController extends Controller
     {
 
         $id_sensei = Auth::guard('sensei')->user()->getAuthIdentifier();
-        $dataKelas = $dataKelasQuery->getKelasBySensei($id_sensei);
+        $dataKelas = $dataKelasQuery->getAllKelasBySenseiID($id_sensei);
         dd($dataKelas);
         return view('page3-dashboard.dashboard-sensei', [
             'kelas' => $dataKelas,
