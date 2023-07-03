@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class StoreSiswaRequest extends FormRequest
 {
@@ -12,7 +11,7 @@ class StoreSiswaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return Auth::guard('[schale')->check();
+        return auth()->guard('schale')->check();
     }
 
     /**
@@ -25,7 +24,6 @@ class StoreSiswaRequest extends FormRequest
         return [
             'nama_siswa' => 'required',
             'jenis_kelamin' => 'required',
-            'kelas_id' => 'required',
         ];
     }
 }
