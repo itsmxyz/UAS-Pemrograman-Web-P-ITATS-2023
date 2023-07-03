@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DataKelasQuery;
 use App\Models\SenseiModel;
 use App\Http\Requests\StoreSenseiRequest;
 use App\Http\Requests\UpdateSenseiRequest;
@@ -18,7 +19,12 @@ class SenseiController extends Controller
     public function index()
     {
         //
-        return view('page3-dashboard.dashboard');
+        $id_sensei = Auth::guard('sensei')->user()->getAuthIdentifier();
+        dd($id_sensei);
+        $dataKelas = $dataKelasQuery->getKelasBySensei($id_sensei);
+        return view('page3-dashboard.dashboard-sensei', [
+            'kelas' => $dataKelas,
+        ]);
     }
     /**
      * Show the form for creating a new resource.
@@ -65,7 +71,7 @@ class SenseiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SenseiModel $sensei)
+    public function show(DataKelasQuery $dataKelasQuery)
     {
         //
     }
