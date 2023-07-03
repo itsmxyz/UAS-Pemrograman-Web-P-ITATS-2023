@@ -57,7 +57,7 @@ class DataKelasQuery extends Model
                 $siswa = DB::table('siswa')
                     ->select('nis_siswa','nama_siswa','jenis_kelamin')
                     ->join('kelas','kelas_id','=','kelas.id_kelas')
-                    ->where('kelas_id','=',$id_sensei)
+                    ->where('sensei_id','=',$id_sensei)
                     ->orderBy('nama_siswa','ASC')
                     ->get();
             }catch (QueryException $e){
@@ -67,7 +67,7 @@ class DataKelasQuery extends Model
                 $kelas = DB::table('kelas')
                     ->select('id_kelas','nama_kelas','sensei.id_sensei','sensei.nama as wali_kelas')->distinct()
                     ->join('sensei','wali_kelas','=','id_sensei')
-                    ->where('id_kelas','=',$id_sensei)
+                    ->where('sensei_id','=',$id_sensei)
                     ->first();
             }catch (QueryException $e){
                 $kelas=[];
