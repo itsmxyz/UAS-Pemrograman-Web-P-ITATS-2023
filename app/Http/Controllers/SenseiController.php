@@ -172,7 +172,7 @@ class SenseiController extends Controller
         $dataMapel = $mapel->getMaPelSensei($id_sensei);
         return view('page3-user.sensei-mapel-all',['mapel' => $dataMapel]);
     }
-    public final function getDataMapel($id_sensei,DataKelasQuery $dataKelasQuery) {
+    public final function getDataMapel($id_mapel,$id_sensei,DataKelasQuery $dataKelasQuery) {
         $dataMapel = $dataKelasQuery->getDataMapelBySensei($id_sensei);
         return view('page3-user.sensei-mapel-view',compact('dataMapel'));
     }
