@@ -74,7 +74,7 @@
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
+            <a class="nav-link collapsed" href="{{route('sensei.mapel-all')}}">
                 <i class="bi bi-person"></i>
                 <span>Mata Pelajaran</span>
             </a>

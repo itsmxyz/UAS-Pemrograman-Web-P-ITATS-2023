@@ -1,4 +1,7 @@
 @extends('templates.schale-kelas')
+@section('tittle')
+    <title>Kelas {{$kelas['kelas']->nama_kelas}}</title>
+@endsection
 @section('card-header')
     <a class="btn btn-primary btn-transparent" href="{{route('schale.kelas')}}"><i class="bi bi-caret-left"></i> Kembali</a>
     <h6 class="ml-auto font-weight-bold text-primary">Kelas {{$kelas['kelas']->nama_kelas}}</h6>

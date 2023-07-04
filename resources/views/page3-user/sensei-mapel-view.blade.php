@@ -1,8 +1,8 @@
 @extends('templates.user-menu')
 @section('header-kelas')
     <a class="btn btn-primary btn-transparent" href="{{route('sensei.kelas-all')}}"><i class="bi bi-caret-left"></i> Kembali</a>
-        <h6 class="font-weight-bold text-primary text-center">Kelas {{$kelas['kelas']->nama_kelas}}</h6>
-        <h6 class="ml-md-5 pl-md-5 font-weight-bold text-primary text-center"></h6>
+    <h6 class="font-weight-bold text-primary text-center">Mapel {{$kelas['kelas']->nama_kelas}}</h6>
+    <h6 class="ml-md-5 pl-md-5 font-weight-bold text-primary text-center"></h6>
 @endsection
 
 @section('konten')
@@ -12,7 +12,7 @@
             <div class="section text-left md-2">
                 <div class="row">
                     <div class="col-md-2">
-                        <label for="kode_kelas" class="mb-4">Kode Kelas</label>
+                        <label for="kode_kelas" class="mb-4">Kode Mata Pelajaran</label>
                     </div>
                     <div class="col-md-5">
                         <input type="text" readonly class="form-control-plaintext" id="kode_kelas"
@@ -21,7 +21,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-2">
-                        <label for="nama" class="mb-4">Nama Kelas</label>
+                        <label for="nama" class="mb-4">Nama Mata Pelajaran</label>
                     </div>
                     <div class="col-md-5">
                         <input type="text" readonly class="form-control-plaintext" name="nama_kelas" class="form-control" required
@@ -30,7 +30,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-2">
-                        <label for="username" class="mb-4">Wali Kelas</label>
+                        <label for="username" class="mb-4">Tahun Ajaran</label>
                     </div>
                     <div class="col-md-5">
                         <input type="text" readonly class="form-control-plaintext" name="wali_kelas" class="form-control" required
@@ -58,7 +58,7 @@
                         <th>No</th>
                         <th>NIS Siswa</th>
                         <th>Nama Siswa</th>
-                        <th>Jenis kelamin</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                         <?php $no=1; ?>
@@ -68,7 +68,9 @@
                             <td>{{$no}}</td> <?php $no++ ?>
                             <td>{{$data->nis_siswa}}</td>
                             <td>{{$data->nama_siswa}}</td>
-                            <td>{{$data->jenis_kelamin}}</td>
+                            <td style="width: 10%">
+
+                            </td>
                         </tr>
                         </tbody>
                     @endforeach
@@ -77,4 +79,5 @@
         </div>
     </div>
 @endsection
+
 
