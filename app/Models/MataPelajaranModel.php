@@ -22,6 +22,15 @@ class MataPelajaranModel extends Model
         $this->belongsTo(SenseiModel::class, 'sensei_id', 'id_sensei');
     }
 
+    public final function getJumlahMapelSensei($sensei_id) {
+        $jumlahMapel = DB::table('mata_pelajaran')
+            ->selectRaw('count(*) as jumlahMapel')
+            ->where('sensei_id','=',$sensei_id)
+            ->first()
+            ->jumlahMapel;
+        return $jumlahMapel;
+    }
+
     public final function getMaPelSensei($id_sensei) {
         try {
             $dataMapel = DB::table('data_kelas')

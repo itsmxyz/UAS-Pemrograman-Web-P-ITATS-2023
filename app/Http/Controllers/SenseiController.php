@@ -20,11 +20,12 @@ class SenseiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(KelasModel $kelasModel)
+    public function index(KelasModel $kelasModel, MataPelajaranModel $mataPelajaranModel)
     {
         $id_sensei = Auth::guard('sensei')->user()->getAuthIdentifier();
+        $jumlahMapel = $mataPelajaranModel->getJumlahMapelSensei($id_sensei);
         $jumlahKelas = $kelasModel->getJumlahKelasbySensei($id_sensei);
-        return view('page3-user.sensei-dashboard',compact('jumlahKelas'));
+        return view('page3-user.sensei-dashboard',compact('jumlahKelas','jumlahMapel'));
     }
     /**
      * Show the form for creating a new resource.
@@ -176,11 +177,5 @@ class SenseiController extends Controller
     public final function getDataMapel($kode_mapel,$id_kelas,DataKelasQuery $dataKelasQuery) {
         $dataMapel = $dataKelasQuery->getDataMapelBySensei($kode_mapel,$id_kelas);
         return view('page3-user.sensei-mapel-view',['data'=>$dataMapel]);
-    }
-    public final function getJumlahMapel($sensei_id, MataPelajaranModel $mataPelajaranModel){
-        DB::table('mata_pelajaran')
-            ->selectRaw('count (*) as jumlahMapel')
-            ->where('sensei_id','=',$sensei_id);
-
     }
 }
