@@ -27,6 +27,7 @@ class MataPelajaranModel extends Model
             $dataMapel = DB::table('mata_pelajaran')
                 ->select('kode_mapel', 'nama_mapel', 'semester', 'tahun_ajaran')
                 ->where('sensei_id','=',$id_sensei)
+                ->orderBy('kode_mapel','ASC')
                 ->paginate(6);
             return $dataMapel;
         }catch (QueryException $e){
