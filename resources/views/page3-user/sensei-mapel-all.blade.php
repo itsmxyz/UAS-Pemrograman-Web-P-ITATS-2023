@@ -115,7 +115,10 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group d-flex" >
                                         <a type="button" class="btn btn-sm btn-outline-primary"
-                                           href="#">View</a>
+                                           href="{{route('sensei.mapel-view',[
+                                            'id_mapel'=>$mapell->id_mapel,
+                                            'id_kelas'=>$mapell->id_kelas
+                                            ])}}">View</a>
                                     </div>
                                     <div>
                                         <small>{{$mapell->nama_kelas}} {{$mapell->tahun_ajaran}}</small>

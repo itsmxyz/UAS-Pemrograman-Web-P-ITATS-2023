@@ -75,7 +75,7 @@ Route::middleware('auth:sensei')->group(function (){
     Route::get('/sensei/kelas/all', [SenseiController::class, 'show'])->name('sensei.kelas-all');
     Route::get('/sensei/kelas/{id_kelas}', [SenseiController::class, 'showKelas'])->name('sensei.kelas-view');
     Route::get('/sensei/matapelajaran/all',[SenseiController::class, 'getAllMapel'])->name('sensei.mapel-all');
-    Route::get('/sensei/matapelajaran/{id_mapel}',[SenseiController::class, 'getDataMapel'])->name('sensei.mapel-view');
+    Route::get('/sensei/matapelajaran/{id_mapel}-kode_kelas={id_kelas}',[SenseiController::class, 'getDataMapel'])->name('sensei.mapel-view');
 
 
 });
