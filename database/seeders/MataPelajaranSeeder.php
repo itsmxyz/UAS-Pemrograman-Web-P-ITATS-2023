@@ -15,7 +15,7 @@ class MataPelajaranSeeder extends Seeder
     {
         //
         MataPelajaranModel::create([
-            'kode_mapel' => 'BIO22A', 'nama_mapel' => 'Biologi', 'semester' => 'Ganjil', 'tahun_ajaran' => '2022', 'sensei_id' => '8003'
+            'kode_mapel' => 'BIO22A', 'nama_mapel' => 'Biologi', 'semester' => 'Ganjil', 'tahun_ajaran' => '2022', 'sensei_id' => '8000'
         ]);
         MataPelajaranModel::create([
             'kode_mapel' => 'BIO22B', 'nama_mapel' => 'Biologi', 'semester' => 'Genap', 'tahun_ajaran' => '2022', 'sensei_id' => '8001'
@@ -23,7 +23,6 @@ class MataPelajaranSeeder extends Seeder
         MataPelajaranModel::create([
             'kode_mapel' => 'MAT22A', 'nama_mapel' => 'Matematika', 'semester' => 'Ganjil', 'tahun_ajaran' => '2022', 'sensei_id' => mt_rand(8000,8004)
         ]);
-
         MataPelajaranModel::create([
             'kode_mapel' => 'MAT22B', 'nama_mapel' => 'Matematika', 'semester' => 'Genap', 'tahun_ajaran' => '2022', 'sensei_id' => mt_rand(8000,8004)
         ]);

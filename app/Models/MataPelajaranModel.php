@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 class MataPelajaranModel extends Model
 {
@@ -18,5 +20,17 @@ class MataPelajaranModel extends Model
     }
     public function sensei() {
         $this->belongsTo(SenseiModel::class, 'sensei_id', 'id_sensei');
+    }
+
+    public final function getMaPelSensei($id_sensei) {
+        try {
+            $dataMapel = DB::table('mata_pelajaran')
+                ->select('kode_mapel', 'nama_mapel', 'semester', 'tahun_ajaran')
+                ->where('sensei_id','=',$id_sensei)
+                ->get();
+            return $dataMapel;
+        }catch (QueryException $e){
+            return collect();
+        }
     }
 }

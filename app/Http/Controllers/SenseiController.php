@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DataKelasQuery;
 use App\Models\KelasModel;
+use App\Models\MataPelajaranModel;
 use App\Models\SenseiModel;
 use App\Http\Requests\StoreSenseiRequest;
 use App\Http\Requests\UpdateSenseiRequest;
@@ -165,5 +166,9 @@ class SenseiController extends Controller
     public final function showKelas(DataKelasQuery $dataKelasQuery, $id_kelas) {
         $kelas = $dataKelasQuery->getDataKelasById($id_kelas);
         return view('page3-user.sensei-kelas-view', compact('kelas'));
+    }
+    public final function getMapel($id_sensei, MataPelajaranModel $mapel) {
+        $dataMapel = $mapel->getMaPelSensei($id_sensei);
+        return view('page3-user.sensei-mapel-all',['mapel' => $dataMapel]);
     }
 }
