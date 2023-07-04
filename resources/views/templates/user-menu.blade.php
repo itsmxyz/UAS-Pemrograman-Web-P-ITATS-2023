@@ -54,7 +54,12 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="http://127.0.0.1:8000/schale/dashboard">
+            <a class="nav-link"
+            @if(auth()->guard('sensei')->check())
+                href="{{route('sensei.dashboard')}}"
+            @elseif(auth()->guard('sekretaris')->check())
+                   href="{{route('sekretaris.dashboard')}}"
+            @endif>
                 <i class="bi bi-house-door"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -64,7 +69,13 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{route('sensei.kelas-all')}}">
+            <a class="nav-link collapsed"
+
+               @if(auth()->guard('sensei')->check())
+                   href="{{route('sensei.kelas-all')}}"
+               @elseif(auth()->guard('sekretaris')->check())
+                   href="{{route('sekretaris.dashboard')}}"
+                @endif>
                 <i class="bi bi-person"></i>
                 <span>Kelas</span>
             </a>
@@ -74,7 +85,12 @@
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{route('sensei.mapel-all')}}">
+            <a class="nav-link collapsed"
+               @if(auth()->guard('sensei')->check())
+                   href="{{route('sensei.mapel-all')}}"
+               @elseif(auth()->guard('sekretaris')->check())
+                   href="{{route('sekretaris.dashboard')}}"
+                @endif>
                 <i class="bi bi-person"></i>
                 <span>Mata Pelajaran</span>
             </a>

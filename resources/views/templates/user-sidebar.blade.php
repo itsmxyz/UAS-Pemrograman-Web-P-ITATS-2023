@@ -1,6 +1,11 @@
 @section('sidebar')
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-    <a class="sidebar-brand align-items-center justify-content-center" href="dashboard.blade.php">
+    <a class="sidebar-brand align-items-center justify-content-center"
+       @if(auth()->guard('sensei')->check())
+           href="{{route('sensei.dashboard')}}"
+        @elseif(auth()->guard('sekretaris')->check())
+           href="{{route('sekretaris.dashboard')}}"
+       @endif
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="bi bi-emoji-laughing-fill"></i>
         </div>

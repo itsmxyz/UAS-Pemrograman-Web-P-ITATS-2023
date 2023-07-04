@@ -65,24 +65,31 @@ class DataKelasQuery extends Model
         }
     }
     public final function getDataMapelBySensei($kode_mapel,$id_kelas) {
+        $id_mapel = DB::table('mata_pelajaran')
+            ->where('kode_mapel','=',$kode_mapel)
+            ->value('id_mapel');
+
         try {
-            $id_mapel = DB::table('mata_pelajaran')
-                ->select('id_mapel')->distinct()
-                ->where('kode_mapel','=',$kode_mapel)
+            $mapel = DB::table('data_kelas')
+                ->select('mata_pelajaran.nama_mapel', 'mata_pelajaran.kode_mapel', 'kelas.nama_kelas', 'mata_pelajaran.tahun_ajaran')
+                ->join('kelas', 'kelas_id', '=', 'kelas.id_kelas')
+                ->join('mata_pelajaran', 'mapel_id', '=', 'mata_pelajaran.id_mapel')
+                ->where('mata_pelajaran.id_mapel', '=', $id_mapel)
+                ->where('kelas.id_kelas', '=', $id_kelas)
                 ->first();
 
-            $dataSiswa = DB::table('siswa')
-                ->select('nis_siswa','nama_siswa','jenis_kelamin','absensi.*','penilaian.*')
-                ->join('absensi','nis_siswa','=','absensi.siswa_nis')
-                ->join('penilaian','nis_siswa','=','penilaian.siswa_nis')
-                ->where('kelas_id','=',$id_kelas)
-                ->where('absensi.nis_siswa','=',$id_mapel);
+            $siswa = DB::table('siswa')
+                ->select('siswa.nis_siswa', 'siswa.nama_siswa', 'siswa.jenis_kelamin',
+                    'absensi.*', 'penilaian.*')
+                ->join('absensi', 'siswa.nis_siswa', '=', 'absensi.siswa_nis')
+                ->leftJoin('siswa as absensi_siswa', 'absensi.siswa_nis', '=', 'absensi_siswa.nis_siswa')
+                ->leftJoin('penilaian', 'siswa.nis_siswa', '=', 'penilaian.siswa_nis')
+                ->leftJoin('siswa as penilaian_siswa', 'penilaian.siswa_nis', '=', 'penilaian_siswa.nis_siswa')
+                ->where('absensi.mapel_id', '=', $id_mapel)
+                ->orderBy('siswa.nama_siswa')
+                ->get();
 
-            $dataMapel = DB::table('data_kelas')
-                ->select('kode_mapel','nama_mapel','semester','tahun_ajaran')
-                ->join('mata_pelajaran','mapel_id','=','mata_pelajaran.id_mapel')
-                ->where('kelas_id',$id_kelas)->union($dataSiswa)->get();
-            return $dataMapel;
+            return compact('mapel','siswa');
         }catch (QueryException $e){
             return collect();
         }

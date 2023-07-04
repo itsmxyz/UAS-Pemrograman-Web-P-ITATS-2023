@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\AbsensiModel>
  */
-class AbsensiFactory extends Factory
+class AbsensiModelFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,6 +18,8 @@ class AbsensiFactory extends Factory
     {
         return [
             //
+            'mapel_id' => '2022XA',
+            'sisw_nis' => '40110',
         ];
     }
 }

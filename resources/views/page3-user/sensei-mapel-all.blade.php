@@ -116,8 +116,8 @@
                                     <div class="btn-group d-flex" >
                                         <a type="button" class="btn btn-sm btn-outline-primary"
                                            href="{{route('sensei.mapel-view',[
-                                            'id_mapel'=>$mapell->id_mapel,
-                                            'id_kelas'=>$mapell->id_kelas
+                                            'kode_mapel' => $mapell->kode_mapel,
+                                            'id_kelas'   => $mapell->id_kelas
                                             ])}}">View</a>
                                     </div>
                                     <div>

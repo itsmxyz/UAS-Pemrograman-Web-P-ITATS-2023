@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PenilaianModel>
  */
-class PenilaianFactory extends Factory
+class PenilaianModelFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,6 +18,8 @@ class PenilaianFactory extends Factory
     {
         return [
             //
+            'mapel_id' => '2022XA',
+            'sisw_nis' => '40110',
         ];
     }
 }

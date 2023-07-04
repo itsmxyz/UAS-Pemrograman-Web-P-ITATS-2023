@@ -25,10 +25,8 @@ use Illuminate\Support\Facades\Route;
 //});
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/aa', function (){
-    return view('templates.user-menu');
-});
-Route::get('/ab/{id_kelas}', [\App\Models\DataKelasQuery::class,'getDataKelasById']);
+Route::get('/aa', [\App\Models\DataKelasQuery::class,'getDataMapelBySensei']);
+Route::get('/ab/', [\App\Models\DataKelasQuery::class,'getDataKelasById']);
 
 Route::middleware('guest')->group(function () {
     Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
@@ -75,7 +73,7 @@ Route::middleware('auth:sensei')->group(function (){
     Route::get('/sensei/kelas/all', [SenseiController::class, 'show'])->name('sensei.kelas-all');
     Route::get('/sensei/kelas/{id_kelas}', [SenseiController::class, 'showKelas'])->name('sensei.kelas-view');
     Route::get('/sensei/matapelajaran/all',[SenseiController::class, 'getAllMapel'])->name('sensei.mapel-all');
-    Route::get('/sensei/matapelajaran/{id_mapel}-kode_kelas={id_kelas}',[SenseiController::class, 'getDataMapel'])->name('sensei.mapel-view');
+    Route::get('/sensei/matapelajaran/{kode_mapel}-kode_kelas={id_kelas}',[SenseiController::class, 'getDataMapel'])->name('sensei.mapel-view');
 
 
 });

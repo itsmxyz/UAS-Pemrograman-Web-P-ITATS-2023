@@ -12,6 +12,7 @@ use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class SenseiController extends Controller
@@ -172,9 +173,14 @@ class SenseiController extends Controller
         $dataMapel = $mapel->getMaPelSensei($id_sensei);
         return view('page3-user.sensei-mapel-all',['mapel' => $dataMapel]);
     }
-    public final function getDataMapel($id_mapel,$id_kelas,DataKelasQuery $dataKelasQuery) {
-        $dataMapel = $dataKelasQuery->getDataMapelBySensei($id_mapel,$id_kelas);
-        dd($dataMapel);
-        return view('page3-user.sensei-mapel-view',compact('dataMapel'));
+    public final function getDataMapel($kode_mapel,$id_kelas,DataKelasQuery $dataKelasQuery) {
+        $dataMapel = $dataKelasQuery->getDataMapelBySensei($kode_mapel,$id_kelas);
+        return view('page3-user.sensei-mapel-view',['data'=>$dataMapel]);
+    }
+    public final function getJumlahMapel($sensei_id, MataPelajaranModel $mataPelajaranModel){
+        DB::table('mata_pelajaran')
+            ->selectRaw('count (*) as jumlahMapel')
+            ->where('sensei_id','=',$sensei_id);
+
     }
 }

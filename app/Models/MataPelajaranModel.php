@@ -25,7 +25,7 @@ class MataPelajaranModel extends Model
     public final function getMaPelSensei($id_sensei) {
         try {
             $dataMapel = DB::table('data_kelas')
-                ->select('nama_kelas','kode_mapel', 'nama_mapel', 'semester', 'tahun_ajaran')
+                ->select('id_kelas','nama_kelas','kode_mapel', 'nama_mapel', 'semester', 'tahun_ajaran')
                 ->join('mata_pelajaran','mapel_id','=','mata_pelajaran.id_mapel')
                 ->join('kelas','kelas_id','=','id_kelas')
                 ->where('mata_pelajaran.sensei_id','=',$id_sensei)

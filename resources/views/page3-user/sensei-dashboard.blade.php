@@ -152,7 +152,7 @@
 
 @section('sidebar-konten')
     <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="{{route('sensei.dashboard')}}">
             <i class="bi bi-house-door"></i>
             <span>Dashboard</span></a>
     </li>
@@ -172,56 +172,11 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="{{route('schale.sekretaris')}}">
+        <a class="nav-link collapsed" href="{{route('sensei.mapel-all')}}">
             <i class="bi bi-person"></i>
             <span>Mata pelajaran</span>
         </a>
     </li>
-@endsection
-
-@section('js')
-    <script>
-        function print(id_kelas) {
-            var id = id_kelas;
-            var url = '{{ route("schale-print-kelas", ":id_kelas") }}';
-            url = url.replace(':id_kelas', id);
-            var newWindow = window.open(url, '_blank');
-            newWindow.onload = function () {
-                newWindow.print();
-                newWindow.onafterprint = function () {
-                    newWindow.close();
-                };
-            };
-        }
-
-        function fillModal(kode, nama, sensei) {
-            var modal = $('#view-data');
-            modal.find('#kode-view').val(kode);
-            modal.find('#nama-update').val(nama);
-            modal.find('#sensei-update').val(sensei);
-        }
-
-        function togglePasswordVisibility() {
-            var passwordInput = document.getElementById("password-delete");
-            var eyeIcon = document.getElementById("eye-icon-delete");
-
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                eyeIcon.classList.remove("bi-eye");
-                eyeIcon.classList.add("bi-eye-slash");
-            } else {
-                passwordInput.type = "password";
-                eyeIcon.classList.remove("bi-eye-slash");
-                eyeIcon.classList.add("bi-eye");
-            }
-        }
-
-        function kodeKelas(namaKelas) {
-            var kodeKelas = document.getElementById('kode-kelas-new');
-            var tahun = {{date('Y')}};
-            kodeKelas.value = tahun + namaKelas.toUpperCase().replace(/[^a-zA-Z]/g, "");
-        }
-    </script>
 @endsection
 
 

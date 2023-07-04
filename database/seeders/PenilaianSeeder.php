@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PenilaianModel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,5 +14,6 @@ class PenilaianSeeder extends Seeder
     public function run(): void
     {
         //
+        PenilaianModel::factory(1)->create();
     }
 }
