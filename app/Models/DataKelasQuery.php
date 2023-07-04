@@ -64,4 +64,21 @@ class DataKelasQuery extends Model
             return collect();
         }
     }
+    public final function getDataMapelBySensei($id_kelas) {
+        try {
+            $dataSiswa = DB::table('siswa')
+                ->select('nis_siswa','nama_siswa','jenis_kelamin','absensi.*','penilaian.*')
+                ->join('absensi','nis_siswa','=','absensi.siswa_nis')
+                ->join('penilaian','nis_siswa','=','penilaian.siswa_nis')
+                ->where('kelas_id','=',$id_kelas);
+
+            $dataMapel = DB::table('data_kelas')
+                ->select('kode_mapel','nama_mapel','semester','tahun_ajaran')
+                ->join('mata_pelajaran','mapel_id','=','mata_pelajaran.id_mapel')
+                ->where('kelas_id',$id_kelas)->union($dataSiswa)->get();
+            return $dataMapel;
+        }catch (QueryException $e){
+            return collect();
+        }
+    }
 }
