@@ -200,36 +200,20 @@
     </style>
 </head>
 <body>
-@if(session()->has('loginError'))
-    <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="login-error">
-        <div class="d-flex">
-            <div class="toast-body">
-                Username atau Password yang anda masukkan salah!
+
+@if($errors->any())
+    @foreach($errors->all() as $errorMessage)
+        <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="login-error">
+            <div class="d-flex">
+                <div class="toast-body">
+                    {{$errorMessage}}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
-    </div>
+    @endforeach
 @endif
-@error('username')
-<div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="login-error">
-    <div class="d-flex">
-        <div class="toast-body">
-            Minimal masukin username lah bodoh!
-        </div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-</div>
-@enderror
-@error('password')
-<div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" id="login-error">
-    <div class="d-flex">
-        <div class="toast-body">
-            Password kau bodoh!
-        </div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-</div>
-@enderror
+
 
 <div class="section">
     <div class="container">
