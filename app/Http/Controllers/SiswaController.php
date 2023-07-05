@@ -65,10 +65,44 @@ class SiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreSiswaRequest $request, SiswaModel $siswa)
+    public function update(StoreSiswaRequest $request, SiswaModel $siswaModel)
     {
         //
-        dd($request->all());
+        $basicValidate = $request->validated();
+        if ($basicValidate) {
+            $isSameKelas = $siswaModel->sameKelasCheck([
+                'nis_siswa' => $request->input('id_siswa'),
+                'id_kelas' => $request->input('id_kelas'),
+            ]);
+            if (!$isSameKelas) {
+                $deleteOldKelas = $siswaModel->deleteSiswaFromKelas($request->input('id_siswa'));
+                $insertToNewKelas = $siswaModel->insertSiswaTOKelas($request->input('id_siswa'), $request->input('id_kelas'));
+                $query = $siswaModel->updateSiswa([
+                    'nama_siswa' => $request->input('nama'),
+                    'jenis_kelamin' => $request->input('jenis_kelamin'),
+                    'kelas_id' => $request->all('id_kelas'),
+                ]);
+                if ($deleteOldKelas || $insertToNewKelas || $query)
+                    return back()->with('sukses', 'Data Siswa berhasil diubah');
+                else
+                    return back()->withErrors('Sistem error! Data Siswa gagal diupdate!')
+                        ->withErrors('Sistem error! Data Siswa gagal diupdate!.');
+            }
+            else {
+                $query = $siswaModel->updateSiswa([
+                    'nama_siswa' => $request->input('nama'),
+                    'jenis_kelamin' => $request->input('jenis_kelamin'),
+                    'kelas_id' => $request->all('id_kelas'),
+                ]);
+                if ($query)
+                    return back()->with('sukses', 'Data Siswa berhasil diubah');
+                else
+                    return back()->withErrors('Sistem error! Data Siswa gagal diupdate!')
+                        ->withErrors('Sistem error! Data Siswa gagal diupdate!.');
+            }
+        }
+        return back()->withErrors('Sistem error! Data Siswa gagal diupdate!')
+            ->withErrors('Sistem error! Data Siswa gagal diupdate!.');
     }
 
     /**

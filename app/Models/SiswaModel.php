@@ -63,13 +63,36 @@ class SiswaModel extends Model
             return false;
         }
     }
+    public final function insertSiswaTOKelas($nis_siswa, $id_kelas, AbsensiModel $absensiModel, PenilaianModel $penilaianModel) {
+        try {
+            $mapelIdKelas = DB::table('data_kelas')
+                ->where('kelas_id','=',$id_kelas)
+                ->pluck('mapel_id');
+
+            foreach ($mapelIdKelas as $mapelID){
+                $absensiModel->create([
+                    'siswa_nis' => $nis_siswa,
+                    'mapel_id' => $mapelID,
+                ]);
+            }
+            foreach ($mapelIdKelas as $mapelID){
+                $penilaianModel->create([
+                    'siswa_nis' => $nis_siswa,
+                    'mapel_id' => $mapelID,
+                ]);
+            }
+            return true;
+        }catch (QueryException $e){
+            return false;
+        }
+    }
     public final function updateSiswa(array $input): bool {
         try {
             $siswa = $this->findOrFail($input['nis_siswa']);
             $siswa->update([
                 'nama_siswa' => $input['nama_siswa'],
-                'jenis_kelamin' => $input['jekel'],
-                'kelas_id' => $input['id_kelas'],
+                'jenis_kelamin' => $input['jenis_kelamin'],
+                'kelas_id' => $input['kelas_id'],
             ]);
             return true;
         }catch (QueryException $e){
@@ -85,12 +108,8 @@ class SiswaModel extends Model
             return false;
         }
     }
-    public final function deleteSiswaFromKelas ($nis_siswa, AbsensiModel $absensiModel, PenilaianModel $penilaianModel) {
+    public final function deleteSiswaFromKelas ($nis_siswa, $id_kelas, AbsensiModel $absensiModel, PenilaianModel $penilaianModel) {
         try {
-            $id_kelas = DB::table('siswa')
-                ->where('nis_siswa','=',$nis_siswa)
-                ->value('kelas_id');
-
             $siswa = $this->findOrFail($nis_siswa);
             $siswa->update([
                 'kelas_id' => '00000',
@@ -106,5 +125,15 @@ class SiswaModel extends Model
         $this->whereIn('kelas_id',$id_kelas)->update([
             'kelas_id' => 00000
         ]);
+    }
+    public final function sameKelasCheck(array $input): bool {
+        $kelasSiswa = DB::table('kelas')
+            ->where('nis_siswa','=',$input['nis_siswa'])
+            ->value('nama_kelas');
+
+        if ($input['kelas'] === $kelasSiswa)
+            return true;
+        else
+            return false;
     }
 }
