@@ -91,7 +91,8 @@ class SiswaModel extends Model
             $siswa->update([
                 'kelas_id' => '00000',
             ]);
-            $absensiModel->deleteAbsensiSiswaInKelas($nis_siswa,);
+            $absensiModel->deleteAbsensiSiswaInKelas($nis_siswa,$id_kelas);
+            $penilaianModel->deletePenilaianSiswaInKelas($nis_siswa,$id_kelas);
             return true;
         }catch (QueryException $e){
             return false;

@@ -104,8 +104,10 @@
                                     <button class="bi bi-arrow-clockwise btn btn-transparent"
                                             id="reset-button" onclick="reset(this)"
                                             data-bs-toggle="tooltip" data-bs-placement="top"
-                                            data-bs-title="Hapus Kelas"
-                                            data-id-siswa="{{$data->nis_siswa}}"></button>
+                                            data-bs-title="Reset Kelas Siswa"
+                                            data-id-siswa="{{$data->nis_siswa}}"
+                                            data-id-kelas="{{$data->id_kelas}}">
+                                    </button>
                                 </div>
                             </div>
                         </td>
@@ -202,6 +204,7 @@
                                 <div class="col-md-15">
                                     <div class="form-group mt-2">
                                         <input type="hidden" name="id_siswa" id="id-reset" value="">
+                                        <input type="hidden" name="id_kelas" value="">
                                         <h6>Masukkan Password untuk konfirmasi</h6>
                                         <div class="input-group">
                                             <input type="password" name="password" class="form-control" id="password-reset" autocomplete="off">
@@ -310,9 +313,10 @@
             document.getElementById("id-delete").value = idSiswa;
         }
 
-        function reset(button) {
+        function reset(button, id_kelas) {
             var row = button.closest("tr");
             var idSiswa = row.cells[0].innerText;
+            document.getElementById('id-kelas').value = id_kelas;
             document.getElementById('id-reset').value = idSiswa;
         }
 
