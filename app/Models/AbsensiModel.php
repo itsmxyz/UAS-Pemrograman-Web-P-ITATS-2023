@@ -13,6 +13,6 @@ class AbsensiModel extends Model
     protected $guarded = ['id_absensi'];
 
     public final function deleteAbsensiSiswaInKelas($nis_siswa, $id_kelas) {
-        $this->where('siswa_nis',$nis_siswa)->where('kelas_id',$id_kelas)->delete();
+        $this->where('siswa_nis','=',$nis_siswa)->where('kelas_id','=',$id_kelas)->delete();
     }
 }

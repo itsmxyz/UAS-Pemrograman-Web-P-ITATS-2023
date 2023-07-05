@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AbsensiModel;
+use App\Models\PenilaianModel;
 use App\Models\SiswaModel;
 use App\Http\Requests\StoreSiswaRequest;
 use App\Http\Requests\UpdateSiswaRequest;
@@ -65,24 +67,25 @@ class SiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreSiswaRequest $request, SiswaModel $siswaModel)
+    public function update(StoreSiswaRequest $request, SiswaModel $siswaModel, AbsensiModel $absensiModel, PenilaianModel $penilaianModel)
     {
         //
         $basicValidate = $request->validated();
         if ($basicValidate) {
             $isSameKelas = $siswaModel->sameKelasCheck([
                 'nis_siswa' => $request->input('id_siswa'),
-                'id_kelas' => $request->input('id_kelas'),
+                'id_kelas' => $request->input('kelas'),
             ]);
             if (!$isSameKelas) {
-                $deleteOldKelas = $siswaModel->deleteSiswaFromKelas($request->input('id_siswa'));
-                $insertToNewKelas = $siswaModel->insertSiswaTOKelas($request->input('id_siswa'), $request->input('id_kelas'));
+                $deleteOldKelas = $siswaModel->deleteSiswaFromKelas($request->input('id_siswa'), $request->input('kelas'));
+                $insertToNewKelas = $siswaModel->insertSiswaTOKelas($request->input('id_siswa'), $request->input('kelas'));
                 $query = $siswaModel->updateSiswa([
+                    'nis_siswa' => $request->input('id_siswa'),
                     'nama_siswa' => $request->input('nama'),
                     'jenis_kelamin' => $request->input('jenis_kelamin'),
-                    'kelas_id' => $request->all('id_kelas'),
+                    'kelas_id' => $request->all('kelas'),
                 ]);
-                if ($deleteOldKelas || $insertToNewKelas || $query)
+                if ($deleteOldKelas && $insertToNewKelas && $query)
                     return back()->with('sukses', 'Data Siswa berhasil diubah');
                 else
                     return back()->withErrors('Sistem error! Data Siswa gagal diupdate!')
@@ -90,9 +93,10 @@ class SiswaController extends Controller
             }
             else {
                 $query = $siswaModel->updateSiswa([
+                    'nis_siswa' => $request->input('id_siswa'),
                     'nama_siswa' => $request->input('nama'),
                     'jenis_kelamin' => $request->input('jenis_kelamin'),
-                    'kelas_id' => $request->all('id_kelas'),
+                    'kelas_id' => $request->all('kelas'),
                 ]);
                 if ($query)
                     return back()->with('sukses', 'Data Siswa berhasil diubah');

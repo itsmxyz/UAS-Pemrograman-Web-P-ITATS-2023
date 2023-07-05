@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <input type="hidden" name="id_siswa" id="id-update">
-                                    <input type="text" name="nama" class="form-control" required
+                                    <input type="text" name="nama_siswa" class="form-control" required
                                            id="nama-update" autocomplete="off">
                                 </div>
                             </div>
@@ -150,8 +150,8 @@
                                     <label for="jenkel" class="mb-4">Jenis Kelamin</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <select name="jekel" id="jenkel-update" class="form-select" required>
-                                        <option selected disabled>{{$data->jenis_kelamin}}</option>
+                                    <select name="jenis_kelamin" id="jenkel-update" class="form-select" required>
+                                        <option selected>{{$data->jenis_kelamin}}</option>
                                         <option value="Laki-laki">Laki-laki</option>
                                         <option value="Perempuan">Perempuan</option>
                                     </select>
@@ -165,7 +165,7 @@
                                     <select name="kelas" id="kelas-update" class="form-select" required>
                                         <option selected disabled>Pilih Kelas</option>
                                         @foreach($kelas as $data)
-                                            <option value="{{$data->nama_kelas}}">{{$data->nama_kelas}}</option>
+                                            <option value="{{$data->id_kelas}}">{{$data->nama_kelas}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -303,7 +303,6 @@
             // Mengambil data form update
             document.getElementById("id-update").value = idSiswa;
             document.getElementById("nama-update").value = nama;
-            document.getElementById("jenkel-update").value = jenkel;
             document.getElementById("kelas-update").value = kelas;
         }
 

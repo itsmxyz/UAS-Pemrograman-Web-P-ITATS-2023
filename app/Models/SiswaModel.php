@@ -63,8 +63,14 @@ class SiswaModel extends Model
             return false;
         }
     }
-    public final function insertSiswaTOKelas($nis_siswa, $id_kelas, AbsensiModel $absensiModel, PenilaianModel $penilaianModel) {
+    public final function insertSiswaTOKelas($nis_siswa, $id_kelas) {
         try {
+            $siswa = $this->findOrFail($nis_siswa);
+            $siswa->update([
+                'kelas_id' => $id_kelas,
+            ]);
+            $absensiModel = new AbsensiModel();
+            $penilaianModel = new PenilaianModel();
             $mapelIdKelas = DB::table('data_kelas')
                 ->where('kelas_id','=',$id_kelas)
                 ->pluck('mapel_id');
@@ -81,8 +87,10 @@ class SiswaModel extends Model
                     'mapel_id' => $mapelID,
                 ]);
             }
+
             return true;
         }catch (QueryException $e){
+            dd($e->getMessage());
             return false;
         }
     }
@@ -108,8 +116,12 @@ class SiswaModel extends Model
             return false;
         }
     }
-    public final function deleteSiswaFromKelas ($nis_siswa, $id_kelas, AbsensiModel $absensiModel, PenilaianModel $penilaianModel) {
+    public final function deleteSiswaFromKelas ($nis_siswa, $id_kelas) {
         try {
+            $absensiModel = new AbsensiModel();
+            $penilaianModel = new PenilaianModel();
+            $absensiModel->deleteAbsensiSiswaInKelas($nis_siswa, $id_kelas);
+            $penilaianModel->deletePenilaianSiswaInKelas($nis_siswa,$id_kelas);
             $siswa = $this->findOrFail($nis_siswa);
             $siswa->update([
                 'kelas_id' => '00000',
@@ -127,11 +139,11 @@ class SiswaModel extends Model
         ]);
     }
     public final function sameKelasCheck(array $input): bool {
-        $kelasSiswa = DB::table('kelas')
+        $kelasSiswa = DB::table('siswa')
             ->where('nis_siswa','=',$input['nis_siswa'])
-            ->value('nama_kelas');
+            ->value('kelas_id');
 
-        if ($input['kelas'] === $kelasSiswa)
+        if ($input['id_kelas'] === $kelasSiswa)
             return true;
         else
             return false;
