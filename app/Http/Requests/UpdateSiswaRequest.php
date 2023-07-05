@@ -23,7 +23,7 @@ class UpdateSiswaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama_siswa' => 'required',
+            'nama' => 'required',
             'jenis_kelamin' => 'required',
         ];
     }
