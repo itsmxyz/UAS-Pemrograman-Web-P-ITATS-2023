@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '8ee72c337a25592cde88cc4f518c6d3f9b40f595',
+        'reference' => 'a380e1e49bc5d38f5a81c4cbc2cbcc113a3da188',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -382,7 +382,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '8ee72c337a25592cde88cc4f518c6d3f9b40f595',
+            'reference' => 'a380e1e49bc5d38f5a81c4cbc2cbcc113a3da188',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1273,21 +1273,6 @@
             'install_path' => __DIR__ . '/../tijsverkoyen/css-to-inline-styles',
             'aliases' => array(),
             'dev_requirement' => false,
-        ),
-        'twbs/bootstrap' => array(
-            'pretty_version' => 'v5.2.3',
-            'version' => '5.2.3.0',
-            'reference' => 'cb021439c683d9805e2864c58095b92d405e9b11',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../twbs/bootstrap',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'twitter/bootstrap' => array(
-            'dev_requirement' => false,
-            'replaced' => array(
-                0 => 'v5.2.3',
-            ),
         ),
         'vlucas/phpdotenv' => array(
             'pretty_version' => 'v5.5.0',
