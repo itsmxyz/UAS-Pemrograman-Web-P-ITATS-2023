@@ -32,7 +32,12 @@ class SiswaController extends Controller
     public function store(StoreSiswaRequest $request, SiswaModel $siswaModel)
     {
         //
-        $query = $siswaModel->insertNewSiswa($request->all());
+        $validatedData = [
+            'nama_siswa' => $request->input('nama_siswa'),
+            'jenis_kelamin' => $request->input('jenis_kelamin'),
+            'kelas_id' => '00000',
+        ];
+        $query = $siswaModel->insertNewSiswa($validatedData);
         if ($query)
             return back()->with('sukses','Data Siswa berhasil ditambahkan!');
         else

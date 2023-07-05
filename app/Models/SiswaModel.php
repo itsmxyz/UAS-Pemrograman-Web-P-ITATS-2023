@@ -14,7 +14,7 @@ class SiswaModel extends Model
     protected $table = 'siswa';
     protected $primaryKey = 'nis_siswa';
     protected $guarded = ['nis_siswa'];
-    protected $fillable = ['nama_siswa', 'jenis_kelamin'];
+    protected $fillable = ['nama_siswa', 'jenis_kelamin', 'kelas_id'];
 
     public function kelas() {
         return $this->belongsTo('kelas', 'kelas_id','id_kelas');
@@ -55,8 +55,8 @@ class SiswaModel extends Model
         try {
             $this->create([
                'nama_siswa' => $input['nama_siswa'],
-               'jenis_kelamin' => $input['jekel'],
-               'kelas_id' => $input['id_kelas'],
+               'jenis_kelamin' => $input['jenis_kelamin'],
+               'kelas_id' => $input['kelas_id'],
             ]);
             return true;
         }catch (QueryException $e){
@@ -85,9 +85,13 @@ class SiswaModel extends Model
             return false;
         }
     }
-    public final function deleteSiswaFromKelas (array $input) {
+    public final function deleteSiswaFromKelas ($nis_siswa) {
         try {
-            $this->whereIn('id_siswa', $input)->delete();
+            $siswa = $this->findOrFail($nis_siswa);
+            $siswa->update([
+                'kelas_id' => '00000',
+            ]);
+
             return true;
         }catch (QueryException $e){
             return false;

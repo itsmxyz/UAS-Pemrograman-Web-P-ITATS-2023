@@ -33,7 +33,7 @@
                             <label for="nama" class="mb-4">Nama</label>
                         </div>
                         <div class="col-md-9">
-                            <input type="text" name="nama" class="form-control" required
+                            <input type="text" name="nama_siswa" class="form-control" required
                                    id="nama" autocomplete="off">
                         </div>
                     </div>
@@ -42,14 +42,13 @@
                             <label for="jenkel" class="mb-4">Jenis kelamin</label>
                         </div>
                         <div class="col-md-9">
-                            <select name="jekel" class="form-select" required>
+                            <select name="jenis_kelamin" class="form-select" required>
                                 <option selected disabled>Pilih jenis kelamin</option>
                                 <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Wanita</option>
+                                <option value="Perempuan">Perempuan</option>
                             </select>
                         </div>
                     </div>
-                    <input type="hidden" name="id_kelas" value="00000">
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button"
                                 data-bs-dismiss="modal">Batal

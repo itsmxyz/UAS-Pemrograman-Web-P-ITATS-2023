@@ -1,14 +1,4 @@
-@if($errors->any())
-    @foreach($errors->all() as $errorMessage)
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: '{{$errorMessage}}'
-            });
-        </script>
-    @endforeach
-@elseif(session()->has('sukses'))
+@if(session('sukses'))
     <script>
         Swal.fire({
             position: 'center',
@@ -20,3 +10,17 @@
         })
     </script>
 @endif
+
+@if($errors->any())
+    @foreach($errors->all() as $errorMessage)
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '{{$errorMessage}}'
+            });
+        </script>
+    @endforeach
+@endif
+
+
