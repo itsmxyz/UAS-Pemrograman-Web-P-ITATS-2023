@@ -36,7 +36,7 @@ class LoginController extends Controller
                 $request->session()->regenerate();
                 return redirect()->intended(route('sensei.dashboard'));
             }
-            return back()->withErrors(['error'=>'Login Gagal'])->onlyInput('username');
+            return back()->withErrors(['error'=>'Username atau Password salah!'])->onlyInput('username');
         }
     }
     public function authSekretaris(Request $request): RedirectResponse

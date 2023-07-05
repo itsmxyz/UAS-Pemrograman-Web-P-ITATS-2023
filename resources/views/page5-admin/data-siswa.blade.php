@@ -80,7 +80,7 @@
                         <td>{{$data->nis_siswa}}</td>
                         <td>{{$data->nama_siswa}}</td>
                         <td>{{$data->jenis_kelamin}}</td>
-                        <td><a href="{{$data->nama_kelas}}">{{$data->nama_kelas}}</a></td>
+                        <td><a href="{{route('schale.kelas-edit', ['id_kelas' => $data->id_kelas])}}">{{$data->nama_kelas}}</a></td>
                         <td style="width: 10%">
                             <div class="d-flex justify-content-center">
                                 <div class="dropdown" data-bs-toggle="modal"
@@ -204,7 +204,6 @@
                                 <div class="col-md-15">
                                     <div class="form-group mt-2">
                                         <input type="hidden" name="id_siswa" id="id-reset" value="">
-                                        <input type="hidden" name="id_kelas" value="">
                                         <h6>Masukkan Password untuk konfirmasi</h6>
                                         <div class="input-group">
                                             <input type="password" name="password" class="form-control" id="password-reset" autocomplete="off">
@@ -297,7 +296,7 @@
 
             // Menampilkan nilai input ke konsol
             console.log("Nama: " + nama);
-            console.log("Username: " + jenkel);
+            console.log("jenkel: " + jenkel);
             console.log("Kelas: " + kelas);
 
             // Mengambil data form update
@@ -313,10 +312,12 @@
             document.getElementById("id-delete").value = idSiswa;
         }
 
-        function reset(button, id_kelas) {
+        function reset(button) {
             var row = button.closest("tr");
             var idSiswa = row.cells[0].innerText;
-            document.getElementById('id-kelas').value = id_kelas;
+            console.log("idSiswa: " + idSiswa);
+            console.log("idKelas: " + idKelas);
+            document.getElementById('id-kelas').value = idKelas;
             document.getElementById('id-reset').value = idSiswa;
         }
 
