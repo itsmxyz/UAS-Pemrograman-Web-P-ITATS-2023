@@ -42,6 +42,7 @@ class KelasModel extends Model
             return 0;
         }
     }
+
     public final function insertKelas(array $input) {
         try {
             $this->create([
