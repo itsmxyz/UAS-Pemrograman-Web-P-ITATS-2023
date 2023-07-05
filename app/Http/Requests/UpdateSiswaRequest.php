@@ -24,7 +24,7 @@ class UpdateSiswaRequest extends FormRequest
     {
         return [
             'nama_siswa' => 'required',
-            'jenis_kelamin' => 'required',
+            'jenkel' => 'required',
         ];
     }
 }
