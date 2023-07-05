@@ -68,7 +68,7 @@ class SiswaController extends Controller
     public function update(UpdateSiswaRequest $request, SiswaModel $siswa)
     {
         //
-
+        dd($request->all());
     }
 
     /**

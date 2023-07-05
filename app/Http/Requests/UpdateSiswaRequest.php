@@ -25,7 +25,6 @@ class UpdateSiswaRequest extends FormRequest
         return [
             'nama_siswa' => 'required',
             'jenis_kelamin' => 'required',
-            'kelas_id' => 'required',
         ];
     }
 }
