@@ -36,7 +36,7 @@ class LoginController extends Controller
                 $request->session()->regenerate();
                 return redirect()->intended(route('sensei.dashboard'));
             }
-            return back()->with('loginError', 'Login Gagal!')->onlyInput('username');
+            return back()->withErrors(['error'=>'Login Gagal'])->onlyInput('username');
         }
     }
     public function authSekretaris(Request $request): RedirectResponse
@@ -56,7 +56,7 @@ class LoginController extends Controller
                 $request->session()->regenerate();
                 return redirect()->intended(route('sekretaris.dashboard'));
             }
-            return back()->with('loginError', 'Login Gagal!')->onlyInput('username');
+            return back()->withErrors(['error'=>'Error!'])->onlyInput('username');
         }
     }
     public function authSchale(Request $request): RedirectResponse
@@ -76,7 +76,7 @@ class LoginController extends Controller
                 $request->session()->regenerate();
                 return redirect()->intended(route('schale.dashboard'));
             }
-            return back()->with('loginError', 'Login Gagal!')->onlyInput('username');
+            return back()->withErrors(['error'=>'Kelas gagal dihapus!'])->onlyInput('username');
         }
     }
     public function logout(Request $request): RedirectResponse

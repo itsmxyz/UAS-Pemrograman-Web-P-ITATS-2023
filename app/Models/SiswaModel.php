@@ -85,13 +85,13 @@ class SiswaModel extends Model
             return false;
         }
     }
-    public final function deleteSiswaFromKelas ($nis_siswa) {
+    public final function deleteSiswaFromKelas ($nis_siswa, $id_kelas, AbsensiModel $absensiModel, PenilaianModel $penilaianModel) {
         try {
             $siswa = $this->findOrFail($nis_siswa);
             $siswa->update([
                 'kelas_id' => '00000',
             ]);
-
+            $absensiModel->deleteAbsensiSiswaInKelas($nis_siswa,);
             return true;
         }catch (QueryException $e){
             return false;
