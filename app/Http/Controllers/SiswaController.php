@@ -98,27 +98,4 @@ class SiswaController extends Controller
             return back()->withErrors('error', 'Masukkan password untuk konfirmasi!')
                 ->withErrors('error', 'Masukkan password untuk konfirmasi!');
     }
-    public final function resetSiswaFromKelas(Request $request, SiswaModel $siswaModel) {
-        $validatedData = $request->validate(['password' => 'required',]);
-        if ($validatedData){
-            $inputPw = $request->input('password');
-            $schaleUser = Auth::guard('schale')->user();
-            if (!Hash::check($inputPw, $schaleUser->getAuthPassword()))
-                return back()->withErrors('Password yang anda masukkan Salah!')
-                    ->withErrors('Password yang anda masukkan Salah!');
-            else {
-                $nis_siswa = $request->input('id_siswa');
-                $query = $siswaModel->deleteSiswaFromKelas($nis_siswa);
-                if ($query) {
-                    return back()->with('sukses', 'Data telah dihapus!');
-                }
-                else
-                    return back()->withErrors('Sistem error! Data Sensei gagal dihapus.')
-                        ->withErrors('Sistem error! Data Sensei gagal dihapus.');
-            }
-        }
-        else
-            return back()->withErrors('error', 'Masukkan password untuk konfirmasi!')
-                ->withErrors('error', 'Masukkan password untuk konfirmasi!');
-    }
 }

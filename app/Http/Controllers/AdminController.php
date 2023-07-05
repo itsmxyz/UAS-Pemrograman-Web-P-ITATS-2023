@@ -71,12 +71,28 @@ class AdminController extends Controller
             'sensei'=> $sensei,
         ]);
     }
-    public final function deleteSiswaFromKelas($nis_siswa, SiswaModel $siswaModel) {
-        $query = $siswaModel->deleteSiswaFromKelas($nis_siswa);
-        if ($query)
-            return back()->with('sukses', 'Siswa berhasil dihapus dari kelas!');
+    public final function deleteSiswaFromKelas(Request $request,SiswaModel $siswaModel) {
+        $validatedData = $request->validate(['password' => 'required',]);
+        if ($validatedData){
+            $inputPw = $request->input('password');
+            $schaleUser = Auth::guard('schale')->user();
+            if (!Hash::check($inputPw, $schaleUser->getAuthPassword()))
+                return back()->withErrors('Password yang anda masukkan Salah!')
+                    ->withErrors('Password yang anda masukkan Salah!');
+            else {
+                $nis_siswa = $request->input('id_siswa');
+                $query = $siswaModel->deleteSiswaFromKelas($nis_siswa);
+                if ($query) {
+                    return back()->with('sukses', 'Data telah dihapus!');
+                }
+                else
+                    return back()->withErrors('Sistem error! Data Sensei gagal dihapus.')
+                        ->withErrors('Sistem error! Data Sensei gagal dihapus.');
+            }
+        }
         else
-            return back()->withErrors(['error' => 'Siswa gagal dihapus dari kelas!']);
+            return back()->withErrors('error', 'Masukkan password untuk konfirmasi!')
+                ->withErrors('error', 'Masukkan password untuk konfirmasi!');
     }
 
     public final function printKelas($id_kelas, DataKelasQuery $dataKelasQuery){

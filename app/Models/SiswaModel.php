@@ -88,9 +88,8 @@ class SiswaModel extends Model
     public final function deleteSiswaFromKelas ($nis_siswa, AbsensiModel $absensiModel, PenilaianModel $penilaianModel) {
         try {
             $id_kelas = DB::table('siswa')
-                ->value('kelas_id')
-                ->where('nis_siswa','=',$nis_siswa);
-            dd($id_kelas);
+                ->where('nis_siswa','=',$nis_siswa)
+                ->value('kelas_id');
 
             $siswa = $this->findOrFail($nis_siswa);
             $siswa->update([

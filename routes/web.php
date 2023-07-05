@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/aa', [\App\Models\DataKelasQuery::class,'getDataMapelBySensei']);
-Route::get('/ab/', [\App\Models\DataKelasQuery::class,'getDataKelasById']);
+Route::get('/ab/', [\App\Models\SiswaModel::class,'deleteSiswaFromKelas']);
 
 Route::middleware('guest')->group(function () {
     Route::get('/schale', [AdminController::class, 'loginPage'])->name('login.schale');
@@ -62,6 +62,7 @@ Route::middleware('schale')->group(function () {
     Route::post('/schale/siswa/create-siswa', [SiswaController::class,'store'])->name('schale.siswa-create');
     Route::post('/schale/siswa/update-siswa', [SiswaController::class,'update'])->name('schale.siswa-update');
     Route::post('/schale/siswa/delete-siswa', [SiswaController::class,'destroy'])->name('schale.siswa-delete');
+    Route::post('/schale/siswa/reset-kelas', [AdminController::class,'deleteSiswaFromKelas'])->name('schale.siswa-reset');
     Route::post('/schale/kelas/create-kelas', [KelasController::class,'store'])->name('schale.kelas-create');
     Route::post('/schale/kelas/update-kelas/{id_kelas}', [KelasController::class,'update'])->name('schale.kelas-update');
     Route::post('/schale/kelas/delete-kelas/{id_kelas}', [KelasController::class,'destroy'])->name('schale.kelas-delete');
