@@ -131,7 +131,7 @@
                         <span aria-hidden="true">x</span>
                     </button>
                 </div>
-                <form method="post" action="#">
+                <form method="post" action="{{route('schale.siswa-update')}}">
                     @csrf
                     <div class="center-wrap p-4">
                         <div class="section text-left md-2">
@@ -140,7 +140,7 @@
                                     <label for="nama" class="mb-4">Nama</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="hidden" name="id_iswa" id="id_siswa">
+                                    <input type="hidden" name="id_siswa" id="id-update">
                                     <input type="text" name="nama" class="form-control" required
                                            id="nama-update" autocomplete="off">
                                 </div>
@@ -150,10 +150,10 @@
                                     <label for="jenkel" class="mb-4">Jenis Kelamin</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <select name="jekel" class="form-select" required>
-                                        <option selected disabled>Pilih jenis kelamin</option>
-                                        <option value="Pria">Pria</option>
-                                        <option value="Wanita">Wanita</option>
+                                    <select name="jekel" id="jenkel-update" class="form-select" required>
+                                        <option selected disabled>{{$data->jenis_kelamin}}</option>
+                                        <option value="Laki-laki">Laki-laki</option>
+                                        <option value="Perempuan">Perempuan</option>
                                     </select>
                                 </div>
                             </div>
@@ -162,8 +162,8 @@
                                     <label for="kelas" class="mb-4">Kelas</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <select name="kelas" class="form-select" required>
-                                        <option value="" selected disabled>Pilih Kelas</option>
+                                    <select name="kelas" id="kelas-update" class="form-select" required>
+                                        <option selected disabled>Pilih Kelas</option>
                                         @foreach($kelas as $data)
                                             <option value="{{$data->nama_kelas}}">{{$data->nama_kelas}}</option>
                                         @endforeach
@@ -190,7 +190,7 @@
     <div class="modal fade" id="reset-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="post" action="#">
+                <form method="post" action="{{route('schale.siswa-reset')}}">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Apakah anda yakin untuk menghapus siswa ini dari kelas?</h5>
@@ -295,11 +295,13 @@
             var kelas = row.cells[3].innerText;
 
             // Menampilkan nilai input ke konsol
+            console.log("ID: " + idSiswa);
             console.log("Nama: " + nama);
             console.log("jenkel: " + jenkel);
             console.log("Kelas: " + kelas);
 
             // Mengambil data form update
+            document.getElementById("id-update").value = idSiswa;
             document.getElementById("nama-update").value = nama;
             document.getElementById("jenkel-update").value = jenkel;
             document.getElementById("kelas-update").value = kelas;
